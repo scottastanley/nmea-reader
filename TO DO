@@ -1,0 +1,18 @@
+        
+- Implement socket listener?  Maybe wait until I am on the boat again.
+- Implement NMEA parsing logic
+- NMEASentenceProvider
+    - takes 1-N raw data providers
+    - Sets up piped output/input for each data provider
+    - Thread group of threads reading each input, parsing sentences and providing to the 
+      parent sentence provider to pass on to listeners
+    
+- NMEASentence (base for all sentences)
+- NMEASentenceFactory?  Hierarchy of them looked up by the initial tag;
+      tag=5 char (IICCC)  where II = talker ID, CCC = type code
+    looked up by talker ID then by three letter type code in the talker.
+
+    
+References:
+https://gpsd.gitlab.io/gpsd/NMEA.html
+http://aprs.gids.nl/nmea/
