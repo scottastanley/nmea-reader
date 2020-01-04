@@ -11,6 +11,7 @@ public abstract class NMEASentence {
     final static String SENTENCE_PATTERN = "^[\\!\\$].*\\*[0-9A-F]{2}$";
     
     final private String m_rawSentence;
+    final private long m_collectedTimestamp;
     private Boolean m_isValid;
     private String m_checksum;
     private String m_tag;
@@ -22,6 +23,7 @@ public abstract class NMEASentence {
      * @param rawSentence
      */
     public NMEASentence(final String rawSentence) {
+        m_collectedTimestamp = System.currentTimeMillis();
         m_rawSentence = rawSentence;
         
         // Validate the sentence pattern
@@ -80,6 +82,16 @@ public abstract class NMEASentence {
         return m_rawSentence;
     }
     
+    /**
+     * Get the system time when this NMEA sentence was received by the
+     * system.
+     * 
+     * @return The timestamp from when the sentence was collected
+     */
+    public long getCollectedTimestamp() {
+        return m_collectedTimestamp;
+    }
+
     /**
      * Get the tag for this NMEA sentence.
      * 

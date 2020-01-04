@@ -21,9 +21,13 @@ public class NMEASentenceTest {
         String rawStr = "APRSA,8.4,A*32";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
-            Assert.assertEquals("Invalid raw sentence", rawStr, s.getRawSentence());
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertFalse("Should be invalid", s.getIsValid());
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,9 +40,13 @@ public class NMEASentenceTest {
         String rawStr = "$APRSA,8.4,A";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
-            Assert.assertEquals("Invalid raw sentence", rawStr, s.getRawSentence());
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertFalse("Should be invalid", s.getIsValid());
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,9 +59,13 @@ public class NMEASentenceTest {
         String rawStr = "$APRSA,8.4,A*3";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
-            Assert.assertEquals("Invalid raw sentence", rawStr, s.getRawSentence());
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertFalse("Should be invalid", s.getIsValid());
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,8 +78,13 @@ public class NMEASentenceTest {
         String rawStr = "$AHDT,357.3,T*31";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertFalse("Should not be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "AHDT", s.getTag());
@@ -93,8 +110,13 @@ public class NMEASentenceTest {
         String rawStr = "$APHDT,357.3,T*31";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "APHDT", s.getTag());
@@ -120,8 +142,13 @@ public class NMEASentenceTest {
         String rawStr = "!APHDT,357.3,T*31";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "APHDT", s.getTag());
@@ -147,8 +174,13 @@ public class NMEASentenceTest {
         String rawStr = "$APHDT,357.9,T*31";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertFalse("Should not be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "APHDT", s.getTag());
@@ -174,8 +206,13 @@ public class NMEASentenceTest {
         String rawStr = "$GPRMC,065830,A,3746.830,N,12223.251,W,0.0,000.0,291219,013.0,E,A*08";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "GPRMC", s.getTag());
@@ -228,8 +265,13 @@ public class NMEASentenceTest {
         String rawStr = "$GPRMC,065830,A,3746.830,N,13523.251,W,0.0,000.0,291219,013.0,E,A*08";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertFalse("Should not be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "GPRMC", s.getTag());
@@ -282,8 +324,13 @@ public class NMEASentenceTest {
         String rawStr = "$APHDG,257.9,,,13.0,E*08";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "APHDG", s.getTag());
@@ -316,8 +363,13 @@ public class NMEASentenceTest {
         String rawStr = "$APHDG,257.0,,,13.0,E*08";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertFalse("Should not be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "APHDG", s.getTag());
@@ -350,8 +402,13 @@ public class NMEASentenceTest {
         String rawStr = "$GPGLL,3747.150,N,12216.060,W,205910,A,A*59";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "GPGLL", s.getTag());
@@ -391,8 +448,13 @@ public class NMEASentenceTest {
         String rawStr = "!GPGLL,3747.150,N,12216.060,W,205910,A,A*59";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "GPGLL", s.getTag());
@@ -432,8 +494,13 @@ public class NMEASentenceTest {
         String rawStr = "$GPGLL,3747.150,N,12216.090,W,205910,A,A*59";
         
         try {
+            long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
             
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             Assert.assertFalse("Should not be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "GPGLL", s.getTag());
