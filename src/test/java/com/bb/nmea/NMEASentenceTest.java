@@ -114,6 +114,33 @@ public class NMEASentenceTest {
             Assert.fail("Caught unexpected exception: " + e.getMessage());
         }
     }
+
+    @Test
+    public void testParseAPHDT_leadingBang() {
+        String rawStr = "!APHDT,357.3,T*31";
+        
+        try {
+            NMEASentence s = new TestNMEASentence(rawStr);
+            
+            Assert.assertTrue("Should be valid", s.getIsValid());
+            
+            Assert.assertEquals("Invalid tag", "APHDT", s.getTag());
+            Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
+            Assert.assertEquals("Invalid type code", "HDT", s.getTypeCode());
+            Assert.assertEquals("Invalid checksum", "31", s.getChecksum());
+            
+            // Validate raw fields
+            Assert.assertEquals("Invalid field 0 string", "APHDT", s.getField(0));
+            
+            Assert.assertEquals("Invalid field 1 string", "357.3", s.getField(1));
+            Assert.assertEquals("Invalid field 1 float", new Float(357.3), s.getFieldAsFloat(1));
+            
+            Assert.assertEquals("Invalid field 2 string", "T", s.getField(2));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
     
     @Test
     public void testParseAPHDT_InvalidChecksum() {
@@ -321,6 +348,47 @@ public class NMEASentenceTest {
     @Test
     public void testParseGPGLL() {
         String rawStr = "$GPGLL,3747.150,N,12216.060,W,205910,A,A*59";
+        
+        try {
+            NMEASentence s = new TestNMEASentence(rawStr);
+            
+            Assert.assertTrue("Should be valid", s.getIsValid());
+            
+            Assert.assertEquals("Invalid tag", "GPGLL", s.getTag());
+            Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
+            Assert.assertEquals("Invalid type code", "GLL", s.getTypeCode());
+            Assert.assertEquals("Invalid checksum", "59", s.getChecksum());
+            
+            // Validate raw fields
+            Assert.assertEquals("Invalid field 0 string", "GPGLL", s.getField(0));
+            
+            Assert.assertEquals("Invalid field 1 string", "3747.150", s.getField(1));
+            Assert.assertEquals("Invalid field 1 string", new Float(3747.150), s.getFieldAsFloat(1));
+            LatLongTest.validateLatLong("Invalid field 1 LatLong", 37, 47.15F, s.getFieldAsLatLong(1));
+            
+            Assert.assertEquals("Invalid field 2 string", "N", s.getField(2));
+            
+            Assert.assertEquals("Invalid field 3 string", "12216.060", s.getField(3));
+            Assert.assertEquals("Invalid field 3 string", new Float(12216.060), s.getFieldAsFloat(3));
+            LatLongTest.validateLatLong("Invalid field 3 LatLong", 122, 16.06F, s.getFieldAsLatLong(3));
+            
+            Assert.assertEquals("Invalid field 4 string", "W", s.getField(4));
+            
+            Assert.assertEquals("Invalid field 5 string", "205910", s.getField(5));
+            Assert.assertEquals("Invalid field 5 string", new Integer(205910), s.getFieldAsInteger(5));
+            
+            Assert.assertEquals("Invalid field 6 string", "A", s.getField(6));
+            
+            Assert.assertEquals("Invalid field 7 string", "A", s.getField(7));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testParseGPGLL_leadingBang() {
+        String rawStr = "!GPGLL,3747.150,N,12216.060,W,205910,A,A*59";
         
         try {
             NMEASentence s = new TestNMEASentence(rawStr);

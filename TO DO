@@ -1,6 +1,10 @@
         
 - Implement socket listener?  Maybe wait until I am on the boat again.
+
 - Implement NMEA parsing logic
+    - Add the timestamp for when the sentence was received
+
+
 - NMEASentenceProvider
     - takes 1-N raw data providers
     - Sets up piped output/input for each data provider

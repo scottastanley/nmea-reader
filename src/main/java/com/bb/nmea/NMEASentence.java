@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * @author Scott Stanley
  */
 public abstract class NMEASentence {
-    final static String SENTENCE_PATTERN = "^\\$.*\\*[0-9A-F]{2}$";
+    final static String SENTENCE_PATTERN = "^[\\!\\$].*\\*[0-9A-F]{2}$";
     
     final private String m_rawSentence;
     private Boolean m_isValid;
