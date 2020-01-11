@@ -7,10 +7,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.bb.nmea.DataProviderTestTools;
 import com.bb.nmea.TestTools;
 import com.bb.nmea.rawdataproviders.DataCollectorOutputStream;
 import com.bb.nmea.rawdataproviders.DataProviderException;
-import com.bb.nmea.rawdataproviders.DataProviderTestTools;
 
 public class InputFileDataProviderTest {
     private static final String TEST_FILE = "target/test_data/testData.nmea";

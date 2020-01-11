@@ -1,5 +1,7 @@
 package com.bb.nmea.rawdataproviders;
 
+import com.bb.nmea.DataProvider;
+
 public class TestPassThroughDataProvider extends DataProvider {
 
     public TestPassThroughDataProvider() {

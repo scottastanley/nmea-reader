@@ -8,7 +8,7 @@ import java.util.concurrent.CountDownLatch;
 
 import org.apache.log4j.Logger;
 
-import com.bb.nmea.rawdataproviders.DataProvider;
+import com.bb.nmea.DataProvider;
 import com.bb.nmea.rawdataproviders.DataProviderException;
 
 public class InputFileDataProvider 

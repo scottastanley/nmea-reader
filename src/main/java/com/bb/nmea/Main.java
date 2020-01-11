@@ -1,4 +1,4 @@
-package com.bb.nmea.rawdataproviders;
+package com.bb.nmea;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import java.io.PipedOutputStream;
 
 import org.apache.log4j.Logger;
 
+import com.bb.nmea.rawdataproviders.DataProviderException;
 import com.bb.nmea.rawdataproviders.port.PortListenerDataProvider;
 
 public class Main {

@@ -1,4 +1,4 @@
-package com.bb.nmea.rawdataproviders;
+package com.bb.nmea;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -11,6 +11,9 @@ import java.io.PipedOutputStream;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.bb.nmea.rawdataproviders.DataProviderException;
+import com.bb.nmea.rawdataproviders.TestPassThroughDataProvider;
 
 import junit.framework.Assert;
 
