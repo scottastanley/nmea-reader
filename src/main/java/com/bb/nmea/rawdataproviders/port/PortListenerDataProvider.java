@@ -3,7 +3,7 @@ package com.bb.nmea.rawdataproviders.port;
 import org.apache.log4j.Logger;
 
 import com.bb.nmea.DataProvider;
-import com.bb.nmea.rawdataproviders.DataProviderException;
+import com.bb.nmea.DataProviderException;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;

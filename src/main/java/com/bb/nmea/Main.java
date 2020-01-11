@@ -8,7 +8,6 @@ import java.io.PipedOutputStream;
 
 import org.apache.log4j.Logger;
 
-import com.bb.nmea.rawdataproviders.DataProviderException;
 import com.bb.nmea.rawdataproviders.port.PortListenerDataProvider;
 
 public class Main {

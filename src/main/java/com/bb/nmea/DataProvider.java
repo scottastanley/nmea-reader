@@ -3,8 +3,6 @@ package com.bb.nmea;
 import java.io.IOException;
 import java.io.PipedOutputStream;
 
-import com.bb.nmea.rawdataproviders.DataProviderException;
-
 public abstract class DataProvider {
     private PipedOutputStream m_oStrm;
     private Boolean m_failed = false;

@@ -1,6 +1,7 @@
 package com.bb.nmea.rawdataproviders;
 
 import com.bb.nmea.DataProvider;
+import com.bb.nmea.DataProviderException;
 
 public class TestDataCollectorDataProvider extends DataProvider {
     DataCollectorOutputStream m_oStrm = new DataCollectorOutputStream();

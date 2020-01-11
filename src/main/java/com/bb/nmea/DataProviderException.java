@@ -1,4 +1,4 @@
-package com.bb.nmea.rawdataproviders;
+package com.bb.nmea;
 
 public class DataProviderException extends Exception {
     private static final long serialVersionUID = 2775519156361665959L;
