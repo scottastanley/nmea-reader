@@ -24,7 +24,7 @@ public class InputFileDataProvider
     }
 
     @Override
-    protected void start() throws DataProviderException {
+    public void start() throws DataProviderException {
         LOG.info("Starting...");
         
         // Verify that the input file exists and is indeed a file
@@ -58,7 +58,7 @@ public class InputFileDataProvider
     }
 
     @Override
-    protected void stop() throws DataProviderException {
+    public void stop() throws DataProviderException {
         LOG.info("Stopping...");
         // Interrupt the read thread
         if (m_readThread != null) {

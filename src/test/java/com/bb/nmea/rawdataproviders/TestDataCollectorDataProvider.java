@@ -9,11 +9,11 @@ public class TestDataCollectorDataProvider extends DataProvider {
     }
 
     @Override
-    protected void start() throws DataProviderException {
+    public void start() throws DataProviderException {
     }
 
     @Override
-    protected void stop() throws DataProviderException {
+    public void stop() throws DataProviderException {
     }
 
     /**

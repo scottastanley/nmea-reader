@@ -15,21 +15,21 @@ public abstract class DataProvider {
      * 
      * @throws DataProviderException
      */
-    abstract protected void start() throws DataProviderException;
+    abstract public void start() throws DataProviderException;
     
     /**
      * Halt the processing
      * 
      * @throws DataProviderException
      */
-    abstract protected void stop() throws DataProviderException;
+    abstract public void stop() throws DataProviderException;
 
     /**
      * Set the output stream that this data provided should feed data in to.
      * 
      * @param oStrm The piped output stream
      */
-    void setOutputStream(final PipedOutputStream oStrm) {
+    protected void setOutputStream(final PipedOutputStream oStrm) {
         m_oStrm = oStrm;
     }
     
