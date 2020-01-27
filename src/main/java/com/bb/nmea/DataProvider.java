@@ -3,9 +3,12 @@ package com.bb.nmea;
 import java.io.IOException;
 import java.io.PipedOutputStream;
 
+import org.apache.log4j.Logger;
+
 public abstract class DataProvider {
+    private static final Logger LOG = Logger.getLogger(DataProvider.class);
+
     private PipedOutputStream m_oStrm;
-    private Boolean m_failed = false;
 
     public DataProvider() {
     }
@@ -22,7 +25,24 @@ public abstract class DataProvider {
      * 
      * @throws DataProviderException
      */
-    abstract public void stop() throws DataProviderException;
+    abstract public void stopChild() throws DataProviderException;
+    
+    /**
+     * Stop the DataProvider
+     * 
+     * @throws DataProviderException If an error occurs
+     */
+    public void stop() throws DataProviderException {
+        // Allow the child to stop itself
+        stopChild();
+        
+        // Close the output stream
+        try {
+            m_oStrm.flush();
+            m_oStrm.close();
+        } catch (IOException e) {}
+        m_oStrm = null;
+    }
 
     /**
      * Set the output stream that this data provided should feed data in to.
@@ -46,16 +66,10 @@ public abstract class DataProvider {
         }
         
         try {
+            LOG.debug("Writing data: " + new String(bytes, offset, numBytes));
             m_oStrm.write(bytes, offset, numBytes);
         } catch (IOException e) {
             throw new DataProviderException("Failed to write data to buffer", e);
         }
-    }
-    
-    /**
-     * 
-     */
-    public void setFailed() {
-        m_failed = true;
     }
 }

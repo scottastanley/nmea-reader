@@ -1,23 +1,30 @@
 package com.bb.nmea.rawdataproviders;
 
+import org.apache.log4j.Logger;
+
 import com.bb.nmea.DataProvider;
 import com.bb.nmea.DataProviderException;
 
 public class TestPassThroughDataProvider extends DataProvider {
-
-    public TestPassThroughDataProvider() {
-    }
+    private static final Logger LOG = Logger.getLogger(TestPassThroughDataProvider.class);
+    final byte[][] m_testByteArrays;
     
-    public void passThroughBytes(final byte[] testBytes) 
-            throws DataProviderException {
-        this.provideData(testBytes, 0, testBytes.length);
+    public TestPassThroughDataProvider(final byte[][] testByteArrays) {
+        m_testByteArrays = testByteArrays;
     }
 
     @Override
     public void start() throws DataProviderException {
+        LOG.debug("Starting");
+        for (byte[] b : m_testByteArrays) {
+            LOG.debug("Providing data: " + new String(b));
+            this.provideData(b, 0, b.length);
+        }
+        LOG.debug("Done");
     }
 
     @Override
-    public void stop() throws DataProviderException {
+    public void stopChild() throws DataProviderException {
+        LOG.debug("Stopping");
     }
 }

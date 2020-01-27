@@ -15,6 +15,9 @@
 - NMEASentenceFactory?  Hierarchy of them looked up by the initial tag;
       tag=5 char (IICCC)  where II = talker ID, CCC = type code
     looked up by talker ID then by three letter type code in the talker.
+    
+Reevaluate the permissions on classes/methods  For instance;
+- public void provideData in DataProvider should probably not be public.  Making this protected is much better.
 
     
 References:

@@ -225,7 +225,7 @@ public class InputFileDataProviderTest {
             
             // Interrupt the DataProvider
             Thread.sleep(500L);
-            dp.stop();
+            dp.stopChild();
             
             // Validate
             byte[] collectedBytes = oStrm.getCollectedBytes();

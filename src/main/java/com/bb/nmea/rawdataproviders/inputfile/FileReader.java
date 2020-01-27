@@ -51,10 +51,8 @@ public class FileReader implements Runnable {
             }
         } catch (IOException e) {
             LOG.error("Failed reading source file", e);
-            m_dp.setFailed();
         } catch (DataProviderException e) {
             LOG.error("Failed providing data", e);
-            m_dp.setFailed();
         } catch (InterruptedException e) {
             LOG.info("Thread interrupted");
             // Ignore this one since this is thrown in the natural stop process

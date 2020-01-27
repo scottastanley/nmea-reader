@@ -35,7 +35,7 @@ public class Main {
             public void run() {
                 LOG.info("Shutting down main()...");
                 try {
-                    dp.stop();
+                    dp.stopChild();
                     
                     if (rdr != null) {
                         rdr.close();

@@ -16,7 +16,7 @@ public class TestDataCollectorDataProvider extends DataProvider {
     }
 
     @Override
-    public void stop() throws DataProviderException {
+    public void stopChild() throws DataProviderException {
     }
 
     /**

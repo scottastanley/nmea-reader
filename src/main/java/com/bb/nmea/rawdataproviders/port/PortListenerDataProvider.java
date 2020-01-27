@@ -42,7 +42,7 @@ public class PortListenerDataProvider extends DataProvider implements SerialPort
     }
 
     @Override
-    public void stop() throws DataProviderException {
+    public void stopChild() throws DataProviderException {
         m_port.closePort();
         m_port = null;
     }

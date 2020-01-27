@@ -28,18 +28,20 @@ public class DataProviderTest {
 
     @Test
     public void testSingleCall() {
-        byte[] origBytes = "$GPVTG,118.0,T,105.0,M,0.1,N,,K,A*00".getBytes();
+        byte[][] origBytes = {
+                    "$GPVTG,118.0,T,105.0,M,0.1,N,,K,A*00".getBytes()
+                };
         try {
-            TestPassThroughDataProvider dp = new TestPassThroughDataProvider();
+            TestPassThroughDataProvider dp = new TestPassThroughDataProvider(origBytes);
             
             PipedOutputStream oStrm = mock(PipedOutputStream.class);
             
             dp.setOutputStream(oStrm);
+            dp.start();
             
-            dp.passThroughBytes(origBytes);
-            
-            verify(oStrm, times(1)).write(origBytes, 0, origBytes.length);
-                        
+            for (byte[] b : origBytes) {
+                verify(oStrm, times(1)).write(b, 0, b.length);
+            }                        
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -56,16 +58,12 @@ public class DataProviderTest {
                     "$APHDG,345.5,,,13.0,E*06".getBytes(),
                 };
         try {
-            TestPassThroughDataProvider dp = new TestPassThroughDataProvider();
+            TestPassThroughDataProvider dp = new TestPassThroughDataProvider(origBytes);
             
             PipedOutputStream oStrm = mock(PipedOutputStream.class);
             
             dp.setOutputStream(oStrm);
-            
-            for (byte[] b : origBytes) {
-                dp.passThroughBytes(b);
-            }
-            
+            dp.start();
             
             for (byte[] b : origBytes) {
                 verify(oStrm, times(1)).write(b, 0, b.length);
@@ -78,12 +76,14 @@ public class DataProviderTest {
     
     @Test
     public void testThrowsRuntimeExceptionIfNoOStrmCfg() {
-        byte[] origBytes = "$GPVTG,118.0,T,105.0,M,0.1,N,,K,A*00".getBytes();
+        byte[][] origBytes = {
+                    "$GPVTG,118.0,T,105.0,M,0.1,N,,K,A*00".getBytes()
+                };
         try {
-            TestPassThroughDataProvider dp = new TestPassThroughDataProvider();
+            TestPassThroughDataProvider dp = new TestPassThroughDataProvider(origBytes);
             
             try {
-                dp.passThroughBytes(origBytes);
+                dp.start();
                 
                 Assert.fail("Should throw an exception");
             } catch (RuntimeException e) {
@@ -98,24 +98,26 @@ public class DataProviderTest {
 
     @Test
     public void testThrowsExceptionWhenWriteFails() {
-        byte[] origBytes = "$GPVTG,118.0,T,105.0,M,0.1,N,,K,A*00".getBytes();
+        byte[][] origBytes = {
+                    "$GPVTG,118.0,T,105.0,M,0.1,N,,K,A*00".getBytes()
+                };
         try {
-            TestPassThroughDataProvider dp = new TestPassThroughDataProvider();
+            TestPassThroughDataProvider dp = new TestPassThroughDataProvider(origBytes);
             
             PipedOutputStream oStrm = mock(PipedOutputStream.class);
-            doThrow(IOException.class).when(oStrm).write(origBytes, 0, origBytes.length);
+            doThrow(IOException.class).when(oStrm).write(origBytes[0], 0, origBytes[0].length);
             
             dp.setOutputStream(oStrm);
             
             try {
-                dp.passThroughBytes(origBytes);
+                dp.start();
                 
                 Assert.fail("Should throw an exception");
             } catch (DataProviderException e) {
                 // Ignore expected exception
             }
             
-            verify(oStrm, times(1)).write(origBytes, 0, origBytes.length);
+            verify(oStrm, times(1)).write(origBytes[0], 0, origBytes[0].length);
                         
         } catch (Exception e) {
             e.printStackTrace();
