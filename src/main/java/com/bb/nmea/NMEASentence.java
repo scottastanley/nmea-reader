@@ -38,7 +38,7 @@ public abstract class NMEASentence {
             m_isValid = m_isValid && m_checksum.equals(calcChecksum);
             
             // Extract the tag
-            m_tag = rawSentence.substring(1, rawSentence.indexOf(","));
+            m_tag = SentenceFactory.getTag(rawSentence);
             m_isValid = m_isValid && m_tag.length() == 5;
         }
         
@@ -116,7 +116,7 @@ public abstract class NMEASentence {
      * @return The type code
      */
     public String getTypeCode() {
-        return m_isValid ? m_tag.substring(2, 5) : null;
+        return m_isValid ? SentenceFactory.getTypeFromTag(m_tag) : null;
     }
 
     /**

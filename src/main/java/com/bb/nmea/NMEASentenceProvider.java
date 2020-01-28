@@ -97,6 +97,7 @@ public class NMEASentenceProvider {
             m_thrdGrp.interrupt();
             m_thrdGrp.joinAll();
             m_thrdGrp.destroy();
+            m_thrdGrp = null;
         } catch (InterruptedException e) {
             // Ignore being interrupted
         }

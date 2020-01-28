@@ -12,7 +12,7 @@ public class HDM extends NMEASentence {
     private final Float m_headingDegrees;
     private final HeadingType m_headingType;
 
-    public HDM(String rawSentence) {
+    public HDM(final String rawSentence) {
         super(rawSentence);
         
         m_headingDegrees = this.getFieldAsFloat(1);

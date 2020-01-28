@@ -1,23 +1,45 @@
         
-- Implement socket listener?  Maybe wait until I am on the boat again.
+TO DO
+-----
+- NMEASentenceProvider testing
+    - Finish single sentence testing of NMEASentenceProvider
+    - Write multiple data provider test, single sentence (2 providers)
+    - Write multiple data provider test, single sentence (3 providers)
+    - Write multiple sentence test using single sentence type (1 provider)
+    - Write multiple sentence test using single sentence type (2 provider)
+    - Write multiple sentence test using single sentence type (3 provider)
+- NMEASentence / SentenceFactory cleanup
+    - Move validation logic reusable code in NMEASentence so can be used by SentenceFactory
+    - Move getTag, getTypeFromTag to NMEASentence and call from factory
+- Write SentenceFactory test
+    - Single test for each valid sentence type supported
+- InvalidSentence support in SentenceFactory
+    - Add InvalidSentence
+    - Add support in SentenceFactory
+    - Testing each
+- UnsupportedSentence support
+    - Add UnsupportedSentence class with simple methods to get each field and the logic to make sure these 
+        can be serialized in a logging listener
+    - Add support in the SentenceFactory
+    - Testing each
+- Cleanup
+    - JavaDoc
+    - license statement
+    - Cleanup warnings
+    - push to GitHub
+- Reevaluate the permissions on classes/methods  For instance;
+    - public void provideData in DataProvider should probably not be public.  Making this protected is much better.
+- Work on project documentation on GitHub
+    - Project description
+    - Usage examples
+    - References
+- Add support for new sentence types
+    - For Each
+        - Add class with unit test
+        - Add to properties file
+        - Add a test in SentenceFactoryTest
+        - Add to multiple sentence test in NMEASentenceProvider
 
-- Implement NMEA parsing logic
-    - Add the timestamp for when the sentence was received
-
-
-- NMEASentenceProvider
-    - takes 1-N raw data providers
-    - Sets up piped output/input for each data provider
-    - Thread group of threads reading each input, parsing sentences and providing to the 
-      parent sentence provider to pass on to listeners
-    
-- NMEASentence (base for all sentences)
-- NMEASentenceFactory?  Hierarchy of them looked up by the initial tag;
-      tag=5 char (IICCC)  where II = talker ID, CCC = type code
-    looked up by talker ID then by three letter type code in the talker.
-    
-Reevaluate the permissions on classes/methods  For instance;
-- public void provideData in DataProvider should probably not be public.  Making this protected is much better.
 
     
 References:

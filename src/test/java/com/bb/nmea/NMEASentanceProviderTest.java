@@ -20,34 +20,6 @@ public class NMEASentanceProviderTest {
     @After
     public void tearDown() throws Exception {
     }
-
-    @Test
-    public void testThread() {
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                for (int n = 0; n < 1000; n++) {
-                    System.out.println("Foo " + System.currentTimeMillis());
-                }
-                
-                synchronized(this) {
-                    this.notifyAll();
-                }
-            }
-        };
-        
-        new Thread(r).start();
-        
-        try {
-            synchronized(r) {
-                r.wait();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            
-        }
-    }
     
     @Test
     public void testSingleSentence() {
@@ -61,15 +33,6 @@ public class NMEASentanceProviderTest {
         byte[][] origBytes = {
                origStr.getBytes()
         };
-        
-        //
-        // Create dataprovider
-        // Create/start nmeasentenceprovider
-        // start dataprovider
-        // wait on dataprovider to complete
-        // stop sentenceprovider (waits on all reading threads to complete)
-        //
-        
         
         try {
             TestPassThroughDataProvider dp = new TestPassThroughDataProvider(origBytes);

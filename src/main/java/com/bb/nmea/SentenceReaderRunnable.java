@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 public class SentenceReaderRunnable implements Runnable {
     private static final Logger LOG = Logger.getLogger(SentenceReaderRunnable.class);
+    private SentenceFactory m_sentFactory = new SentenceFactory();
     private BufferedReader m_sentRdr;
     private final NMEASentenceProvider m_nmeaSentProv;
 
@@ -21,7 +22,9 @@ public class SentenceReaderRunnable implements Runnable {
         String sentenceStr = null;
         try {
             while((sentenceStr = m_sentRdr.readLine()) != null) {
-                LOG.debug("HERE: " + sentenceStr);
+                LOG.debug("New sentence: " + sentenceStr);
+                NMEASentence sentence = m_sentFactory.getNMEASentence(sentenceStr);
+                m_nmeaSentProv.newEvent(sentence);
             }
         } catch (IOException e) {
             LOG.error("Failed reading NMEA sentence", e);
