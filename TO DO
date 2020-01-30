@@ -1,13 +1,6 @@
         
 TO DO
 -----
-- NMEASentenceProvider testing
-    - Finish single sentence testing of NMEASentenceProvider
-    - Write multiple data provider test, single sentence (2 providers)
-    - Write multiple data provider test, single sentence (3 providers)
-    - Write multiple sentence test using single sentence type (1 provider)
-    - Write multiple sentence test using single sentence type (2 provider)
-    - Write multiple sentence test using single sentence type (3 provider)
 - NMEASentence / SentenceFactory cleanup
     - Move validation logic reusable code in NMEASentence so can be used by SentenceFactory
     - Move getTag, getTypeFromTag to NMEASentence and call from factory

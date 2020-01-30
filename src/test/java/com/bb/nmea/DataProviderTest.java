@@ -67,7 +67,7 @@ public class DataProviderTest {
             
             for (byte[] b : origBytes) {
                 verify(oStrm, times(1)).write(b, 0, b.length);
-            }                        
+            }
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
