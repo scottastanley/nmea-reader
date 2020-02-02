@@ -30,7 +30,6 @@ public class HDM_Test {
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "APHDM", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
@@ -57,7 +56,6 @@ public class HDM_Test {
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "APHDM", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());

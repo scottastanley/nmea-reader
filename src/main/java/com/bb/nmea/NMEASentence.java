@@ -12,7 +12,6 @@ public abstract class NMEASentence {
     
     final private String m_rawSentence;
     final private long m_collectedTimestamp;
-    private Boolean m_isValid;
     private String m_checksum;
     private String m_tag;
     private String[] m_fields;
@@ -25,27 +24,9 @@ public abstract class NMEASentence {
     public NMEASentence(final String rawSentence) {
         m_collectedTimestamp = System.currentTimeMillis();
         m_rawSentence = rawSentence;
-        
-        // Validate the sentence pattern
-        m_isValid = true;
-        m_isValid = m_isValid && Pattern.matches(SENTENCE_PATTERN, rawSentence);
-        
-        // Extract and validate the checksum
-        if (m_isValid) {
-            m_checksum = rawSentence.substring(rawSentence.length() - 2, rawSentence.length());
-            
-            String calcChecksum = calculateChecksum(rawSentence);
-            m_isValid = m_isValid && m_checksum.equals(calcChecksum);
-            
-            // Extract the tag
-            m_tag = SentenceFactory.getTag(rawSentence);
-            m_isValid = m_isValid && m_tag.length() == 5;
-        }
-        
-        // Parse out the raw fields
-        if (m_isValid) {
-            m_fields = rawSentence.substring(1, rawSentence.length() - 3).split(",");
-        }
+        m_checksum = rawSentence.substring(rawSentence.length() - 2, rawSentence.length());
+        m_tag = NMEASentence.getTag(rawSentence);
+        m_fields = rawSentence.substring(1, rawSentence.length() - 3).split(",");
     }
     
     /**
@@ -55,7 +36,7 @@ public abstract class NMEASentence {
      * @param rawSentence
      * @return The calculated checksum
      */
-    private String calculateChecksum(final String rawSentence) {
+    private static String calculateChecksum(final String rawSentence) {
         // Extract the relevant portion of the string and remove all special characters
         String chkSumStr = rawSentence.substring(1, rawSentence.length() - 3);
         chkSumStr = chkSumStr.replace("$", "").replace("I", "").replace("*", "");
@@ -107,7 +88,7 @@ public abstract class NMEASentence {
      * @return The talker ID
      */
     public String getTalkerId() {
-        return m_isValid ? m_tag.substring(0, 2) : null;
+        return m_tag.substring(0, 2);
     }
     
     /**
@@ -116,7 +97,7 @@ public abstract class NMEASentence {
      * @return The type code
      */
     public String getTypeCode() {
-        return m_isValid ? SentenceFactory.getTypeFromTag(m_tag) : null;
+        return NMEASentence.getTypeFromTag(m_tag);
     }
 
     /**
@@ -126,18 +107,6 @@ public abstract class NMEASentence {
      */
     public String getChecksum() {
         return m_checksum;
-    }
-    
-    /**
-     * Does this NMEA sentence pass the base validation.  This validation insures
-     * the sentence has the correct string pattern, that the tag has the proper length and
-     * that the checksum of the data in the sentence can be validated against the provided
-     * checksum.
-     * 
-     * @return True of this sentence has passed validation
-     */
-    public Boolean getIsValid() {
-        return m_isValid;
     }
 
     /**
@@ -178,5 +147,48 @@ public abstract class NMEASentence {
      */
     protected LatLong getFieldAsLatLong(final int index) {
         return m_fields != null ? new LatLong(getField(index)) : null;
+    }
+    
+    /**
+     * Parse the tag from the provided raw sentence string.
+     * 
+     * @param rawSentence The raw NMEA sentence
+     * @return The tag value
+     */
+    static String getTag(final String rawSentence) {
+        return rawSentence.substring(1, rawSentence.indexOf(","));
+    }
+    
+    /**
+     * Parse the NMEA sentence type from the provided tag value.
+     * 
+     * @param tag The NMEA tag value
+     * @return The NMEA type field
+     */
+    static String getTypeFromTag(final String tag) {
+        return tag.substring(2, 5);
+    }
+    
+    /**
+     * Evaluate whether the provided raw sentence is a valid NMEA sentence.  A sentence
+     * is considered valid if it meets the following criteria;
+     * 
+     * 1) The raw sentence matches the regular expression in the SENTENCE_PATTERN variable
+     * 2) The checksum in the sentence matches one calculated based on the provided sentence content
+     * 
+     * @param rawSentence The raw NMEA sentence
+     * @return True if the sentence is valid
+     */
+    static Boolean isValidRawSentence(final String rawSentence) {
+       Boolean isValid = Pattern.matches(SENTENCE_PATTERN, rawSentence);
+        
+        // Extract and validate the checksum
+        if (isValid) {
+            String origchecksum = rawSentence.substring(rawSentence.length() - 2, rawSentence.length());
+            String calcChecksum = calculateChecksum(rawSentence);
+            isValid = isValid && origchecksum.equals(calcChecksum);
+        }
+        
+        return isValid;
     }
 }

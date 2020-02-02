@@ -45,7 +45,7 @@ public class SentenceFactory {
      * @return An instance of the appropriate NMEASentence class
      */
     NMEASentence getNMEASentence(final String rawSentence) {
-        String type = getTypeFromTag(getTag(rawSentence));
+        String type = NMEASentence.getTypeFromTag(NMEASentence.getTag(rawSentence));
         Class<? extends NMEASentence> clazz = SENTENCE_CLASSES.get(type.toLowerCase());
         
         NMEASentence instance = null;
@@ -58,26 +58,6 @@ public class SentenceFactory {
         }
         
         return instance;
-    }
-    
-    /**
-     * Parse the tag from the provided raw sentence string.
-     * 
-     * @param rawSentence The raw NMEA sentence
-     * @return The tag value
-     */
-    static String getTag(final String rawSentence) {
-        return rawSentence.substring(1, rawSentence.indexOf(","));
-    }
-    
-    /**
-     * Parse the NMEA sentence type from the provided tag value.
-     * 
-     * @param tag The NMEA tag value
-     * @return The NMEA type field
-     */
-    static String getTypeFromTag(final String tag) {
-        return tag.substring(2, 5);
     }
     
     /**

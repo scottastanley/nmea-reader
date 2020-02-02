@@ -17,18 +17,11 @@ public class NMEASentenceTest {
     }
 
     @Test
-    public void testInvalidMissing$() {
+    public void testIsValid_InvalidMissing$() {
         String rawStr = "APRSA,8.4,A*32";
         
         try {
-            long preTime = System.currentTimeMillis();
-            NMEASentence s = new TestNMEASentence(rawStr);
-            long postTime = System.currentTimeMillis();
-            
-            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
-            Assert.assertTrue("Invalid collected timestamp", 
-                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertFalse("Should be invalid", s.getIsValid());
+            Assert.assertFalse("Message should be invalid", NMEASentence.isValidRawSentence(rawStr));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -36,18 +29,11 @@ public class NMEASentenceTest {
     }
 
     @Test
-    public void testInvalidMissingChecksum() {
+    public void testIsValid_InvalidMissingChecksum() {
         String rawStr = "$APRSA,8.4,A";
         
         try {
-            long preTime = System.currentTimeMillis();
-            NMEASentence s = new TestNMEASentence(rawStr);
-            long postTime = System.currentTimeMillis();
-            
-            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
-            Assert.assertTrue("Invalid collected timestamp", 
-                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertFalse("Should be invalid", s.getIsValid());
+            Assert.assertFalse("Message should be invalid", NMEASentence.isValidRawSentence(rawStr));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -55,50 +41,11 @@ public class NMEASentenceTest {
     }
 
     @Test
-    public void testInvalidInvalidChecksumLength() {
+    public void testIsValid_InvalidChecksumLength() {
         String rawStr = "$APRSA,8.4,A*3";
         
         try {
-            long preTime = System.currentTimeMillis();
-            NMEASentence s = new TestNMEASentence(rawStr);
-            long postTime = System.currentTimeMillis();
-            
-            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
-            Assert.assertTrue("Invalid collected timestamp", 
-                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertFalse("Should be invalid", s.getIsValid());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail("Caught unexpected exception: " + e.getMessage());
-        }
-    }
-
-    @Test
-    public void testInvalidTag_lt5chars() {
-        String rawStr = "$AHDT,357.3,T*31";
-        
-        try {
-            long preTime = System.currentTimeMillis();
-            NMEASentence s = new TestNMEASentence(rawStr);
-            long postTime = System.currentTimeMillis();
-            
-            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
-            Assert.assertTrue("Invalid collected timestamp", 
-                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertFalse("Should not be valid", s.getIsValid());
-            
-            Assert.assertEquals("Invalid tag", "AHDT", s.getTag());
-            Assert.assertNull("Invalid talked ID", s.getTalkerId());
-            Assert.assertNull("Invalid type code", s.getTypeCode());
-            Assert.assertEquals("Invalid checksum", "31", s.getChecksum());
-            
-            // Validate raw fields
-            Assert.assertNull("Invalid field 0 string", s.getField(0));
-            
-            Assert.assertNull("Invalid field 1 string", s.getField(1));
-            Assert.assertNull("Invalid field 1 float", s.getFieldAsFloat(1));
-            
-            Assert.assertNull("Invalid field 2 string", s.getField(2));
+            Assert.assertFalse("Message should be invalid", NMEASentence.isValidRawSentence(rawStr));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -110,6 +57,8 @@ public class NMEASentenceTest {
         String rawStr = "$APHDT,357.3,T*31";
         
         try {
+            Assert.assertTrue("Message should be valid", NMEASentence.isValidRawSentence(rawStr));
+
             long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
@@ -117,7 +66,6 @@ public class NMEASentenceTest {
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "APHDT", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
@@ -142,6 +90,8 @@ public class NMEASentenceTest {
         String rawStr = "!APHDT,357.3,T*31";
         
         try {
+            Assert.assertTrue("Message should be valid", NMEASentence.isValidRawSentence(rawStr));
+
             long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
@@ -149,7 +99,6 @@ public class NMEASentenceTest {
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "APHDT", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
@@ -174,27 +123,7 @@ public class NMEASentenceTest {
         String rawStr = "$APHDT,357.9,T*31";
         
         try {
-            long preTime = System.currentTimeMillis();
-            NMEASentence s = new TestNMEASentence(rawStr);
-            long postTime = System.currentTimeMillis();
-            
-            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
-            Assert.assertTrue("Invalid collected timestamp", 
-                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertFalse("Should not be valid", s.getIsValid());
-            
-            Assert.assertEquals("Invalid tag", "APHDT", s.getTag());
-            Assert.assertNull("Invalid talked ID", s.getTalkerId());
-            Assert.assertNull("Invalid type code", s.getTypeCode());
-            Assert.assertEquals("Invalid checksum", "31", s.getChecksum());
-            
-            // Validate raw fields
-            Assert.assertNull("Invalid field 0 string", s.getField(0));
-            
-            Assert.assertNull("Invalid field 1 string", s.getField(1));
-            Assert.assertNull("Invalid field 1 float", s.getFieldAsFloat(1));
-            
-            Assert.assertNull("Invalid field 2 string", s.getField(2));
+            Assert.assertFalse("Message should be invalid", NMEASentence.isValidRawSentence(rawStr));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -206,6 +135,8 @@ public class NMEASentenceTest {
         String rawStr = "$GPRMC,065830,A,3746.830,N,12223.251,W,0.0,000.0,291219,013.0,E,A*08";
         
         try {
+            Assert.assertTrue("Message should be valid", NMEASentence.isValidRawSentence(rawStr));
+
             long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
@@ -213,7 +144,6 @@ public class NMEASentenceTest {
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "GPRMC", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
@@ -265,54 +195,7 @@ public class NMEASentenceTest {
         String rawStr = "$GPRMC,065830,A,3746.830,N,13523.251,W,0.0,000.0,291219,013.0,E,A*08";
         
         try {
-            long preTime = System.currentTimeMillis();
-            NMEASentence s = new TestNMEASentence(rawStr);
-            long postTime = System.currentTimeMillis();
-            
-            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
-            Assert.assertTrue("Invalid collected timestamp", 
-                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertFalse("Should not be valid", s.getIsValid());
-            
-            Assert.assertEquals("Invalid tag", "GPRMC", s.getTag());
-            Assert.assertNull("Invalid talked ID", s.getTalkerId());
-            Assert.assertNull("Invalid type code", s.getTypeCode());
-            Assert.assertEquals("Invalid checksum", "08", s.getChecksum());
-            
-            // Validate raw fields
-            Assert.assertNull("Invalid field 0 string", s.getField(0));
-            
-            Assert.assertNull("Invalid field 1 string", s.getField(1));
-            Assert.assertNull("Invalid field 1 float", s.getFieldAsInteger(1));
-            
-            Assert.assertNull("Invalid field 2 string", s.getField(2));
-            
-            Assert.assertNull("Invalid field 3 string", s.getField(3));
-            Assert.assertNull("Invalid field 3 string", s.getFieldAsFloat(3));
-            Assert.assertNull("Invalid field 3 LatLong", s.getFieldAsLatLong(3));
-            
-            Assert.assertNull("Invalid field 4 string", s.getField(4));
-            
-            Assert.assertNull("Invalid field 5 string", s.getField(5));
-            Assert.assertNull("Invalid field 5 string", s.getFieldAsFloat(5));
-            Assert.assertNull("Invalid field 5 LatLong", s.getFieldAsLatLong(5));
-            
-            Assert.assertNull("Invalid field 6 string", s.getField(6));
-            
-            Assert.assertNull("Invalid field 7 string", s.getField(7));
-            Assert.assertNull("Invalid field 7 string", s.getFieldAsFloat(7));
-            
-            Assert.assertNull("Invalid field 8 string", s.getField(8));
-            Assert.assertNull("Invalid field 8 string", s.getFieldAsFloat(8));
-            
-            Assert.assertNull("Invalid field 9 float", s.getFieldAsInteger(9));
-            
-            Assert.assertNull("Invalid field 10 string", s.getField(10));
-            Assert.assertNull("Invalid field 10 string", s.getFieldAsFloat(10));
-            
-            Assert.assertNull("Invalid field 11 string", s.getField(11));
-            
-            Assert.assertNull("Invalid field 12 string", s.getField(12));
+            Assert.assertFalse("Message should be invalid", NMEASentence.isValidRawSentence(rawStr));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -324,6 +207,8 @@ public class NMEASentenceTest {
         String rawStr = "$APHDG,257.9,,,13.0,E*08";
         
         try {
+            Assert.assertTrue("Message should be valid", NMEASentence.isValidRawSentence(rawStr));
+
             long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
@@ -331,7 +216,6 @@ public class NMEASentenceTest {
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "APHDG", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
@@ -363,34 +247,7 @@ public class NMEASentenceTest {
         String rawStr = "$APHDG,257.0,,,13.0,E*08";
         
         try {
-            long preTime = System.currentTimeMillis();
-            NMEASentence s = new TestNMEASentence(rawStr);
-            long postTime = System.currentTimeMillis();
-            
-            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
-            Assert.assertTrue("Invalid collected timestamp", 
-                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertFalse("Should not be valid", s.getIsValid());
-            
-            Assert.assertEquals("Invalid tag", "APHDG", s.getTag());
-            Assert.assertNull("Invalid talked ID", s.getTalkerId());
-            Assert.assertNull("Invalid type code", s.getTypeCode());
-            Assert.assertEquals("Invalid checksum", "08", s.getChecksum());
-            
-            // Validate raw fields
-            Assert.assertNull("Invalid field 0 string", s.getField(0));
-            
-            Assert.assertNull("Invalid field 1 string", s.getField(1));
-            Assert.assertNull("Invalid field 1 float", s.getFieldAsFloat(1));
-            
-            Assert.assertNull("Invalid field 2 string", s.getField(2));
-            
-            Assert.assertNull("Invalid field 3 string", s.getField(3));
-            
-            Assert.assertNull("Invalid field 4 string", s.getField(4));
-            Assert.assertNull("Invalid field 4 float", s.getFieldAsFloat(4));
-            
-            Assert.assertNull("Invalid field 5 string", s.getField(5));
+            Assert.assertFalse("Message should be invalid", NMEASentence.isValidRawSentence(rawStr));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -402,6 +259,8 @@ public class NMEASentenceTest {
         String rawStr = "$GPGLL,3747.150,N,12216.060,W,205910,A,A*59";
         
         try {
+            Assert.assertTrue("Message should be valid", NMEASentence.isValidRawSentence(rawStr));
+
             long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
@@ -409,7 +268,6 @@ public class NMEASentenceTest {
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "GPGLL", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
@@ -448,6 +306,8 @@ public class NMEASentenceTest {
         String rawStr = "!GPGLL,3747.150,N,12216.060,W,205910,A,A*59";
         
         try {
+            Assert.assertTrue("Message should be valid", NMEASentence.isValidRawSentence(rawStr));
+
             long preTime = System.currentTimeMillis();
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
@@ -455,7 +315,6 @@ public class NMEASentenceTest {
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertTrue("Should be valid", s.getIsValid());
             
             Assert.assertEquals("Invalid tag", "GPGLL", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
@@ -494,41 +353,7 @@ public class NMEASentenceTest {
         String rawStr = "$GPGLL,3747.150,N,12216.090,W,205910,A,A*59";
         
         try {
-            long preTime = System.currentTimeMillis();
-            NMEASentence s = new TestNMEASentence(rawStr);
-            long postTime = System.currentTimeMillis();
-            
-            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
-            Assert.assertTrue("Invalid collected timestamp", 
-                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
-            Assert.assertFalse("Should not be valid", s.getIsValid());
-            
-            Assert.assertEquals("Invalid tag", "GPGLL", s.getTag());
-            Assert.assertNull("Invalid talked ID", s.getTalkerId());
-            Assert.assertNull("Invalid type code", s.getTypeCode());
-            Assert.assertEquals("Invalid checksum", "59", s.getChecksum());
-            
-            // Validate raw fields
-            Assert.assertNull("Invalid field 0 string", s.getField(0));
-            
-            Assert.assertNull("Invalid field 1 string", s.getField(1));
-            Assert.assertNull("Invalid field 1 string", s.getFieldAsFloat(1));
-            Assert.assertNull("Invalid field 1 LatLong", s.getFieldAsLatLong(1));
-            
-            Assert.assertNull("Invalid field 2 string", s.getField(2));
-            
-            Assert.assertNull("Invalid field 3 string", s.getField(3));
-            Assert.assertNull("Invalid field 3 string", s.getFieldAsFloat(3));
-            Assert.assertNull("Invalid field 3 LatLong", s.getFieldAsLatLong(3));
-            
-            Assert.assertNull("Invalid field 4 string", s.getField(4));
-            
-            Assert.assertNull("Invalid field 5 string", s.getField(5));
-            Assert.assertNull("Invalid field 5 string", s.getFieldAsInteger(5));
-            
-            Assert.assertNull("Invalid field 6 string", s.getField(6));
-            
-            Assert.assertNull("Invalid field 7 string", s.getField(7));
+            Assert.assertFalse("Message should be invalid", NMEASentence.isValidRawSentence(rawStr));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());

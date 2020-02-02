@@ -1,9 +1,6 @@
         
 TO DO
 -----
-- NMEASentence / SentenceFactory cleanup
-    - Move validation logic reusable code in NMEASentence so can be used by SentenceFactory
-    - Move getTag, getTypeFromTag to NMEASentence and call from factory
 - Write SentenceFactory test
     - Single test for each valid sentence type supported
 - InvalidSentence support in SentenceFactory

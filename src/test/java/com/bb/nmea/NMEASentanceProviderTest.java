@@ -49,7 +49,7 @@ public class NMEASentanceProviderTest {
         byte[][] origBytes = getBytes(origStr);
         
         ExpectedResults expRes = new ExpectedResults();
-        expRes.addResult(new ExpectedSentence(origStr[0], Boolean.TRUE, "AP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr[0], "AP", "HDM", HDM.class));
         
         try {
             TestPassThroughDataProvider dp = new TestPassThroughDataProvider(origBytes);
@@ -82,8 +82,8 @@ public class NMEASentanceProviderTest {
         byte[][] origBytes2 = getBytes(origStr2);
         
         ExpectedResults expRes = new ExpectedResults();
-        expRes.addResult(new ExpectedSentence(origStr1[0], Boolean.TRUE, "AP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr2[0], Boolean.TRUE, "GP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr1[0], "AP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr2[0], "GP", "HDM", HDM.class));
         
         try {
             TestPassThroughDataProvider dp1 = new TestPassThroughDataProvider(origBytes1);
@@ -122,9 +122,9 @@ public class NMEASentanceProviderTest {
         byte[][] origBytes3 = getBytes(origStr3);
         
         ExpectedResults expRes = new ExpectedResults();
-        expRes.addResult(new ExpectedSentence(origStr1[0], Boolean.TRUE, "AP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr2[0], Boolean.TRUE, "GP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr3[0], Boolean.TRUE, "AP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr1[0], "AP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr2[0], "GP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr3[0], "AP", "HDM", HDM.class));
         
         try {
             TestPassThroughDataProvider dp1 = new TestPassThroughDataProvider(origBytes1);
@@ -156,10 +156,10 @@ public class NMEASentanceProviderTest {
         byte[][] origBytes = getBytes(origStr);
         
         ExpectedResults expRes = new ExpectedResults();
-        expRes.addResult(new ExpectedSentence(origStr[0], Boolean.TRUE, "AP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr[1], Boolean.TRUE, "GP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr[2], Boolean.TRUE, "II", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr[3], Boolean.TRUE, "GN", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr[0], "AP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr[1], "GP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr[2], "II", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr[3], "GN", "HDM", HDM.class));
         
         try {
             TestPassThroughDataProvider dp = new TestPassThroughDataProvider(origBytes);
@@ -198,15 +198,15 @@ public class NMEASentanceProviderTest {
         byte[][] origBytes2 = getBytes(origStr2);
         
         ExpectedResults expRes = new ExpectedResults();
-        expRes.addResult(new ExpectedSentence(origStr1[0], Boolean.TRUE, "AP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr1[1], Boolean.TRUE, "GP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr1[2], Boolean.TRUE, "II", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr1[3], Boolean.TRUE, "GN", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr1[0], "AP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr1[1], "GP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr1[2], "II", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr1[3], "GN", "HDM", HDM.class));
         
-        expRes.addResult(new ExpectedSentence(origStr2[0], Boolean.TRUE, "QA", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr2[1], Boolean.TRUE, "FD", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr2[2], Boolean.TRUE, "RR", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr2[3], Boolean.TRUE, "ZK", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr2[0], "QA", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr2[1], "FD", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr2[2], "RR", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr2[3], "ZK", "HDM", HDM.class));
         
         try {
             TestPassThroughDataProvider dp1 = new TestPassThroughDataProvider(origBytes1);
@@ -254,20 +254,20 @@ public class NMEASentanceProviderTest {
         byte[][] origBytes3 = getBytes(origStr3);
         
         ExpectedResults expRes = new ExpectedResults();
-        expRes.addResult(new ExpectedSentence(origStr1[0], Boolean.TRUE, "AP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr1[1], Boolean.TRUE, "GP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr1[2], Boolean.TRUE, "II", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr1[3], Boolean.TRUE, "GN", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr1[0], "AP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr1[1], "GP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr1[2], "II", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr1[3], "GN", "HDM", HDM.class));
         
-        expRes.addResult(new ExpectedSentence(origStr2[0], Boolean.TRUE, "GP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr2[1], Boolean.TRUE, "AP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr2[2], Boolean.TRUE, "GN", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr2[3], Boolean.TRUE, "II", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr2[0], "GP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr2[1], "AP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr2[2], "GN", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr2[3], "II", "HDM", HDM.class));
         
-        expRes.addResult(new ExpectedSentence(origStr3[0], Boolean.TRUE, "AP", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr3[1], Boolean.TRUE, "IN", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr3[2], Boolean.TRUE, "GA", "HDM", HDM.class));
-        expRes.addResult(new ExpectedSentence(origStr3[3], Boolean.TRUE, "GR", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr3[0], "AP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr3[1], "IN", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr3[2], "GA", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr3[3], "GR", "HDM", HDM.class));
         
         try {
             TestPassThroughDataProvider dp1 = new TestPassThroughDataProvider(origBytes1);
@@ -309,7 +309,6 @@ public class NMEASentanceProviderTest {
 
             ExpectedSentence expSent = expRes.getExpected(sentence.getRawSentence());
 
-            Assert.assertEquals("Incorrect validity " + n, expSent.m_validity, sentence.getIsValid());
             Assert.assertEquals("Incorrect talker ID " + n, expSent.m_talkerId, sentence.getTalkerId());
             Assert.assertEquals("Incorrect type code " + n, expSent.m_typeCode, sentence.getTypeCode());
             Assert.assertTrue("Incorrect class " + n, expSent.m_clazz.isInstance(sentence));
@@ -341,10 +340,9 @@ public class NMEASentanceProviderTest {
         String m_typeCode;
         Class<? extends NMEASentence> m_clazz;
         
-        public ExpectedSentence(String rawSentence, Boolean validity, String talkerId, String typeCode,
+        public ExpectedSentence(String rawSentence, String talkerId, String typeCode,
                                     Class<? extends NMEASentence> clazz) {
             m_rawSentence = rawSentence;
-            m_validity = validity;
             m_talkerId = talkerId;
             m_typeCode = typeCode;
             m_clazz = clazz;
