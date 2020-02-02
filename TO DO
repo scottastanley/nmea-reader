@@ -1,8 +1,6 @@
         
 TO DO
 -----
-- Write SentenceFactory test
-    - Single test for each valid sentence type supported
 - InvalidSentence support in SentenceFactory
     - Add InvalidSentence
     - Add support in SentenceFactory
@@ -30,7 +28,11 @@ TO DO
         - Add a test in SentenceFactoryTest
         - Add to multiple sentence test in NMEASentenceProvider
 
-
+New sentence Class
+------------------
+- Implement new class with unit test
+- Add entry to sentences.properties
+- Add test method to SentenceFactoryTest
     
 References:
 https://gpsd.gitlab.io/gpsd/NMEA.html
