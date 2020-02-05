@@ -24,7 +24,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.bb.nmea.rawdataproviders.TestDataCollectorDataProvider;
+import com.bb.nmea.rawdataproviders.DataCollectorOutputStream;
 
 public class FileReaderTest {
 
@@ -58,7 +58,9 @@ public class FileReaderTest {
 
         try {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
-            TestDataCollectorDataProvider dp = new TestDataCollectorDataProvider();
+            DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
+            TestDataCollectingInputFileDataProvider dp = new TestDataCollectingInputFileDataProvider();
+            
             CountDownLatch latch = new CountDownLatch(1);
             
             FileReader rdr = new FileReader(dp, inpStr, latch);
@@ -102,7 +104,7 @@ public class FileReaderTest {
 
         try {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
-            TestDataCollectorDataProvider dp = new TestDataCollectorDataProvider();
+            TestDataCollectingInputFileDataProvider dp = new TestDataCollectingInputFileDataProvider();
             CountDownLatch latch = new CountDownLatch(1);
             
             FileReader rdr = new FileReader(dp, inpStr, latch);
@@ -147,7 +149,7 @@ public class FileReaderTest {
 
         try {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
-            TestDataCollectorDataProvider dp = new TestDataCollectorDataProvider();
+            TestDataCollectingInputFileDataProvider dp = new TestDataCollectingInputFileDataProvider();
             CountDownLatch latch = new CountDownLatch(1);
             
             FileReader rdr = new FileReader(dp, inpStr, latch);
@@ -192,7 +194,7 @@ public class FileReaderTest {
 
         try {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
-            TestDataCollectorDataProvider dp = new TestDataCollectorDataProvider();
+            TestDataCollectingInputFileDataProvider dp = new TestDataCollectingInputFileDataProvider();
             CountDownLatch latch = new CountDownLatch(1);
             
             FileReader rdr = new FileReader(dp, inpStr, latch);
@@ -237,7 +239,7 @@ public class FileReaderTest {
 
         try {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
-            TestDataCollectorDataProvider dp = new TestDataCollectorDataProvider();
+            TestDataCollectingInputFileDataProvider dp = new TestDataCollectingInputFileDataProvider();
             CountDownLatch latch = new CountDownLatch(1);
             
             FileReader rdr = new FileReader(dp, inpStr, latch);

@@ -95,7 +95,7 @@ public class NMEASentenceProvider {
         LOG.info("Stopping all data providers");
         for (DataProvider dp : m_dataProviders) {
             try {
-                dp.stop();
+                dp.stopDataProvider();
             } catch (DataProviderException e) {
                 LOG.info("Error shutting down: " + e.getMessage());
             }

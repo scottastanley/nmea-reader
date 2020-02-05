@@ -83,4 +83,17 @@ public class InputFileDataProvider
 
         LOG.info("Read thread interrupted");
     }
+    
+    /**
+     * Provide the data to the data provider.
+     * 
+     * @param bytes
+     * @param offset
+     * @param numBytes
+     * @throws DataProviderException
+     */
+    final void provideFileData(final byte[] bytes, final int offset, final int numBytes) 
+            throws DataProviderException {
+        this.provideData(bytes, offset, numBytes);
+    }
 }

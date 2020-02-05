@@ -39,7 +39,8 @@ public class Main {
             PipedInputStream inpStrm = new PipedInputStream();
             PipedOutputStream outStrm = new PipedOutputStream(inpStrm);
             
-            dp.setOutputStream(outStrm);
+            DataProvider dpRaw = (DataProvider) dp;
+            dpRaw.setOutputStream(outStrm);
             
             rdr = new BufferedReader(new InputStreamReader(inpStrm));
         } catch (IOException e) {

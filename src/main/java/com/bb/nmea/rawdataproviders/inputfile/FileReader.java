@@ -22,19 +22,18 @@ import java.util.concurrent.CountDownLatch;
 
 import org.apache.log4j.Logger;
 
-import com.bb.nmea.DataProvider;
 import com.bb.nmea.DataProviderException;
 
 public class FileReader implements Runnable {
     private static final Logger LOG = Logger.getLogger(FileReader.class);
-    private final DataProvider m_dp;
+    private final InputFileDataProvider m_dp;
     private final InputStream m_inpStrm;
     private final CountDownLatch m_latch;
     
     private Integer m_maxBytesPerBlock = 64;
     private Long m_delay = 10L;
 
-    public FileReader(final DataProvider dp, final InputStream inpStrm, 
+    public FileReader(final InputFileDataProvider dp, final InputStream inpStrm, 
                       final CountDownLatch latch) {
         m_dp = dp;
         m_inpStrm = inpStrm;
@@ -53,7 +52,7 @@ public class FileReader implements Runnable {
         int numBytesRead = 0;
         try {
             while ((numBytesRead = m_inpStrm.read(buffer)) != -1) {
-                m_dp.provideData(buffer, 0, numBytesRead);
+                m_dp.provideFileData(buffer, 0, numBytesRead);
                 
                 // Change the buffer size
                 numBytesToRead = ran.nextInt(m_maxBytesPerBlock) + 1;

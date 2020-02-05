@@ -17,6 +17,7 @@ package com.bb.nmea;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.PipedOutputStream;
 
 import junit.framework.Assert;
 
@@ -77,5 +78,15 @@ public class TestTools {
     public static void deleteFile(final String fileName) {
         File f = new File(fileName);
         f.delete();
+    }
+    
+    /**
+     * Set the output stream on the provided data provider.
+     * 
+     * @param dp
+     * @param oStrm
+     */
+    public static void setOutputStream(final DataProvider dp, final PipedOutputStream oStrm) {
+        dp.setOutputStream(oStrm);
     }
 }

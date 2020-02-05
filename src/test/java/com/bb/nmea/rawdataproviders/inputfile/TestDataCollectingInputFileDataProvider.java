@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bb.nmea.rawdataproviders;
+package com.bb.nmea.rawdataproviders.inputfile;
 
-import com.bb.nmea.DataProvider;
 import com.bb.nmea.DataProviderException;
+import com.bb.nmea.TestTools;
+import com.bb.nmea.rawdataproviders.DataCollectorOutputStream;
 
-public class TestDataCollectorDataProvider extends DataProvider {
+public class TestDataCollectingInputFileDataProvider extends InputFileDataProvider {
     DataCollectorOutputStream m_oStrm = new DataCollectorOutputStream();
 
-    public TestDataCollectorDataProvider() {
+    public TestDataCollectingInputFileDataProvider() {
+        super(null);
         m_oStrm = new DataCollectorOutputStream();
-        this.setOutputStream(m_oStrm);
+        TestTools.setOutputStream(this, m_oStrm);
     }
 
     @Override

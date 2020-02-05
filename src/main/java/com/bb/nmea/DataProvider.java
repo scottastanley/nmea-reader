@@ -20,25 +20,43 @@ import java.io.PipedOutputStream;
 
 import org.apache.log4j.Logger;
 
+/**
+ * The abstract base class for all raw NMEA DataProviders.  All data sources
+ * used by the NMEASentenceProvider must extend this base class.  This class 
+ * provides the core functionality used by the NMEASentenceProvider to link
+ * data provided by the data provider over to the threads parsing
+ * this data and providing events to the listeners.  
+ * 
+ * Two methods must be implemented by each DataProvider, start() and stop().
+ * These methods will be called to initiate processing of data by the provider 
+ * and then to halt processing.  During the processing of data, the data provider
+ * logic should call the method provideData(byte[], int, int) with all 
+ * data received.
+ */
 public abstract class DataProvider {
     private static final Logger LOG = Logger.getLogger(DataProvider.class);
-
     private PipedOutputStream m_oStrm;
 
+    /**
+     * Create an instance of a DataProvider.
+     */
     public DataProvider() {
     }
     
     /**
      * Initiate the process for reading data.
      * 
-     * @throws DataProviderException
+     * @throws DataProviderException If an error occurs starting processing
      */
     abstract public void start() throws DataProviderException;
     
     /**
-     * Halt the processing
+     * Halt the processing of data.  Note that after this method has been
+     * called, the stream used to provide data to the parsing logic will
+     * be closed, so all calls to provideData() will result in an runtime
+     * error.
      * 
-     * @throws DataProviderException
+     * @throws DataProviderException If an error occurs stopping the process
      */
     abstract public void stopChild() throws DataProviderException;
     
@@ -47,7 +65,7 @@ public abstract class DataProvider {
      * 
      * @throws DataProviderException If an error occurs
      */
-    public void stop() throws DataProviderException {
+    final void stopDataProvider() throws DataProviderException {
         // Allow the child to stop itself
         stopChild();
         
@@ -64,7 +82,7 @@ public abstract class DataProvider {
      * 
      * @param oStrm The piped output stream
      */
-    protected void setOutputStream(final PipedOutputStream oStrm) {
+    final void setOutputStream(final PipedOutputStream oStrm) {
         m_oStrm = oStrm;
     }
     
@@ -74,7 +92,7 @@ public abstract class DataProvider {
      * @param bytes The raw data bytes
      * @throws DataProviderException If an error occurs feeding this data in to the processor 
      */
-    public void provideData(final byte[] bytes, final int offset, final int numBytes) 
+    final protected void provideData(final byte[] bytes, final int offset, final int numBytes) 
             throws DataProviderException {
         if (m_oStrm == null) {
             throw new RuntimeException("DataProvider not fully configured.  No oStrm provided.");

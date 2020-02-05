@@ -51,7 +51,7 @@ public class DataProviderTest {
             
             PipedOutputStream oStrm = mock(PipedOutputStream.class);
             
-            dp.setOutputStream(oStrm);
+            ((DataProvider) dp).setOutputStream(oStrm);
             dp.start();
             
             for (byte[] b : origBytes) {
@@ -77,7 +77,7 @@ public class DataProviderTest {
             
             PipedOutputStream oStrm = mock(PipedOutputStream.class);
             
-            dp.setOutputStream(oStrm);
+            ((DataProvider) dp).setOutputStream(oStrm);
             dp.start();
             
             for (byte[] b : origBytes) {
@@ -122,7 +122,7 @@ public class DataProviderTest {
             PipedOutputStream oStrm = mock(PipedOutputStream.class);
             doThrow(IOException.class).when(oStrm).write(origBytes[0], 0, origBytes[0].length);
             
-            dp.setOutputStream(oStrm);
+            ((DataProvider) dp).setOutputStream(oStrm);
             
             try {
                 dp.start();

@@ -18,7 +18,11 @@ package com.bb.nmea;
 import java.util.regex.Pattern;
 
 /**
- * The abstract base for all NMEA sentences.
+ * The abstract base class for all NMEA sentences.  
+ * 
+ * This class provides the parsing for the core fields common to all
+ * NMEA sentences as well as methods for use by sub-classes to access 
+ * the rest of the fields.
  * 
  * @author Scott Stanley
  */
@@ -143,7 +147,7 @@ public abstract class NMEASentence {
      * @return The field value
      */
     protected Float getFieldAsFloat(final int index) {
-        return m_fields != null ? Float.valueOf(getField(index)) : null;
+        return Float.valueOf(getField(index));
     }
 
     /**
@@ -153,7 +157,7 @@ public abstract class NMEASentence {
      * @return The field value
      */
     protected Integer getFieldAsInteger(final int index) {
-        return m_fields != null ? Integer.valueOf(getField(index)) : null;
+        return Integer.valueOf(getField(index));
     }
     
     /**
@@ -163,7 +167,7 @@ public abstract class NMEASentence {
      * @return The field value
      */
     protected LatLong getFieldAsLatLong(final int index) {
-        return m_fields != null ? new LatLong(getField(index)) : null;
+        return new LatLong(getField(index));
     }
     
     /**
