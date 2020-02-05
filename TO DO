@@ -3,8 +3,6 @@ TO DO
 -----
 - Cleanup
     - JavaDoc
-    - license statement
-    - Cleanup warnings
     - push to GitHub
 - Reevaluate the permissions on classes/methods  For instance;
     - public void provideData in DataProvider should probably not be public.  Making this protected is much better.
