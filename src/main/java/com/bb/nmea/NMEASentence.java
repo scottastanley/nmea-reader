@@ -15,6 +15,7 @@ public abstract class NMEASentence {
     private String m_checksum;
     private String m_tag;
     private String[] m_fields;
+    private Boolean m_isValid = true;
 
     /**
      * Create a new NMEASentence initializing the common details.
@@ -190,5 +191,21 @@ public abstract class NMEASentence {
         }
         
         return isValid;
+    }
+
+    /**
+     * Is this NMEASentence valid?
+     * 
+     * @return true if this sentence is valid
+     */
+    public Boolean isValid() {
+        return m_isValid;
+    }
+
+    /**
+     * Flag the sentence as invalid.
+     */
+    protected void setInValid() {
+        m_isValid = Boolean.FALSE;
     }
 }

@@ -10,6 +10,8 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 
+import com.bb.nmea.sentences.InvalidSentence;
+
 /**
  * SentenceFactory is a factory class providing instances of the specific NMEASentence classes.  The
  * classes supported by this factory are specified in the resource file nmea.properties with the
@@ -50,8 +52,13 @@ public class SentenceFactory {
         
         NMEASentence instance = null;
         try {
-            instance = clazz.getConstructor(String.class).newInstance(rawSentence);
-            Assert.assertNotNull("Null instance", instance);
+            Boolean isValid = NMEASentence.isValidRawSentence(rawSentence);
+            if (isValid) {
+                instance = clazz.getConstructor(String.class).newInstance(rawSentence);
+                Assert.assertNotNull("Null instance", instance);
+            } else {
+                instance = new InvalidSentence(rawSentence);
+            }
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | NoSuchMethodException | SecurityException e) {
             LOG.error("Failed to instantiate sentence: " + rawSentence, e);

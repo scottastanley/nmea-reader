@@ -63,6 +63,7 @@ public class NMEASentenceTest {
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
             
+            Assert.assertTrue("Sentence should be valid", s.isValid());
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
@@ -96,6 +97,7 @@ public class NMEASentenceTest {
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
             
+            Assert.assertTrue("Sentence should be valid", s.isValid());
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
@@ -141,6 +143,7 @@ public class NMEASentenceTest {
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
             
+            Assert.assertTrue("Sentence should be valid", s.isValid());
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
@@ -213,6 +216,7 @@ public class NMEASentenceTest {
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
             
+            Assert.assertTrue("Sentence should be valid", s.isValid());
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
@@ -265,6 +269,7 @@ public class NMEASentenceTest {
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
             
+            Assert.assertTrue("Sentence should be valid", s.isValid());
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
@@ -312,6 +317,7 @@ public class NMEASentenceTest {
             NMEASentence s = new TestNMEASentence(rawStr);
             long postTime = System.currentTimeMillis();
             
+            Assert.assertTrue("Sentence should be valid", s.isValid());
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
