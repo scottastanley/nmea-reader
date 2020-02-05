@@ -1,15 +1,6 @@
         
 TO DO
 -----
-- InvalidSentence support in SentenceFactory
-    - Add InvalidSentence
-    - Add support in SentenceFactory
-    - Testing each
-- UnsupportedSentence support
-    - Add UnsupportedSentence class with simple methods to get each field and the logic to make sure these 
-        can be serialized in a logging listener
-    - Add support in the SentenceFactory
-    - Testing each
 - Cleanup
     - JavaDoc
     - license statement

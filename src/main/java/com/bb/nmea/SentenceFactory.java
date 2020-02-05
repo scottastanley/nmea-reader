@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 
 import com.bb.nmea.sentences.InvalidSentence;
+import com.bb.nmea.sentences.UnsupportedSentence;
 
 /**
  * SentenceFactory is a factory class providing instances of the specific NMEASentence classes.  The
@@ -47,18 +48,23 @@ public class SentenceFactory {
      * @return An instance of the appropriate NMEASentence class
      */
     NMEASentence getNMEASentence(final String rawSentence) {
-        String type = NMEASentence.getTypeFromTag(NMEASentence.getTag(rawSentence));
-        Class<? extends NMEASentence> clazz = SENTENCE_CLASSES.get(type.toLowerCase());
-        
         NMEASentence instance = null;
         try {
             Boolean isValid = NMEASentence.isValidRawSentence(rawSentence);
             if (isValid) {
-                instance = clazz.getConstructor(String.class).newInstance(rawSentence);
-                Assert.assertNotNull("Null instance", instance);
+                String type = NMEASentence.getTypeFromTag(NMEASentence.getTag(rawSentence));
+                Class<? extends NMEASentence> clazz = SENTENCE_CLASSES.get(type.toLowerCase());
+                
+                if (clazz != null) {
+                    instance = clazz.getConstructor(String.class).newInstance(rawSentence);
+                } else {
+                    instance = new UnsupportedSentence(rawSentence);
+                }
             } else {
                 instance = new InvalidSentence(rawSentence);
             }
+            
+            Assert.assertNotNull("Null instance", instance);
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | NoSuchMethodException | SecurityException e) {
             LOG.error("Failed to instantiate sentence: " + rawSentence, e);

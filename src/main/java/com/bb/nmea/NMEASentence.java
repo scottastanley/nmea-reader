@@ -111,7 +111,8 @@ public abstract class NMEASentence {
     }
 
     /**
-     * Get the value of the specified field index as a string.
+     * Get the value of the specified field index as a string.  The indexes
+     * of fields in the sentence begin as 0 with the tag field.
      * 
      * @param index The index of the field to retrieve
      * @return The field value
