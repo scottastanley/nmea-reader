@@ -73,7 +73,7 @@ public class InputFileDataProvider
     }
 
     @Override
-    public void stopChild() throws DataProviderException {
+    public void stop() throws DataProviderException {
         LOG.info("Stopping...");
         // Interrupt the read thread
         if (m_readThread != null) {

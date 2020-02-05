@@ -39,7 +39,7 @@ public class TestPassThroughDataProvider extends DataProvider {
     }
 
     @Override
-    public void stopChild() throws DataProviderException {
+    public void stop() throws DataProviderException {
         LOG.debug("Stopping");
     }
 }

@@ -58,7 +58,7 @@ public abstract class DataProvider {
      * 
      * @throws DataProviderException If an error occurs stopping the process
      */
-    abstract public void stopChild() throws DataProviderException;
+    abstract public void stop() throws DataProviderException;
     
     /**
      * Stop the DataProvider
@@ -67,7 +67,7 @@ public abstract class DataProvider {
      */
     final void stopDataProvider() throws DataProviderException {
         // Allow the child to stop itself
-        stopChild();
+        stop();
         
         // Close the output stream
         try {
