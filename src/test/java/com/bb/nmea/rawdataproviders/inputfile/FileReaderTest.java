@@ -16,6 +16,7 @@
 package com.bb.nmea.rawdataproviders.inputfile;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.CountDownLatch;
 
@@ -24,6 +25,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.bb.nmea.DataProviderException;
 import com.bb.nmea.rawdataproviders.DataCollectorOutputStream;
 
 public class FileReaderTest {
@@ -56,18 +58,24 @@ public class FileReaderTest {
         + "$GPRMC,193520,A,3746.823,N,12223.246,W,0.1,126.0,291219,013.0,E,A*0C";
         byte[] origBytes = origStr.getBytes();
 
+        DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
         try {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
-            DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
-            TestDataCollectingInputFileDataProvider dp = new TestDataCollectingInputFileDataProvider();
             
             CountDownLatch latch = new CountDownLatch(1);
             
-            FileReader rdr = new FileReader(dp, inpStr, latch);
+            FileReader rdr = new FileReader((byte[] data, int numBytes) ->  {
+                try {
+                    oStrm.write(data, 0, numBytes);
+                } catch (IOException e) {
+                    throw new DataProviderException("", e);
+                    }
+            }, inpStr, latch);
+            
             rdr.setDelay(0L);
             rdr.run();
             
-            byte[] collectedBytes = dp.getCollectedBytes();
+            byte[] collectedBytes = oStrm.getCollectedBytes();
             Assert.assertEquals("Wrong number of collected bytes", origBytes.length, collectedBytes.length);
             
             String collectedStr = new String(collectedBytes);
@@ -79,6 +87,10 @@ public class FileReaderTest {
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
+        } finally {
+            try {
+                if (oStrm != null) oStrm.close();
+            } catch (IOException e) {}
         }
     }
 
@@ -102,17 +114,24 @@ public class FileReaderTest {
         + "$GPRMC,193520,A,3746.823,N,12223.246,W,0.1,126.0,291219,013.0,E,A*0C";
         byte[] origBytes = origStr.getBytes();
 
+        DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
         try {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
-            TestDataCollectingInputFileDataProvider dp = new TestDataCollectingInputFileDataProvider();
             CountDownLatch latch = new CountDownLatch(1);
             
-            FileReader rdr = new FileReader(dp, inpStr, latch);
+            FileReader rdr = new FileReader((byte[] data, int numBytes) ->  {
+                try {
+                    oStrm.write(data, 0, numBytes);
+                } catch (IOException e) {
+                    throw new DataProviderException("", e);
+                    }
+            }, inpStr, latch);
+
             rdr.setMaxBytesPerBlock(1);
             rdr.setDelay(0L);
             rdr.run();
             
-            byte[] collectedBytes = dp.getCollectedBytes();
+            byte[] collectedBytes = oStrm.getCollectedBytes();
             Assert.assertEquals("Wrong number of collected bytes", origBytes.length, collectedBytes.length);
             
             String collectedStr = new String(collectedBytes);
@@ -124,6 +143,10 @@ public class FileReaderTest {
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
+        } finally {
+            try {
+                if (oStrm != null) oStrm.close();
+            } catch (IOException e) {}
         }
     }
 
@@ -147,17 +170,24 @@ public class FileReaderTest {
         + "$GPRMC,193520,A,3746.823,N,12223.246,W,0.1,126.0,291219,013.0,E,A*0C";
         byte[] origBytes = origStr.getBytes();
 
+        DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
         try {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
-            TestDataCollectingInputFileDataProvider dp = new TestDataCollectingInputFileDataProvider();
             CountDownLatch latch = new CountDownLatch(1);
             
-            FileReader rdr = new FileReader(dp, inpStr, latch);
+            FileReader rdr = new FileReader((byte[] data, int numBytes) ->  {
+                try {
+                    oStrm.write(data, 0, numBytes);
+                } catch (IOException e) {
+                    throw new DataProviderException("", e);
+                    }
+            }, inpStr, latch);
+
             rdr.setMaxBytesPerBlock(origBytes.length);
             rdr.setDelay(0L);
             rdr.run();
             
-            byte[] collectedBytes = dp.getCollectedBytes();
+            byte[] collectedBytes = oStrm.getCollectedBytes();
             Assert.assertEquals("Wrong number of collected bytes", origBytes.length, collectedBytes.length);
             
             String collectedStr = new String(collectedBytes);
@@ -169,6 +199,10 @@ public class FileReaderTest {
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
+        } finally {
+            try {
+                if (oStrm != null) oStrm.close();
+            } catch (IOException e) {}
         }
     }
 
@@ -192,17 +226,24 @@ public class FileReaderTest {
         + "$GPRMC,193520,A,3746.823,N,12223.246,W,0.1,126.0,291219,013.0,E,A*0C";
         byte[] origBytes = origStr.getBytes();
 
+        DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
         try {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
-            TestDataCollectingInputFileDataProvider dp = new TestDataCollectingInputFileDataProvider();
             CountDownLatch latch = new CountDownLatch(1);
             
-            FileReader rdr = new FileReader(dp, inpStr, latch);
+            FileReader rdr = new FileReader((byte[] data, int numBytes) ->  {
+                try {
+                    oStrm.write(data, 0, numBytes);
+                } catch (IOException e) {
+                    throw new DataProviderException("", e);
+                    }
+            }, inpStr, latch);
+
             rdr.setMaxBytesPerBlock(origBytes.length + 50);
             rdr.setDelay(0L);
             rdr.run();
             
-            byte[] collectedBytes = dp.getCollectedBytes();
+            byte[] collectedBytes = oStrm.getCollectedBytes();
             Assert.assertEquals("Wrong number of collected bytes", origBytes.length, collectedBytes.length);
             
             String collectedStr = new String(collectedBytes);
@@ -214,6 +255,10 @@ public class FileReaderTest {
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
+        } finally {
+            try {
+                if (oStrm != null) oStrm.close();
+            } catch (IOException e) {}
         }
     }
 
@@ -237,17 +282,24 @@ public class FileReaderTest {
         + "$GPRMC,193520,A,3746.823,N,12223.246,W,0.1,126.0,291219,013.0,E,A*0C";
         byte[] origBytes = origStr.getBytes();
 
+        DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
         try {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
-            TestDataCollectingInputFileDataProvider dp = new TestDataCollectingInputFileDataProvider();
             CountDownLatch latch = new CountDownLatch(1);
             
-            FileReader rdr = new FileReader(dp, inpStr, latch);
+            FileReader rdr = new FileReader((byte[] data, int numBytes) ->  {
+                try {
+                    oStrm.write(data, 0, numBytes);
+                } catch (IOException e) {
+                    throw new DataProviderException("", e);
+                    }
+            }, inpStr, latch);
+
             rdr.setMaxBytesPerBlock(origBytes.length/4);
             rdr.setDelay(0L);
             rdr.run();
             
-            byte[] collectedBytes = dp.getCollectedBytes();
+            byte[] collectedBytes = oStrm.getCollectedBytes();
             Assert.assertEquals("Wrong number of collected bytes", origBytes.length, collectedBytes.length);
             
             String collectedStr = new String(collectedBytes);
@@ -259,6 +311,10 @@ public class FileReaderTest {
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
+        } finally {
+            try {
+                if (oStrm != null) oStrm.close();
+            } catch (IOException e) {}
         }
     }
 }

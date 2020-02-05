@@ -26,18 +26,18 @@ import com.bb.nmea.DataProviderException;
 
 public class FileReader implements Runnable {
     private static final Logger LOG = Logger.getLogger(FileReader.class);
-    private final InputFileDataProvider m_dp;
     private final InputStream m_inpStrm;
     private final CountDownLatch m_latch;
+    private final DataMethod m_dm;
     
     private Integer m_maxBytesPerBlock = 64;
     private Long m_delay = 10L;
 
-    public FileReader(final InputFileDataProvider dp, final InputStream inpStrm, 
+    public FileReader(final DataMethod dm, final InputStream inpStrm, 
                       final CountDownLatch latch) {
-        m_dp = dp;
         m_inpStrm = inpStrm;
         m_latch = latch;
+        m_dm = dm;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class FileReader implements Runnable {
         int numBytesRead = 0;
         try {
             while ((numBytesRead = m_inpStrm.read(buffer)) != -1) {
-                m_dp.provideFileData(buffer, 0, numBytesRead);
+                m_dm.provideData(buffer, numBytesRead);
                 
                 // Change the buffer size
                 numBytesToRead = ran.nextInt(m_maxBytesPerBlock) + 1;

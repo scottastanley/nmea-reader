@@ -52,7 +52,7 @@ public class InputFileDataProvider
             InputStream inpStrm = new FileInputStream(m_inputFile);
             
             m_latch = new CountDownLatch(1);
-            m_readThread = new Thread(new FileReader(this, inpStrm, m_latch));
+            m_readThread = new Thread(new FileReader(this::provideFileData, inpStrm, m_latch));
             m_readThread.setName("NMEA File Input");
             
             // Start the read thread
@@ -92,8 +92,8 @@ public class InputFileDataProvider
      * @param numBytes
      * @throws DataProviderException
      */
-    final void provideFileData(final byte[] bytes, final int offset, final int numBytes) 
+    final void provideFileData(final byte[] bytes, final int numBytes) 
             throws DataProviderException {
-        this.provideData(bytes, offset, numBytes);
+        this.provideData(bytes, 0, numBytes);
     }
 }

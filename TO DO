@@ -1,12 +1,6 @@
         
 TO DO
 -----
-- Look at how the FileReader and InputFileDataProvider classes are implemented.  See if I can 
-  define the FileReader constructor with a lambda expression with the function to call with data.
-  then change InputFileDataProvider to pass the function in instead of an instance of the DP class.
-  This will simplify the testing alot since I can unravel the whole CollectingDataProvider logic and 
-  just pass a method in to the FileReader test with the collecting input stream.
-
 - Cleanup
     - JavaDoc
     - push to GitHub
