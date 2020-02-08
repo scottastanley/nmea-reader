@@ -17,6 +17,8 @@ package com.bb.nmea;
 
 import java.util.regex.Pattern;
 
+import com.bb.nmea.sentences.common.LatLong;
+
 /**
  * The abstract base class for all NMEA sentences.  
  * 

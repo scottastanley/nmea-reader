@@ -19,7 +19,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.bb.nmea.HeadingType;
+import com.bb.nmea.sentences.common.HeadingType;
 
 import junit.framework.Assert;
 

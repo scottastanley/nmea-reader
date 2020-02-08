@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bb.nmea;
+package com.bb.nmea.sentences.common;
 
 public class LatLong {
     final Integer m_degrees;

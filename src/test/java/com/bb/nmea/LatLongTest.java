@@ -20,6 +20,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.bb.nmea.sentences.common.LatLong;
+
 public class LatLongTest {
 
     @Before

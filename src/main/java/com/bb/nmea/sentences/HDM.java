@@ -15,8 +15,8 @@
  */
 package com.bb.nmea.sentences;
 
-import com.bb.nmea.HeadingType;
 import com.bb.nmea.NMEASentence;
+import com.bb.nmea.sentences.common.HeadingType;
 
 /**
  * HDM: Magnetic Heading

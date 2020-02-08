@@ -22,6 +22,7 @@ import org.junit.Test;
 import com.bb.nmea.sentences.HDM;
 import com.bb.nmea.sentences.InvalidSentence;
 import com.bb.nmea.sentences.UnsupportedSentence;
+import com.bb.nmea.sentences.common.HeadingType;
 
 import junit.framework.Assert;
 
