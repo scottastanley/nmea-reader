@@ -1,14 +1,15 @@
         
 TO DO
 -----
+- Update the main class to allow specification of input files as data providers
+- Clean up the main class
+- Clean up the listener logic?  Only reason to change to abstract class is to unify exception from constructors.
 - Cleanup
     - JavaDoc
     - push to GitHub
 - look at the base classes and make the methods final that should not be extended.  
 - Reevaluate the permissions on classes/methods  For instance;
 
-- Write a sample Main method providing an example of using the NMEASentenceProvider.  Main 
-   should be in a different package to insure access modifiers are okay.
 - Work on project documentation on GitHub
     - Project description
     - Usage examples

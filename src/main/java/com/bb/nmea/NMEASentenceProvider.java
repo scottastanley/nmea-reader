@@ -116,6 +116,14 @@ public class NMEASentenceProvider {
         } catch (InterruptedException e) {
             // Ignore being interrupted
         }
+        
+        //
+        // Stop all of the listeners
+        //
+        LOG.info("Stopping all listeners");
+        for (NMEAListener l : m_listeners) {
+            l.stop();
+        }
     }
     
     /**

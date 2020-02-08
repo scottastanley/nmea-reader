@@ -37,4 +37,8 @@ public class TestNMEAListener implements NMEAListener {
     public List<NMEASentence> getNMEASentences() {
         return m_rcvdSentences;
     }
+
+    @Override
+    public void stop() {        
+    }
 }

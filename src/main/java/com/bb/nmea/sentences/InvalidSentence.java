@@ -33,8 +33,6 @@ public class InvalidSentence extends NMEASentence {
      * @param rawSentence The raw NMEA sentence
      */
     public InvalidSentence(String rawSentence) {
-        super(rawSentence);
-        
-        this.setInValid();
+        super(rawSentence, Boolean.FALSE);
     }
 }

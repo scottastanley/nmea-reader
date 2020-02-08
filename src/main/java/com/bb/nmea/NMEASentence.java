@@ -31,8 +31,8 @@ import com.bb.nmea.sentences.common.LatLong;
 public abstract class NMEASentence {
     final static String SENTENCE_PATTERN = "^[\\!\\$].*\\*[0-9A-F]{2}$";
     
-    final private String m_rawSentence;
-    final private long m_collectedTimestamp;
+    private String m_rawSentence;
+    private long m_collectedTimestamp;
     private String m_checksum;
     private String m_tag;
     private String[] m_fields;
@@ -44,11 +44,34 @@ public abstract class NMEASentence {
      * @param rawSentence
      */
     public NMEASentence(final String rawSentence) {
+        initFields(rawSentence);
+    }
+
+    /**
+     * Create a new NMEASentence initializing the common details flagged with the provided validity.
+     * 
+     * @param rawSentence
+     * @param isValid Is this raw sentence valid?
+     */
+    public NMEASentence(final String rawSentence, final Boolean isValid) {
+        m_isValid = isValid;
+        initFields(rawSentence);
+    }
+    
+    /**
+     * Initialize the core fields for the sentence
+     * 
+     * @param rawSentence
+     */
+    private void initFields(final String rawSentence) {
         m_collectedTimestamp = System.currentTimeMillis();
         m_rawSentence = rawSentence;
-        m_checksum = rawSentence.substring(rawSentence.length() - 2, rawSentence.length());
-        m_tag = NMEASentence.getTag(rawSentence);
-        m_fields = rawSentence.substring(1, rawSentence.length() - 3).split(",");
+        
+        if (m_isValid) {
+            m_checksum = rawSentence.substring(rawSentence.length() - 2, rawSentence.length());
+            m_tag = NMEASentence.getTag(rawSentence);
+            m_fields = rawSentence.substring(1, rawSentence.length() - 3).split(",");
+        }
     }
     
     /**
