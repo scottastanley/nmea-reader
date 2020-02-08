@@ -39,13 +39,6 @@ public class PortListenerDataProvider extends DataProvider implements SerialPort
         LOG.info("Starting " + m_port.getSystemPortName() + " ...");
         m_port.addDataListener(this);
         
-//        Runtime.getRuntime().addShutdownHook(new Thread() {
-//            public void run() {
-//                LOG.debug("Shutting down...");
-//                m_port.closePort();
-//            }
-//        });
-        
         if (! m_port.openPort()) {
             LOG.error("Failed to open serial port");
             throw new DataProviderException("Failed to open serial port");
