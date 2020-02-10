@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,9 @@ public class NMEASentenceProvider {
     private List<DataProvider> m_dataProviders = new ArrayList<DataProvider>();
     private SentenceReaderThreadGroup m_thrdGrp = new SentenceReaderThreadGroup();
     private List<NMEAListener> m_listeners = new ArrayList<NMEAListener>();
+    
+    private long m_numSentences = 0L;
+    private long m_startTimestamp;
 
     /**
      * Create a new NMEASentenceProvider accepting data from the provided set of
@@ -72,6 +76,7 @@ public class NMEASentenceProvider {
             throws NMEADataProcessorException {
         LOG.info("Starting data providers");
         try {
+            m_startTimestamp = System.currentTimeMillis();
             for (DataProvider dp : m_dataProviders) {
                 dp.start();
             }
@@ -139,6 +144,16 @@ public class NMEASentenceProvider {
                 LOG.error("Error notifying listener of NMEA sentence", t);
             }
         });
+        
+        m_numSentences++;
+        if ((m_numSentences % 300L) == 0) {
+            // Prevent divide by zero when operating with no delay
+            double elapsedTimeSec = Math.max((System.currentTimeMillis() - m_startTimestamp)/1000.0, 1.0);
+            
+            double rate = m_numSentences/elapsedTimeSec; 
+            DecimalFormat format = new DecimalFormat("###,###.00");
+            LOG.info("Stats: " + m_numSentences + " in " + elapsedTimeSec + " seconds (" + format.format(rate) + " sent/sec)");
+        }
     }
     
     /**

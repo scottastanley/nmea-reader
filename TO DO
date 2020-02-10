@@ -1,9 +1,10 @@
         
 TO DO
 -----
-- Update the main class to allow specification of input files as data providers
 - Clean up the main class
+- Write tests for config classes
 - Clean up the listener logic?  Only reason to change to abstract class is to unify exception from constructors.
+- Modify the logic for listeners.  Add the method to add an array of listeners?
 - Cleanup
     - JavaDoc
     - push to GitHub
@@ -30,3 +31,21 @@ New sentence Class
 References:
 https://gpsd.gitlab.io/gpsd/NMEA.html
 http://aprs.gids.nl/nmea/
+
+
+cu.usbserial-AM009S8I: FT232R USB UART
+    desc: FT232R USB UART
+    baud: 9600               parity: 0           
+    numDataBits: 8           numStopBits: 1       
+    readTimeout: 0           writeTimeout: 0       
+    inpStream=null: true    
+
+tty.usbserial-AM009S8I: FT232R USB UART (Dial-In)
+    desc: FT232R USB UART (Dial-In)
+    baud: 9600               parity: 0           
+    numDataBits: 8           numStopBits: 1       
+    readTimeout: 0           writeTimeout: 0       
+    inpStream=null: true    
+
+    INFO  NMEASentenceProvider - Stats: 2100 in 418 rate 5 sent/sec
+    
