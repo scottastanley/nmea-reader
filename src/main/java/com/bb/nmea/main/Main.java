@@ -15,6 +15,7 @@
  */
 package com.bb.nmea.main;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,6 +27,7 @@ import com.bb.nmea.NMEADataProcessorException;
 import com.bb.nmea.NMEAListener;
 import com.bb.nmea.NMEASentenceProvider;
 import com.bb.nmea.listeners.SentenceLogger;
+import com.bb.nmea.rawdataproviders.inputfile.InputFileDataProvider;
 import com.bb.nmea.rawdataproviders.port.PortListenerDataProvider;
 
 public class Main {
@@ -48,10 +50,18 @@ public class Main {
         List<DataProvider> dataProviders = new ArrayList<DataProvider>();
         
         // Configure the port data providers
-        List<PortConfig> ports = config.getPortConfigs();
-        for (PortConfig port : ports) {
-            PortListenerDataProvider portList = new PortListenerDataProvider(port.getDescriptor(), port.getBaudRate());
-            dataProviders.add(portList);
+        List<PortConfig> portConfigs = config.getPortConfigs();
+        for (PortConfig portConfig : portConfigs) {
+            PortListenerDataProvider dp = new PortListenerDataProvider(portConfig.getDescriptor(), portConfig.getBaudRate());
+            dataProviders.add(dp);
+        }
+        
+        // Configure the file data providers
+        List<FileConfig> fileConfigs = config.getFileConfigs();
+        for (FileConfig fileConfig : fileConfigs) {
+            File file = new File(fileConfig.getFilename());
+            InputFileDataProvider dp = new InputFileDataProvider(file, fileConfig.getPauseMillis());
+            dataProviders.add(dp);
         }
         
         List<NMEAListener> listeners = new ArrayList<NMEAListener>();

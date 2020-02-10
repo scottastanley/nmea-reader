@@ -24,8 +24,15 @@ public class PortConfig {
     
     static String[] getPortIds(final Properties props) {
         String idsStr = props.getProperty(PORT_PREFIX + IDS_PROPERTY);
-        String[] propIds = idsStr.trim().split(",");
-        return propIds; 
+
+        String[] portIds = null;
+        if (idsStr != null) {
+            portIds = idsStr.trim().split(",");
+        } else {
+            portIds = new String[0];
+        }
+        
+        return portIds; 
     }
 
     /**

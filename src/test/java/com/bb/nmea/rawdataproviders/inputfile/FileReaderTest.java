@@ -70,9 +70,8 @@ public class FileReaderTest {
                 } catch (IOException e) {
                     throw new DataProviderException("", e);
                     }
-            }, inpStr, latch);
+            }, inpStr, latch, 0L);
             
-            rdr.setDelay(0L);
             rdr.run();
             
             byte[] collectedBytes = oStrm.getCollectedBytes();
@@ -125,10 +124,9 @@ public class FileReaderTest {
                 } catch (IOException e) {
                     throw new DataProviderException("", e);
                     }
-            }, inpStr, latch);
+            }, inpStr, latch, 0L);
 
             rdr.setMaxBytesPerBlock(1);
-            rdr.setDelay(0L);
             rdr.run();
             
             byte[] collectedBytes = oStrm.getCollectedBytes();
@@ -181,10 +179,9 @@ public class FileReaderTest {
                 } catch (IOException e) {
                     throw new DataProviderException("", e);
                     }
-            }, inpStr, latch);
+            }, inpStr, latch, 0L);
 
             rdr.setMaxBytesPerBlock(origBytes.length);
-            rdr.setDelay(0L);
             rdr.run();
             
             byte[] collectedBytes = oStrm.getCollectedBytes();
@@ -237,10 +234,9 @@ public class FileReaderTest {
                 } catch (IOException e) {
                     throw new DataProviderException("", e);
                     }
-            }, inpStr, latch);
+            }, inpStr, latch, 0L);
 
             rdr.setMaxBytesPerBlock(origBytes.length + 50);
-            rdr.setDelay(0L);
             rdr.run();
             
             byte[] collectedBytes = oStrm.getCollectedBytes();
@@ -293,10 +289,9 @@ public class FileReaderTest {
                 } catch (IOException e) {
                     throw new DataProviderException("", e);
                     }
-            }, inpStr, latch);
+            }, inpStr, latch, 0L);
 
             rdr.setMaxBytesPerBlock(origBytes.length/4);
-            rdr.setDelay(0L);
             rdr.run();
             
             byte[] collectedBytes = oStrm.getCollectedBytes();

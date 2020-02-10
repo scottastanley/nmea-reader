@@ -67,7 +67,7 @@ public class InputFileDataProviderTest {
             File testFile = new File(TEST_FILE);
             
             // Create the data provider and process the input
-            InputFileDataProvider dp = new InputFileDataProvider(testFile);
+            InputFileDataProvider dp = new InputFileDataProvider(testFile, 10L);
             DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
             DataProviderTestTools.setOutputStream(dp, oStrm);
 
@@ -117,7 +117,7 @@ public class InputFileDataProviderTest {
             File testFile = new File(TEST_FILE);
             
             // Create the data provider and process the input
-            InputFileDataProvider dp = new InputFileDataProvider(testFile);
+            InputFileDataProvider dp = new InputFileDataProvider(testFile, 10L);
             DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
             DataProviderTestTools.setOutputStream(dp, oStrm);
 
@@ -147,7 +147,7 @@ public class InputFileDataProviderTest {
             File testFile = new File(TEST_FILE);
             
             // Create the data provider and process the input
-            InputFileDataProvider dp = new InputFileDataProvider(testFile);
+            InputFileDataProvider dp = new InputFileDataProvider(testFile, 10L);
             DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
             DataProviderTestTools.setOutputStream(dp, oStrm);
 
@@ -188,7 +188,7 @@ public class InputFileDataProviderTest {
             File testFile = new File("/tmp");
             
             // Create the data provider and process the input
-            InputFileDataProvider dp = new InputFileDataProvider(testFile);
+            InputFileDataProvider dp = new InputFileDataProvider(testFile, 10L);
             DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
             DataProviderTestTools.setOutputStream(dp, oStrm);
 
@@ -220,7 +220,7 @@ public class InputFileDataProviderTest {
             File testFile = new File(TEST_FILE);
             
             // Create the data provider and process the input
-            InputFileDataProvider dp = new InputFileDataProvider(testFile);
+            InputFileDataProvider dp = new InputFileDataProvider(testFile, 10L);
             DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
             DataProviderTestTools.setOutputStream(dp, oStrm);
 

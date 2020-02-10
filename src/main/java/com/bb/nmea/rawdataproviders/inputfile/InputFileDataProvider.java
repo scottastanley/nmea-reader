@@ -31,11 +31,13 @@ public class InputFileDataProvider
     private static final Logger LOG = Logger.getLogger(InputFileDataProvider.class);
 
     private final File m_inputFile;
+    private final Long m_pauseMillis;
     private Thread m_readThread = null;
     private CountDownLatch m_latch;
 
-    public InputFileDataProvider(final File inputFile) {
+    public InputFileDataProvider(final File inputFile, final Long pauseMillis) {
         m_inputFile = inputFile;
+        m_pauseMillis = pauseMillis;
     }
 
     @Override
@@ -52,7 +54,7 @@ public class InputFileDataProvider
             InputStream inpStrm = new FileInputStream(m_inputFile);
             
             m_latch = new CountDownLatch(1);
-            m_readThread = new Thread(new FileReader(this::provideFileData, inpStrm, m_latch));
+            m_readThread = new Thread(new FileReader(this::provideFileData, inpStrm, m_latch, m_pauseMillis));
             m_readThread.setName("NMEA File Input");
             
             // Start the read thread

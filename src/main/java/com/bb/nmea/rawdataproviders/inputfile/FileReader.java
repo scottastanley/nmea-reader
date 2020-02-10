@@ -29,15 +29,16 @@ public class FileReader implements Runnable {
     private final InputStream m_inpStrm;
     private final CountDownLatch m_latch;
     private final DataMethod m_dm;
+    private final long m_delay;
     
     private Integer m_maxBytesPerBlock = 64;
-    private Long m_delay = 10L;
 
     public FileReader(final DataMethod dm, final InputStream inpStrm, 
-                      final CountDownLatch latch) {
+                      final CountDownLatch latch, final long pauseMillis) {
         m_inpStrm = inpStrm;
         m_latch = latch;
         m_dm = dm;
+        m_delay = pauseMillis;
     }
 
     @Override
@@ -59,7 +60,7 @@ public class FileReader implements Runnable {
                 LOG.debug("Num bytes to read: " + numBytesToRead);
                 buffer = new byte[numBytesToRead];
 
-                if (m_delay >= 0) {
+                if (m_delay > 0) {
                     Thread.sleep(m_delay);
                 }
             }
@@ -104,12 +105,5 @@ public class FileReader implements Runnable {
      */
     public Long getDelay() {
         return m_delay;
-    }
-
-    /**
-     * @param delay the delay to set
-     */
-    public void setDelay(Long delay) {
-        m_delay = delay;
     }
 }
