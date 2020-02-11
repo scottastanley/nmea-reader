@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bb.nmea.rawdataproviders.inputfile;
+package com.bb.nmea.dataproviders.inputfile;
 
 import java.io.File;
 
@@ -26,6 +26,7 @@ import com.bb.nmea.DataProviderException;
 import com.bb.nmea.DataProviderTestTools;
 import com.bb.nmea.TestTools;
 import com.bb.nmea.dataproviders.DataCollectorOutputStream;
+import com.bb.nmea.dataproviders.inputfile.InputFileDataProvider;
 
 public class InputFileDataProviderTest {
     private static final String TEST_FILE = "target/test_data/testData.nmea";

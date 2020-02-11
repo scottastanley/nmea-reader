@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bb.nmea.rawdataproviders.inputfile;
+package com.bb.nmea.dataproviders.inputfile;
 
 import java.io.IOException;
 import java.io.InputStream;
