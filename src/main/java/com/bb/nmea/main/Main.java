@@ -26,22 +26,25 @@ import com.bb.nmea.DataProvider;
 import com.bb.nmea.NMEADataProcessorException;
 import com.bb.nmea.NMEAListener;
 import com.bb.nmea.NMEASentenceProvider;
+import com.bb.nmea.dataproviders.inputfile.InputFileDataProvider;
+import com.bb.nmea.dataproviders.port.PortListenerDataProvider;
 import com.bb.nmea.listeners.SentenceLogger;
-import com.bb.nmea.rawdataproviders.inputfile.InputFileDataProvider;
-import com.bb.nmea.rawdataproviders.port.PortListenerDataProvider;
 
+/**
+ * The Main class for the example client using the {@link com.bb.nmea.NMEASentenceProvider} to 
+ * listen to NMEA sentences.
+ * This java application is written in a configurable way to allow listening to multiple
+ * ports or reading from source files using the provided {@link com.bb.nmea.DataProvider}s,
+ * {@link com.bb.nmea.dataproviders.port.PortListenerDataProvider} and 
+ * {@link com.bb.nmea.dataproviders.inputfile.InputFileDataProvider}.  Details on how to 
+ * configure and run this example client are defined in {@link com.bb.nmea.main}.
+ * 
+ * @author Scott Stanley
+ */
 public class Main {
     private static final Logger LOG = Logger.getLogger(Main.class);
     
-    public Main() {
-    }
-
     public static void main(String[] args) {
-        Main m = new Main();
-        m.run();
-    }
-    
-    private void run() {
         Configuration config = new Configuration();
         
         //
@@ -102,7 +105,7 @@ public class Main {
     /**
      * Open a user console and wait on the user to enter "exit" before returning
      */
-    private void waitOnUserInput() {
+    private static void waitOnUserInput() {
         Scanner s = new Scanner(System.in);
         
         String input = "";

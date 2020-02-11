@@ -1,10 +1,11 @@
         
 TO DO
 -----
-- Clean up the main class
 - Write tests for config classes
 - Clean up the listener logic?  Only reason to change to abstract class is to unify exception from constructors.
 - Modify the logic for listeners.  Add the method to add an array of listeners?
+- When running the file reader data sources, it does not wait on user input until 
+    done reading the files.  They must block on start()
 - Cleanup
     - JavaDoc
     - push to GitHub
