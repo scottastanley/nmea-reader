@@ -25,7 +25,7 @@ import org.junit.Test;
 import com.bb.nmea.DataProviderException;
 import com.bb.nmea.DataProviderTestTools;
 import com.bb.nmea.TestTools;
-import com.bb.nmea.rawdataproviders.DataCollectorOutputStream;
+import com.bb.nmea.dataproviders.DataCollectorOutputStream;
 
 public class InputFileDataProviderTest {
     private static final String TEST_FILE = "target/test_data/testData.nmea";

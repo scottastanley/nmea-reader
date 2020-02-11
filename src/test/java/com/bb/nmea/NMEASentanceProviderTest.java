@@ -23,7 +23,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.bb.nmea.rawdataproviders.TestPassThroughDataProvider;
+import com.bb.nmea.dataproviders.TestPassThroughDataProvider;
 import com.bb.nmea.sentences.HDM;
 
 import javafx.util.Pair;

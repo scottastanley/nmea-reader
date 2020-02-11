@@ -26,7 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.bb.nmea.DataProviderException;
-import com.bb.nmea.rawdataproviders.DataCollectorOutputStream;
+import com.bb.nmea.dataproviders.DataCollectorOutputStream;
 
 public class FileReaderTest {
 
