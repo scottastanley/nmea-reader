@@ -23,10 +23,10 @@ import java.util.Properties;
  * @author Scott Stanley
  */
 class FileConfig {
-    private static final String FILE_PREFIX = "files.";
-    private static final String IDS_PROPERTY = "ids";
-    private static final String FILENAME_PROPERTY = "filename";
-    private static final String PAUSE_MILLIS_PROPERTY = "pause_millis";
+    static final String FILE_PREFIX = "files.";
+    static final String IDS_PROPERTY = "ids";
+    static final String FILENAME_PROPERTY = "filename";
+    static final String PAUSE_MILLIS_PROPERTY = "pause_millis";
 
     private final String m_filename;
     private final Long m_pauseMillis;

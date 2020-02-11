@@ -23,10 +23,10 @@ import java.util.Properties;
  * @author Scott Stanley
  */
 class PortConfig {
-    private static final String PORT_PREFIX = "ports.";
-    private static final String IDS_PROPERTY = "ids";
-    private static final String DESCRIPTOR_PROPERTY = "descriptor";
-    private static final String BAUDRATE_PROPERTY = "baudRate";
+    static final String PORT_PREFIX = "ports.";
+    static final String IDS_PROPERTY = "ids";
+    static final String DESCRIPTOR_PROPERTY = "descriptor";
+    static final String BAUDRATE_PROPERTY = "baudRate";
     
     private final String m_descriptor;
     private final Integer m_baudRate;
