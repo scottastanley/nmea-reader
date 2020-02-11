@@ -20,6 +20,13 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+/**
+ * A ThreadGroup which is used to control the set of threads executing the instances of 
+ * {@link com.bb.nmea.SentenceReaderRunnable}.  This thread froup will contain a thread 
+ * for each {@link com.bb.nmea.DataProvider} given to the {@link com.bb.nmea.NMEASentenceProvider}.
+ * 
+ * @author Scott Stanley
+ */
 public class SentenceReaderThreadGroup 
         extends ThreadGroup {
     private static final Logger LOG = Logger.getLogger(SentenceReaderThreadGroup.class);

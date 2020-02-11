@@ -1,21 +1,23 @@
         
 TO DO
 -----
-- Clean up the listener logic?  Only reason to change to abstract class is to unify exception from constructors.
-- Modify the logic for listeners.  Add the method to add an array of listeners?
-- When running the file reader data sources, it does not wait on user input until 
-    done reading the files.  They must block on start()
-- Cleanup
-    - JavaDoc
-    - push to GitHub
-- look at the base classes and make the methods final that should not be extended.  
-- Reevaluate the permissions on classes/methods  For instance;
-
 - Work on project documentation on GitHub
     - Project description
     - Usage examples
     - References
-- Add support for new sentence types
+    
+- When running the file reader data sources, it does not wait on user input until 
+    done reading the files.  They must block on start()
+
+- Listener logic
+    - Clean up the listener logic?  Only reason to change to abstract class is to unify exception from constructors.
+    - Add a method to add an array of listeners?
+
+- SentenceLogger
+    - Modify so writes data to a directory with rolling files in case they get large.
+    - Allow some configurability?  Output file path?
+
+- Adding support for new sentence types
     - For Each
         - Add class with unit test
         - Add to properties file

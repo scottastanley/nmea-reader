@@ -25,6 +25,14 @@ import org.apache.log4j.Logger;
 import com.bb.nmea.NMEAListener;
 import com.bb.nmea.NMEASentence;
 
+/**
+ * A simple example {@link com.bb.nmea.NMEAListener} which accepts and logs all NMEA sentences
+ * to an output file.  The log file is consistent with that required by the 
+ * {@link com.bb.nmea.dataproviders.inputfile.InputFileDataProvider}.  This combination of logger and data provider
+ * are particularly useful for allowing working when a live NMEA data feed is not available.
+ * 
+ * @author Scott Stanley
+ */
 public class SentenceLogger implements NMEAListener {
     private static final Logger LOG = Logger.getLogger(SentenceLogger.class);
     private static final String FILENAME_TEMPLATE = "raw_{TIMESTAMP}.nmea";

@@ -20,6 +20,19 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
+/**
+ * A runnable object which reads data provided by the {@link com.bb.nmea.DataProvider}s.  Each 
+ * data provider is provided with a piped output stream to which all piped data is written.
+ * The corresponding piped input stream is provided to an instance of SentenceReaderRunnable
+ * and started running in a thread.  All data provided by the data provider is read from the 
+ * piped input stream a single line at a time and the provided raw NMEA sentence is
+ * parsed to create an instance of {@link com.bb.nmea.NMEASentence}.  These sentences are
+ * then passed to the {@link com.bb.nmea.NMEASentenceProvider} to be passed to each of the
+ * listeners which have been registered.
+ * 
+ * @author Scott Stanley
+ *
+ */
 public class SentenceReaderRunnable implements Runnable {
     private static final Logger LOG = Logger.getLogger(SentenceReaderRunnable.class);
     private SentenceFactory m_sentFactory = new SentenceFactory();

@@ -23,7 +23,7 @@ import java.util.Scanner;
 import org.apache.log4j.Logger;
 
 import com.bb.nmea.DataProvider;
-import com.bb.nmea.NMEADataProcessorException;
+import com.bb.nmea.NMEASentenceProviderException;
 import com.bb.nmea.NMEAListener;
 import com.bb.nmea.NMEASentenceProvider;
 import com.bb.nmea.dataproviders.inputfile.InputFileDataProvider;
@@ -87,7 +87,7 @@ public class Main {
             
             // Wait on the user before proceeding
             waitOnUserInput();
-        } catch (NMEADataProcessorException e) {
+        } catch (NMEASentenceProviderException e) {
             LOG.error("Failed setting up the NMEASentenceProvider", e);
             System.exit(-1);
         } finally {
@@ -95,7 +95,7 @@ public class Main {
             if (nmeaProv != null) {
                 try {
                     nmeaProv.stop();
-                } catch (NMEADataProcessorException e) {
+                } catch (NMEASentenceProviderException e) {
                     LOG.error("Error stopping NMEA sentence provider", e);
                 }
             }

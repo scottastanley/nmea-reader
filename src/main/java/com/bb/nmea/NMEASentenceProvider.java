@@ -26,6 +26,15 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+/**
+ * The core driver class for the NMEA sentence processing/parsing logic.  This class
+ * is constructed with a set of {@link com.bb.nmea.DataProver} instances to accept 
+ * raw NMEA data from and a set of {@link com.bb.nmea.NMEAListener} instances to provide 
+ * the NMEA data to.  Each raw NMEA sentence read from the data providers is parsed and 
+ * provided to the listeners as am instance of the abstract class {@link com.bb.nmea.NMEASentence}.
+ * 
+ * @author Scott Stanley
+ */
 public class NMEASentenceProvider {
     private static final Logger LOG = Logger.getLogger(NMEASentenceProvider.class);
     
@@ -41,10 +50,10 @@ public class NMEASentenceProvider {
      * DataProviders.
      * 
      * @param rawDataProviders The DataProviders to process data from.
-     * @throws NMEADataProcessorException
+     * @throws NMEASentenceProviderException
      */
     public NMEASentenceProvider(final DataProvider... rawDataProviders) 
-        throws NMEADataProcessorException {
+        throws NMEASentenceProviderException {
 
         try {
             for (DataProvider dp : rawDataProviders) {
@@ -63,17 +72,17 @@ public class NMEASentenceProvider {
             m_thrdGrp.waitOnAllAlive();
         } catch (IOException e) {
             stop();
-            throw new NMEADataProcessorException("Failed to setup data pipes", e);
+            throw new NMEASentenceProviderException("Failed to setup data pipes", e);
         }
     }
     
     /**
      * Start processing data from the DataProviders.
      * 
-     * @throws NMEADataProcessorException If an error occurs starting one of the DataProviders.
+     * @throws NMEASentenceProviderException If an error occurs starting one of the DataProviders.
      */
     public void start() 
-            throws NMEADataProcessorException {
+            throws NMEASentenceProviderException {
         LOG.info("Starting data providers");
         try {
             m_startTimestamp = System.currentTimeMillis();
@@ -82,17 +91,17 @@ public class NMEASentenceProvider {
             }
         } catch (DataProviderException e) {
             stop();
-            throw new NMEADataProcessorException("Failed starting data provider", e);
+            throw new NMEASentenceProviderException("Failed starting data provider", e);
         }
     }
     
     /**
      * Stop the processing of this NMEASentenceProvider.
      * 
-     * @throws NMEADataProcessorException
+     * @throws NMEASentenceProviderException
      */
     public void stop() 
-            throws NMEADataProcessorException {
+            throws NMEASentenceProviderException {
         
         //
         // Indicate to the data providers that they should stop providing data

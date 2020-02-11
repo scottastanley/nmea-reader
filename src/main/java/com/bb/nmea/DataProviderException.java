@@ -15,6 +15,12 @@
  */
 package com.bb.nmea;
 
+/**
+ * An exception thrown by the {@link com.bb.nmea.DataProvider} implementations 
+ * in the event of errors.
+ * 
+ * @author Scott Stanley
+ */
 public class DataProviderException extends Exception {
     private static final long serialVersionUID = 2775519156361665959L;
 

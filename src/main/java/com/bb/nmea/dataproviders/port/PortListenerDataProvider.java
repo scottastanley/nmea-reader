@@ -23,11 +23,23 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 
+/**
+ * A sample {@link com.bb.nmea.DataProvider} which listens to a serial port and provides 
+ * all received data to the {@link com.bb.nmea.NMEASentenceProvider}.
+ * 
+ * @author sstanley
+ */
 public class PortListenerDataProvider extends DataProvider implements SerialPortDataListener {
     private static final Logger LOG = Logger.getLogger(PortListenerDataProvider.class);
    
     private SerialPort m_port = null;
 
+    /**
+     * Construct a PortListenerDataProvider for the provided port descriptor and baud.
+     * 
+     * @param descriptor
+     * @param baudRate
+     */
     public PortListenerDataProvider(final String descriptor, final Integer baudRate) {
         m_port = SerialPort.getCommPort(descriptor);
         m_port.setBaudRate(baudRate);

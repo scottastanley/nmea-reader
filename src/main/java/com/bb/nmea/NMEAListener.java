@@ -15,8 +15,23 @@
  */
 package com.bb.nmea;
 
+/**
+ * The interface which must be implemented by all listeners for NMEA sentences.
+ * 
+ * @author Scott Stanley
+ */
 public interface NMEAListener {
+    /**
+     * Process the provided NMEASentence.  This method will be called with all
+     * sentences received by the system, including invalid sentences as well as those 
+     * for which an explicit class is not defined.
+     * 
+     * @param sentence The NMEA sentence
+     */
     public void processEvent(final NMEASentence sentence);
     
+    /**
+     * Stop processing data in the listener and close all open resources.
+     */
     public void stop();
 }

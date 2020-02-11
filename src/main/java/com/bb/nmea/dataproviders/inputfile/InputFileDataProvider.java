@@ -26,6 +26,16 @@ import org.apache.log4j.Logger;
 import com.bb.nmea.DataProvider;
 import com.bb.nmea.DataProviderException;
 
+/**
+ * A sample {@link com.bb.nmea.DataProvider} which reads NMEA sentences from an input file
+ * and provides this data to the {@link com.bb.nmea.NMEASentenceProvider}.  The format of the 
+ * file for this data provider is a simple text file with a single NMEA sentence per line.  This
+ * is the format output by the {@link com.bb.nmea.listeners.SentenceLogger}.  This combination of 
+ * logger and data provider are particularly useful for allowing working when a live NMEA 
+ * data feed is not available.
+ * 
+ * @author Scott Stanley
+ */
 public class InputFileDataProvider 
         extends DataProvider {
     private static final Logger LOG = Logger.getLogger(InputFileDataProvider.class);
@@ -35,6 +45,13 @@ public class InputFileDataProvider
     private Thread m_readThread = null;
     private CountDownLatch m_latch;
 
+    /**
+     * Create an InputFileDataProvider reading the provided file with the specified
+     * pause between sentences.
+     * 
+     * @param inputFile
+     * @param pauseMillis
+     */
     public InputFileDataProvider(final File inputFile, final Long pauseMillis) {
         m_inputFile = inputFile;
         m_pauseMillis = pauseMillis;
