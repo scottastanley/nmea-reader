@@ -1,11 +1,7 @@
         
 TO DO
 -----
-- Work on project documentation on GitHub
-    - Project description
-    - Usage examples
-    - References
-    
+
 - When running the file reader data sources, it does not wait on user input until 
     done reading the files.  They must block on start()
 
@@ -16,13 +12,6 @@ TO DO
 - SentenceLogger
     - Modify so writes data to a directory with rolling files in case they get large.
     - Allow some configurability?  Output file path?
-
-- Adding support for new sentence types
-    - For Each
-        - Add class with unit test
-        - Add to properties file
-        - Add a test in SentenceFactoryTest
-        - Add to multiple sentence test in NMEASentenceProvider
 
 New sentence Class
 ------------------

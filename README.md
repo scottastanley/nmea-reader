@@ -22,12 +22,48 @@ An example Java application is provided in the class ``com.bb.nmea.main.Main``. 
 
 The basic pattern for using the _NMEASentenceProvider_ is as follows;
 ```java
-List<DataProvider> dataProviders = 
+// Create and add all desired data providers to the list
+List<DataProvider> dataProviders = ArrayList<DataProvider>();
+
+NMEASentenceProvider nmeaProvider = new NMEASentenceProvider(dataProviders);
+
+// Create and add any listeners
+SentenceLogger logger = new SentenceLogger();
+nmeaProvider.addListener(logger);
+
+// Start processing
+nmeaProvider.start();
+
+//
+// Wait while data is processed...
+//
+
+// When ready to exit, stop processing
+nmeaProvider.stop();
 
 ```
 
+## Developer Guidelines
+
+### Implementing New Parsing for an NMEA Sentence
+All NMEA sentence implementations included library are in the package ``com.bb.nmea.sentences``.  Each class in this package except for the classes _InvalidSentence_ and _UnsupportedSentence_ are concrete implementations for a specific three-digit NMEA sentence type.  The general class naming scheme is for the class name to be all capital letters and the same as the NMEA type the class supports.  
+
+The two classes _InvalidSentence_ and _UnsupportedSentence_ are used in the parsing logic for specific purposes.  All raw NMEA sentences which do not pass basic validation are parsed in to instances of the class _InvalidSentence_ and all valid sentences of an NMEA type which do not have a concrete class implementing support are parsed in to instances of the type _UnsupportedSentence_.  This allows the system to provide parsing for all sentence types for basic listeners such as the _SentenceLogger_ which really only need the raw data.
+
+All NMEA sentences classes must extend the base class, ``NMEASentence``, and must implement a constructor taking a single String parameter, where the string is the raw NMEA sentence. All parsing of the raw sentence into discrete fields is handled by the superclass.  The subclasses can utilize methods, ie. ``getField(int)`` or ``getFieldAsFloat(int)``, on the superclass to obtain the value of the fields from the raw NMEA sentence as specific field types. Some special classes for parsing particular field types, such as latitude and longitude values as well as heading types, are included in the package ``com.bb.nmea.sentences.common``.  These field types are encoded in particular ways in the raw NMEA sentence, so the common logic is provided for parsing and representing these.
+
+In addition, each class supporting an NMEA sentence type are registered in the properties file, ``sentences.properties``.  The format for an entry in this file is "type=fully.qualified.path.for.Class" where the property name is the three digit NMEA sentence type and the value is the fully qualified class.
+
+Basic steps for implementing a support for a new NMEA sentence type are;
+- Implement the class for the sentence in the package ``com.bb.nmea.sentences``
+- Implement a basic unit test for the new sentence type class
+- Add an entry for this class in the properties file, ``sentences.properties``
+- Add a test case in unit test SentenceFactoryTest.java for the new class to insure that the factory properly handles the new class.
+- If desired, add this sentence to a test case in the unit test NMEASentenceProviderTest.java.  At some point, not all sentences need be included here.
+
+
 ## References
-* [NMEA Revealed](https://gpsd.gitlab.io/gpsd/NMEA.html|"FOO")
+* [NMEA Revealed](https://gpsd.gitlab.io/gpsd/NMEA.html)
 * [GPS - NMEA sentence information](http://aprs.gids.nl/nmea/)
 * [The NMEA 0183 Protocol](https://www.tronico.fi/OH6NT/docs/NMEA0183.pdf)
 * [The NMEA 0183 Information sheet, Everything you wanted to know about NMEA 0183 (but were afraid to ask)](https://www.actisense.com/wp-content/uploads/2017/07/NMEA-0183-Information-sheet-issue-4-1-1.pdf), Actisense.
