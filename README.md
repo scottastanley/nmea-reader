@@ -25,6 +25,7 @@ The basic pattern for using the _NMEASentenceProvider_ is as follows;
 // Create and add all desired data providers to the list
 List<DataProvider> dataProviders = ArrayList<DataProvider>();
 
+// Create the NMEA sentence provider
 NMEASentenceProvider nmeaProvider = new NMEASentenceProvider(dataProviders);
 
 // Create and add any listeners
