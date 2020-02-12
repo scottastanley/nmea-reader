@@ -77,7 +77,9 @@ public class NMEASentenceProvider {
     }
     
     /**
-     * Start processing data from the DataProviders.
+     * Start processing data from the DataProviders.  This method will return once data processing has been
+     * started allowing the client application to control the main thread of execution.  Processing will
+     * continue until the method stop() is called.
      * 
      * @throws NMEASentenceProviderException If an error occurs starting one of the DataProviders.
      */
