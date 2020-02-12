@@ -24,7 +24,7 @@ The basic pattern for using the _NMEASentenceProvider_ is as follows;
 ```java
 List<DataProvider> dataProviders = 
 
-```
+``
 
 ## References
 * [NMEA Revealed](https://gpsd.gitlab.io/gpsd/NMEA.html|"FOO")
