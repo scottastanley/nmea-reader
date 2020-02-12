@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 
 import com.bb.nmea.sentences.InvalidSentence;
 import com.bb.nmea.sentences.UnsupportedSentence;
@@ -78,8 +77,6 @@ public class SentenceFactory {
             } else {
                 instance = new InvalidSentence(rawSentence);
             }
-            
-            Assert.assertNotNull("Null instance", instance);
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | NoSuchMethodException | SecurityException e) {
             LOG.error("Failed to instantiate sentence: " + rawSentence, e);

@@ -71,10 +71,10 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Incorrect class", InvalidSentence.class, s.getClass());
             Assert.assertFalse("Message should be invalid", s.isValid());
             Assert.assertEquals("Incorrect raw sentence", rawStr, s.getRawSentence());
-            Assert.assertEquals("Incorrect tag", "APHDT", s.getTag());
-            Assert.assertEquals("Incorrect tag", "AP", s.getTalkerId());
-            Assert.assertEquals("Incorrect tag", "HDT", s.getTypeCode());
-            Assert.assertEquals("Incorrect tag", "31", s.getChecksum());
+            Assert.assertEquals("Incorrect tag", null, s.getTag());
+            Assert.assertEquals("Incorrect talker ID", null, s.getTalkerId());
+            Assert.assertEquals("Incorrect type", null, s.getTypeCode());
+            Assert.assertEquals("Incorrect checksum", null, s.getChecksum());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -92,10 +92,10 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Incorrect class", InvalidSentence.class, s.getClass());
             Assert.assertFalse("Message should be invalid", s.isValid());
             Assert.assertEquals("Incorrect raw sentence", rawStr, s.getRawSentence());
-            Assert.assertEquals("Incorrect tag", "APHDG", s.getTag());
-            Assert.assertEquals("Incorrect tag", "AP", s.getTalkerId());
-            Assert.assertEquals("Incorrect tag", "HDG", s.getTypeCode());
-            Assert.assertEquals("Incorrect tag", "08", s.getChecksum());
+            Assert.assertEquals("Incorrect tag", null, s.getTag());
+            Assert.assertEquals("Incorrect talker ID", null, s.getTalkerId());
+            Assert.assertEquals("Incorrect type", null, s.getTypeCode());
+            Assert.assertEquals("Incorrect checksum", null, s.getChecksum());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());

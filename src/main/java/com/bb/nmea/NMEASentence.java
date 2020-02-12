@@ -69,8 +69,8 @@ public abstract class NMEASentence {
         
         if (m_isValid) {
             m_checksum = rawSentence.substring(rawSentence.length() - 2, rawSentence.length());
-            m_tag = NMEASentence.getTag(rawSentence);
             m_fields = rawSentence.substring(1, rawSentence.length() - 3).split(",");
+            m_tag = m_fields[0];
         }
     }
     
@@ -133,7 +133,7 @@ public abstract class NMEASentence {
      * @return The talker ID
      */
     public String getTalkerId() {
-        return m_tag.substring(0, 2);
+        return m_tag != null ? m_tag.substring(0, 2) : null;
     }
     
     /**
@@ -142,7 +142,7 @@ public abstract class NMEASentence {
      * @return The type code
      */
     public String getTypeCode() {
-        return NMEASentence.getTypeFromTag(m_tag);
+        return m_tag != null ? NMEASentence.getTypeFromTag(m_tag) : null;
     }
 
     /**
