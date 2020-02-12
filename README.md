@@ -21,7 +21,7 @@ The _NMEASentenceProvider_ is the core driver for the processing. All data provi
 An example Java application is provided in the class ``com.bb.nmea.main.Main``.  This client is configurable using a properties file and supports reading NMEA data from files and serial ports.  
 
 The basic pattern for using the _NMEASentenceProvider_ is as follows;
-```java
+``java
 List<DataProvider> dataProviders = 
 
 ``
