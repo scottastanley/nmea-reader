@@ -21,8 +21,10 @@ import org.junit.Test;
 
 import com.bb.nmea.sentences.HDM;
 import com.bb.nmea.sentences.InvalidSentence;
+import com.bb.nmea.sentences.RSA;
 import com.bb.nmea.sentences.UnsupportedSentence;
 import com.bb.nmea.sentences.common.HeadingType;
+import com.bb.nmea.sentences.common.Status;
 
 import junit.framework.Assert;
 
@@ -172,6 +174,34 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid field 10 string", "013.0", sUnsp.getUnknownField(10));
             Assert.assertEquals("Invalid field 11 string", "E", sUnsp.getUnknownField(11));
             Assert.assertEquals("Invalid field 12 string", "A", sUnsp.getUnknownField(12));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testRSA() {
+        String rawStr = "$APRSA,8.6,A,8.2,A*55";
+
+        try {
+            SentenceFactory fact = new SentenceFactory();
+            NMEASentence s = fact.getNMEASentence(rawStr);
+            
+            Assert.assertEquals("Incorrect class", RSA.class, s.getClass());
+            RSA rsaS = RSA.class.cast(s);
+            Assert.assertEquals("Invalid tag", "APRSA", rsaS.getTag());
+            Assert.assertEquals("Invalid talked ID", "AP", rsaS.getTalkerId());
+            Assert.assertEquals("Invalid type code", "RSA", rsaS.getTypeCode());
+            Assert.assertEquals("Invalid checksum", "55", rsaS.getChecksum());
+            
+            Assert.assertEquals("Invalid dual rudder", Boolean.TRUE, rsaS.isDualRudder());
+            Assert.assertEquals("Invalid rudder angle, single rudder", new Float(8.6), rsaS.getRudderAngle());
+            Assert.assertEquals("Invalid rudder status, single rudder", Status.VALID, rsaS.getRudderStatus());
+            Assert.assertEquals("Invalid rudder angle, starboard rudder", new Float(8.6), rsaS.getStarboardRudderAngle());
+            Assert.assertEquals("Invalid rudder status, starboard rudder", Status.VALID, rsaS.getStarboardRudderStatus());
+            Assert.assertEquals("Invalid rudder angle, port rudder", new Float(8.2), rsaS.getPortRudderAngle());
+            Assert.assertEquals("Invalid rudder status, port rudder", Status.VALID, rsaS.getPortRudderStatus());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());

@@ -87,6 +87,7 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "HDT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "31", s.getChecksum());
+            Assert.assertEquals("Incorrect number of fields", new Integer(3), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "APHDT", s.getField(0));
@@ -121,6 +122,7 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "HDT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "31", s.getChecksum());
+            Assert.assertEquals("Incorrect number of fields", new Integer(3), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "APHDT", s.getField(0));
@@ -167,6 +169,7 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "RMC", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "08", s.getChecksum());
+            Assert.assertEquals("Incorrect number of fields", new Integer(13), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "GPRMC", s.getField(0));
@@ -240,6 +243,7 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "08", s.getChecksum());
+            Assert.assertEquals("Incorrect number of fields", new Integer(6), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "APHDG", s.getField(0));
@@ -293,6 +297,7 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "GLL", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "59", s.getChecksum());
+            Assert.assertEquals("Incorrect number of fields", new Integer(8), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "GPGLL", s.getField(0));
@@ -341,6 +346,7 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "GLL", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "59", s.getChecksum());
+            Assert.assertEquals("Incorrect number of fields", new Integer(8), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "GPGLL", s.getField(0));

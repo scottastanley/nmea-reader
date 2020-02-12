@@ -25,6 +25,7 @@ import org.junit.Test;
 
 import com.bb.nmea.dataproviders.TestPassThroughDataProvider;
 import com.bb.nmea.sentences.HDM;
+import com.bb.nmea.sentences.RSA;
 
 import javafx.util.Pair;
 import junit.framework.Assert;
@@ -289,6 +290,35 @@ public class NMEASentanceProviderTest {
             TestPassThroughDataProvider dp2 = new TestPassThroughDataProvider(origBytes2);
             TestPassThroughDataProvider dp3 = new TestPassThroughDataProvider(origBytes3);
             NMEASentenceProvider nmeaSP = new NMEASentenceProvider(dp1, dp2, dp3);
+            
+            TestNMEAListener list = new TestNMEAListener();
+            nmeaSP.addListener(list);
+            nmeaSP.start();
+            nmeaSP.stop();
+            
+            List<NMEASentence> res = list.getNMEASentences();
+            validateSentences(res, expRes);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+    
+    @Test
+    public void testMultiSentenceRealSentences() {
+        String[] origStr = {
+                "$APHDM,339.7,M*3D",
+                "$APRSA,8.6,A*30"
+            };
+        byte[][] origBytes = getBytes(origStr);
+        
+        ExpectedResults expRes = new ExpectedResults();
+        expRes.addResult(new ExpectedSentence(origStr[0], "AP", "HDM", HDM.class));
+        expRes.addResult(new ExpectedSentence(origStr[1], "AP", "RSA", RSA.class));
+        
+        try {
+            TestPassThroughDataProvider dp = new TestPassThroughDataProvider(origBytes);
+            NMEASentenceProvider nmeaSP = new NMEASentenceProvider(dp);
             
             TestNMEAListener list = new TestNMEAListener();
             nmeaSP.addListener(list);

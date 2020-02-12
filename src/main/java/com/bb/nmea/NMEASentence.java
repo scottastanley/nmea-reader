@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 
 import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.LatLong;
+import com.bb.nmea.sentences.common.Status;
 
 /**
  * The abstract base class for all NMEA sentences.  
@@ -154,6 +155,18 @@ public abstract class NMEASentence {
     public String getChecksum() {
         return m_checksum;
     }
+    
+    /**
+     * Get the number of fields parsed from the raw sentence.  Particularly useful for 
+     * NMEA sentences with potentially dual definitions based on the existence of specific
+     * gear.  For instance, the RSA sentence can report rudder angles for single or dual
+     * rudder systems.
+     * 
+     * @return The number of fields
+     */
+    protected Integer getNumFields() {
+        return m_fields.length;
+    }
 
     /**
      * Get the value of the specified field index as a string.  The indexes
@@ -197,13 +210,27 @@ public abstract class NMEASentence {
     }
     
     /**
-     * Get the value of the specified field index as a HeadingType instance.
+     * Get the value of the specified field index as a value in the HeadingType enumeration.
      * 
      * @param index The index of the field to retrieve
      * @return The field value
      */
     protected HeadingType getFieldAsHeadingType(final int index) {
         return HeadingType.getHeadingType(getField(index));
+    }
+    
+    /**
+     * Get the value of the specified field index as a value in the Status enumeration.
+     * 
+     * Note:  Be very careful when using the Status enumeration that the definition 
+     * in your NMEA sentence matches that from the enumeration.  There seems to be a bit 
+     * of variability in these, but many do match this definition.
+     * 
+     * @param index The index of the field to retrieve
+     * @return The field value
+     */
+    protected Status getFieldAsStatus(final int index) {
+        return Status.getStatus(getField(index));
     }
     
     /**
