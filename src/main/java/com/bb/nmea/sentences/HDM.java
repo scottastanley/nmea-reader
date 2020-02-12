@@ -31,7 +31,7 @@ public class HDM extends NMEASentence {
         super(rawSentence);
         
         m_headingDegrees = this.getFieldAsFloat(1);
-        m_headingType = HeadingType.getHeadingType(this.getField(2));
+        m_headingType = this.getFieldAsHeadingType(2);
     }
 
     /**

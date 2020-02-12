@@ -17,6 +17,7 @@ package com.bb.nmea;
 
 import java.util.regex.Pattern;
 
+import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.LatLong;
 
 /**
@@ -193,6 +194,16 @@ public abstract class NMEASentence {
      */
     protected LatLong getFieldAsLatLong(final int index) {
         return new LatLong(getField(index));
+    }
+    
+    /**
+     * Get the value of the specified field index as a HeadingType instance.
+     * 
+     * @param index The index of the field to retrieve
+     * @return The field value
+     */
+    protected HeadingType getFieldAsHeadingType(final int index) {
+        return HeadingType.getHeadingType(getField(index));
     }
     
     /**
