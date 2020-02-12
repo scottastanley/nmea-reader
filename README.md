@@ -40,7 +40,6 @@ nmeaProvider.start();
 
 // When ready to exit, stop processing
 nmeaProvider.stop();
-
 ```
 
 ## Developer Guidelines
