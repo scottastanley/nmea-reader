@@ -56,7 +56,7 @@ public enum HeadingType {
      * 
      * @return the name
      */
-    public String getName() {
+    public String getRawHeadingType() {
         return m_rawHeadingType;
     }
 }
