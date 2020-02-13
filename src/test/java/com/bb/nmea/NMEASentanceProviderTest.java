@@ -24,6 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.bb.nmea.dataproviders.TestPassThroughDataProvider;
+import com.bb.nmea.sentences.HDG;
 import com.bb.nmea.sentences.HDM;
 import com.bb.nmea.sentences.RSA;
 
@@ -308,13 +309,15 @@ public class NMEASentanceProviderTest {
     public void testMultiSentenceRealSentences() {
         String[] origStr = {
                 "$APHDM,339.7,M*3D",
-                "$APRSA,8.6,A*30"
+                "$APRSA,8.6,A*30",
+                "$APHDG,096.2,,,13.0,E*0C"
             };
         byte[][] origBytes = getBytes(origStr);
         
         ExpectedResults expRes = new ExpectedResults();
         expRes.addResult(new ExpectedSentence(origStr[0], "AP", "HDM", HDM.class));
         expRes.addResult(new ExpectedSentence(origStr[1], "AP", "RSA", RSA.class));
+        expRes.addResult(new ExpectedSentence(origStr[2], "AP", "HDG", HDG.class));
         
         try {
             TestPassThroughDataProvider dp = new TestPassThroughDataProvider(origBytes);

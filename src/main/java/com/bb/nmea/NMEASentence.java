@@ -17,6 +17,7 @@ package com.bb.nmea;
 
 import java.util.regex.Pattern;
 
+import com.bb.nmea.sentences.common.Direction;
 import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.LatLong;
 import com.bb.nmea.sentences.common.Status;
@@ -71,7 +72,7 @@ public abstract class NMEASentence {
         
         if (m_isValid) {
             m_checksum = rawSentence.substring(rawSentence.length() - 2, rawSentence.length());
-            m_fields = rawSentence.substring(1, rawSentence.length() - 3).split(",");
+            m_fields = rawSentence.substring(1, rawSentence.length() - 3).split(",", -1);
             m_tag = m_fields[0];
         }
     }
@@ -186,7 +187,8 @@ public abstract class NMEASentence {
      * @return The field value
      */
     protected Float getFieldAsFloat(final int index) {
-        return Float.valueOf(getField(index));
+        String strValue = getField(index);
+        return strValue != null && !strValue.equals("") ? Float.valueOf(strValue) : null;
     }
 
     /**
@@ -196,7 +198,8 @@ public abstract class NMEASentence {
      * @return The field value
      */
     protected Integer getFieldAsInteger(final int index) {
-        return Integer.valueOf(getField(index));
+        String strValue = getField(index);
+        return strValue != null && !strValue.equals("") ? Integer.valueOf(strValue) : null;
     }
     
     /**
@@ -206,7 +209,8 @@ public abstract class NMEASentence {
      * @return The field value
      */
     protected LatLong getFieldAsLatLong(final int index) {
-        return new LatLong(getField(index));
+        String strValue = getField(index);
+        return strValue != null && !strValue.equals("") ? new LatLong(strValue) : null;
     }
     
     /**
@@ -216,7 +220,8 @@ public abstract class NMEASentence {
      * @return The field value
      */
     protected HeadingType getFieldAsHeadingType(final int index) {
-        return HeadingType.getHeadingType(getField(index));
+        String strValue = getField(index);
+        return strValue != null && !strValue.equals("") ? HeadingType.getHeadingType(strValue) : null;
     }
     
     /**
@@ -230,7 +235,19 @@ public abstract class NMEASentence {
      * @return The field value
      */
     protected Status getFieldAsStatus(final int index) {
-        return Status.getStatus(getField(index));
+        String strValue = getField(index);
+        return strValue != null && !strValue.equals("") ? Status.getStatus(strValue) : null;
+    }
+    
+    /**
+     * Get the value of the specified field index as a value in the Direction enumeration.
+     * 
+     * @param index The index of the field to retrieve
+     * @return The field value
+     */
+    protected Direction getFieldAsDirection(final int index) {
+        String strValue = getField(index);
+        return strValue != null && !strValue.equals("") ? Direction.getDirection(strValue) : null;
     }
     
     /**

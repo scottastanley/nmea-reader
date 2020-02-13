@@ -19,10 +19,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.bb.nmea.sentences.HDG;
 import com.bb.nmea.sentences.HDM;
 import com.bb.nmea.sentences.InvalidSentence;
 import com.bb.nmea.sentences.RSA;
 import com.bb.nmea.sentences.UnsupportedSentence;
+import com.bb.nmea.sentences.common.Direction;
 import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.Status;
 
@@ -202,6 +204,32 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid rudder status, starboard rudder", Status.VALID, rsaS.getStarboardRudderStatus());
             Assert.assertEquals("Invalid rudder angle, port rudder", new Float(8.2), rsaS.getPortRudderAngle());
             Assert.assertEquals("Invalid rudder status, port rudder", Status.VALID, rsaS.getPortRudderStatus());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testHDG() {
+        String rawStr = "$APHDG,252.1,5.3,N,13.0,E*63";
+
+        try {
+            SentenceFactory fact = new SentenceFactory();
+            NMEASentence sentObj = fact.getNMEASentence(rawStr);
+            
+            Assert.assertEquals("Incorrect class", HDG.class, sentObj.getClass());
+            HDG s = HDG.class.cast(sentObj);
+            Assert.assertEquals("Invalid tag", "APHDG", s.getTag());
+            Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
+            Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
+            Assert.assertEquals("Invalid checksum", "63", s.getChecksum());
+            
+            Assert.assertEquals("Invalid heading", new Float(252.1), s.getHeadingDegrees());
+            Assert.assertEquals("Invalid deviation degrees", new Float(5.3), s.getDeviationDegrees());
+            Assert.assertEquals("Invalid deviation direction", Direction.NORTH, s.getDeviationDirection());
+            Assert.assertEquals("Invalid variation degrees", new Float(13.0), s.getVariationDegrees());
+            Assert.assertEquals("Invalid variation direction", Direction.EAST, s.getVariationDirection());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
