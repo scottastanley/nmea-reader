@@ -18,6 +18,7 @@ package com.bb.nmea;
 import java.util.regex.Pattern;
 
 import com.bb.nmea.sentences.common.Direction;
+import com.bb.nmea.sentences.common.FAAModeIndicator;
 import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.LatLong;
 import com.bb.nmea.sentences.common.Status;
@@ -248,6 +249,18 @@ public abstract class NMEASentence {
     protected Direction getFieldAsDirection(final int index) {
         String strValue = getField(index);
         return strValue != null && !strValue.equals("") ? Direction.getDirection(strValue) : null;
+    }
+    
+    
+    /**
+     * Get the value of the specified field index as a value in the FAAModeIndicator enumeration.
+     * 
+     * @param index The index of the field to retrieve
+     * @return The field value
+     */
+    protected FAAModeIndicator getFieldAsFAAModeIndicator(final int index) {
+        String strValue = getField(index);
+        return strValue != null && !strValue.equals("") ? FAAModeIndicator.getFAAModeIndicator(strValue) : null;
     }
     
     /**

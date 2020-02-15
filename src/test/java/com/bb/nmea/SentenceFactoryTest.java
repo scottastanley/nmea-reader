@@ -24,7 +24,9 @@ import com.bb.nmea.sentences.HDM;
 import com.bb.nmea.sentences.InvalidSentence;
 import com.bb.nmea.sentences.RSA;
 import com.bb.nmea.sentences.UnsupportedSentence;
+import com.bb.nmea.sentences.VTG;
 import com.bb.nmea.sentences.common.Direction;
+import com.bb.nmea.sentences.common.FAAModeIndicator;
 import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.Status;
 
@@ -230,6 +232,32 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid deviation direction", Direction.NORTH, s.getDeviationDirection());
             Assert.assertEquals("Invalid variation degrees", new Float(13.0), s.getVariationDegrees());
             Assert.assertEquals("Invalid variation direction", Direction.EAST, s.getVariationDirection());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testVTG() {
+        String rawStr = "$GPVTG,077.2,T,064.0,M,0.1,N,0.2,K,D*25";
+
+        try {
+            SentenceFactory fact = new SentenceFactory();
+            NMEASentence sentObj = fact.getNMEASentence(rawStr);
+            
+            Assert.assertEquals("Incorrect class", VTG.class, sentObj.getClass());
+            VTG s = VTG.class.cast(sentObj);
+            Assert.assertEquals("Invalid tag", "GPVTG", s.getTag());
+            Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
+            Assert.assertEquals("Invalid type code", "VTG", s.getTypeCode());
+            Assert.assertEquals("Invalid checksum", "25", s.getChecksum());
+            
+            Assert.assertEquals("Invalid true course", new Float(77.2), s.getCourseOverGroundDegrTrue());
+            Assert.assertEquals("Invalid magnetic course", new Float(64.0), s.getCourseOverGroundDegrMagnetic());
+            Assert.assertEquals("Invalid true course", new Float(0.1), s.getSpeedOverGroundKnots());
+            Assert.assertEquals("Invalid true course", new Float(0.2), s.getSpeedOverGroundKmPerHr());
+            Assert.assertEquals("Invalid FAA mode", FAAModeIndicator.DIFFERENTIAL_MODE, s.getFaaModeIndicator());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
