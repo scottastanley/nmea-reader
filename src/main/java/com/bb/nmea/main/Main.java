@@ -23,12 +23,13 @@ import java.util.Scanner;
 import org.apache.log4j.Logger;
 
 import com.bb.nmea.DataProvider;
-import com.bb.nmea.NMEASentenceProviderException;
 import com.bb.nmea.NMEAListener;
 import com.bb.nmea.NMEASentenceProvider;
+import com.bb.nmea.NMEASentenceProviderException;
 import com.bb.nmea.dataproviders.inputfile.InputFileDataProvider;
 import com.bb.nmea.dataproviders.port.PortListenerDataProvider;
 import com.bb.nmea.listeners.SentenceLogger;
+import com.bb.nmea.listeners.StatsCollector;
 
 /**
  * The Main class for the example client using the {@link com.bb.nmea.NMEASentenceProvider} to 
@@ -69,6 +70,7 @@ public class Main {
         
         List<NMEAListener> listeners = new ArrayList<NMEAListener>();
         listeners.add(new SentenceLogger());
+        listeners.add(new StatsCollector());
         
         //
         // Set up the NMEA sentence provider and start it

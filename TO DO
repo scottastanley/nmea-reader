@@ -13,16 +13,26 @@ TO DO
     - Modify so writes data to a directory with rolling files in case they get large.
     - Allow some configurability?  Output file path?
 
-New sentence Class
-------------------
-- Implement new class with unit test
-- Add entry to sentences.properties
-- Add test method to SentenceFactoryTest
-    
-References:
-https://gpsd.gitlab.io/gpsd/NMEA.html
-http://aprs.gids.nl/nmea/
+Sentence Counts
+---------------
+GGA: 214
+VHW: 214
+GLL: 5236
+VTG: 10259
+RMC: 5236
+DPT: 214
+MWV: 214
+BWC: 2276
+MTW: 214
+ZDA: 213
+DBT: 214
+HDT: 5047
 
+HDG: 5081
+HDM: 5082
+RSA: 5141
+INVALID: 7
+    
 
 cu.usbserial-AM009S8I: FT232R USB UART
     desc: FT232R USB UART
