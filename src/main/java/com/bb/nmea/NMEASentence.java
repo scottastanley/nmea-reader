@@ -22,6 +22,7 @@ import com.bb.nmea.sentences.common.FAAModeIndicator;
 import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.LatLong;
 import com.bb.nmea.sentences.common.Status;
+import com.bb.nmea.sentences.common.TemperatureUnits;
 
 /**
  * The abstract base class for all NMEA sentences.  
@@ -261,6 +262,17 @@ public abstract class NMEASentence {
     protected FAAModeIndicator getFieldAsFAAModeIndicator(final int index) {
         String strValue = getField(index);
         return strValue != null && !strValue.equals("") ? FAAModeIndicator.getFAAModeIndicator(strValue) : null;
+    }
+    
+    /**
+     * Get the value of the specified field index as a value in the TemperatureUnits enumeration.
+     * 
+     * @param index The index of the field to retrieve
+     * @return The field value
+     */
+    protected TemperatureUnits getFieldAsTemperatureUnits(final int index) {
+        String strValue = getField(index);
+        return strValue != null && !strValue.equals("") ? TemperatureUnits.getTemperatureUnits(strValue) : null;
     }
     
     /**
