@@ -19,6 +19,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.bb.nmea.sentences.DBT;
 import com.bb.nmea.sentences.HDG;
 import com.bb.nmea.sentences.HDM;
 import com.bb.nmea.sentences.InvalidSentence;
@@ -258,6 +259,30 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid true course", new Float(0.1), s.getSpeedOverGroundKnots());
             Assert.assertEquals("Invalid true course", new Float(0.2), s.getSpeedOverGroundKmPerHr());
             Assert.assertEquals("Invalid FAA mode", FAAModeIndicator.DIFFERENTIAL_MODE, s.getFaaModeIndicator());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testDBT() {
+        String rawStr = "$SDDBT,16.6,f,5.0,M,2.8,F*38";
+
+        try {
+            SentenceFactory fact = new SentenceFactory();
+            NMEASentence sentObj = fact.getNMEASentence(rawStr);
+            
+            Assert.assertEquals("Incorrect class", DBT.class, sentObj.getClass());
+            DBT s = DBT.class.cast(sentObj);
+            Assert.assertEquals("Invalid tag", "SDDBT", s.getTag());
+            Assert.assertEquals("Invalid talked ID", "SD", s.getTalkerId());
+            Assert.assertEquals("Invalid type code", "DBT", s.getTypeCode());
+            Assert.assertEquals("Invalid checksum", "38", s.getChecksum());
+            
+            Assert.assertEquals("Invalid depth in feet", new Float(16.6), s.getWaterDepthInFeet());
+            Assert.assertEquals("Invalid depth in meters", new Float(5.0), s.getWaterDepthInMeters());
+            Assert.assertEquals("Invalid depth in fathoms", new Float(2.8), s.getWaterDepthInFathoms());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
