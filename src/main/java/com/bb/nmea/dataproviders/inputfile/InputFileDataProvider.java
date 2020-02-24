@@ -21,7 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.concurrent.CountDownLatch;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.bb.nmea.DataProvider;
 import com.bb.nmea.DataProviderException;
@@ -38,7 +39,7 @@ import com.bb.nmea.DataProviderException;
  */
 public class InputFileDataProvider 
         extends DataProvider {
-    private static final Logger LOG = Logger.getLogger(InputFileDataProvider.class);
+    private static final Logger LOG = LogManager.getLogger(InputFileDataProvider.class);
 
     private final File m_inputFile;
     private final Long m_pauseMillis;

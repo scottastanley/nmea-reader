@@ -20,7 +20,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.bb.nmea.NMEAListener;
 import com.bb.nmea.NMEASentence;
@@ -34,7 +35,7 @@ import com.bb.nmea.NMEASentence;
  * @author Scott Stanley
  */
 public class SentenceLogger implements NMEAListener {
-    private static final Logger LOG = Logger.getLogger(SentenceLogger.class);
+    private static final Logger LOG = LogManager.getLogger(SentenceLogger.class);
     private static final String FILENAME_TEMPLATE = "raw_{TIMESTAMP}.nmea";
     
     private final PrintWriter m_wrt;

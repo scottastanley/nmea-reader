@@ -18,7 +18,8 @@ package com.bb.nmea;
 import java.io.IOException;
 import java.io.PipedOutputStream;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The abstract base class for all raw NMEA DataProviders.  All data sources
@@ -34,7 +35,7 @@ import org.apache.log4j.Logger;
  * data received.
  */
 public abstract class DataProvider {
-    private static final Logger LOG = Logger.getLogger(DataProvider.class);
+    private static final Logger LOG = LogManager.getLogger(DataProvider.class);
     private PipedOutputStream m_oStrm;
 
     /**

@@ -24,7 +24,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The core driver class for the NMEA sentence processing/parsing logic.  This class
@@ -36,7 +37,7 @@ import org.apache.log4j.Logger;
  * @author Scott Stanley
  */
 public class NMEASentenceProvider {
-    private static final Logger LOG = Logger.getLogger(NMEASentenceProvider.class);
+    private static final Logger LOG = LogManager.getLogger(NMEASentenceProvider.class);
     
     private List<DataProvider> m_dataProviders = new ArrayList<DataProvider>();
     private SentenceReaderThreadGroup m_thrdGrp = new SentenceReaderThreadGroup();

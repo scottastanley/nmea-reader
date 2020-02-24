@@ -22,7 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.bb.nmea.sentences.InvalidSentence;
 import com.bb.nmea.sentences.UnsupportedSentence;
@@ -38,7 +39,7 @@ import com.bb.nmea.sentences.UnsupportedSentence;
  * @author Scott Stanley
  */
 public class SentenceFactory {
-    private static final Logger LOG = Logger.getLogger(SentenceFactory.class);
+    private static final Logger LOG = LogManager.getLogger(SentenceFactory.class);
 
     private static final String BASE_SENTENCE_LIST_FILE = "sentences.properties";
     private static final Map<String,Class<? extends NMEASentence>> SENTENCE_CLASSES = new HashMap<String,Class<? extends NMEASentence>>();

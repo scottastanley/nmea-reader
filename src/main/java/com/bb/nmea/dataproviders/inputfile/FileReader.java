@@ -20,12 +20,13 @@ import java.io.InputStream;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.bb.nmea.DataProviderException;
 
 public class FileReader implements Runnable {
-    private static final Logger LOG = Logger.getLogger(FileReader.class);
+    private static final Logger LOG = LogManager.getLogger(FileReader.class);
     private final InputStream m_inpStrm;
     private final CountDownLatch m_latch;
     private final DataMethod m_dm;

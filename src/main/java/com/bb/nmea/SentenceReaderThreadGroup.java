@@ -18,7 +18,8 @@ package com.bb.nmea;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * A ThreadGroup which is used to control the set of threads executing the instances of 
@@ -29,7 +30,7 @@ import org.apache.log4j.Logger;
  */
 public class SentenceReaderThreadGroup 
         extends ThreadGroup {
-    private static final Logger LOG = Logger.getLogger(SentenceReaderThreadGroup.class);
+    private static final Logger LOG = LogManager.getLogger(SentenceReaderThreadGroup.class);
     private final List<Thread> m_threads = new ArrayList<Thread>();
 
     /**

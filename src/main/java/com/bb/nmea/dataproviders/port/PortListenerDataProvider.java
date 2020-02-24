@@ -15,7 +15,8 @@
  */
 package com.bb.nmea.dataproviders.port;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.bb.nmea.DataProvider;
 import com.bb.nmea.DataProviderException;
@@ -30,7 +31,7 @@ import com.fazecast.jSerialComm.SerialPortEvent;
  * @author sstanley
  */
 public class PortListenerDataProvider extends DataProvider implements SerialPortDataListener {
-    private static final Logger LOG = Logger.getLogger(PortListenerDataProvider.class);
+    private static final Logger LOG = LogManager.getLogger(PortListenerDataProvider.class);
    
     private SerialPort m_port = null;
 

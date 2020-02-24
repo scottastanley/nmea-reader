@@ -15,13 +15,14 @@
  */
 package com.bb.nmea.dataproviders;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.bb.nmea.DataProvider;
 import com.bb.nmea.DataProviderException;
 
 public class TestPassThroughDataProvider extends DataProvider {
-    private static final Logger LOG = Logger.getLogger(TestPassThroughDataProvider.class);
+    private static final Logger LOG = LogManager.getLogger(TestPassThroughDataProvider.class);
     final byte[][] m_testByteArrays;
     
     public TestPassThroughDataProvider(final byte[][] testByteArrays) {

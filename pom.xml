@@ -29,7 +29,7 @@
         <build_version>trunk-SNAPSHOT</build_version>
         <junit_version>4.10</junit_version>
         <mockito_version>2.8.47</mockito_version>
-        <log4j_version>1.2.17</log4j_version>
+        <log4j_version>2.12.1</log4j_version>
         <jserialcomm_version>[2.0.0,3.0.0)</jserialcomm_version>
     </properties>
 
@@ -49,9 +49,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j_version}</version>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-api</artifactId>
+          <version>${log4j_version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-core</artifactId>
+          <version>${log4j_version}</version>
         </dependency>
         <dependency>
           <groupId>com.fazecast</groupId>

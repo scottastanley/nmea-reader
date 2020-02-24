@@ -18,7 +18,8 @@ package com.bb.nmea.listeners;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.bb.nmea.NMEAListener;
 import com.bb.nmea.NMEASentence;
@@ -32,7 +33,7 @@ import com.bb.nmea.NMEASentence;
  * @author Scott Stanley
  */
 public class StatsCollector implements NMEAListener {
-    private static final Logger LOG = Logger.getLogger(StatsCollector.class);
+    private static final Logger LOG = LogManager.getLogger(StatsCollector.class);
     private static final String INVALID_TYPE = "INVALID";
     private final Map<String,Counter> m_counters = new HashMap<String,Counter>();
 
