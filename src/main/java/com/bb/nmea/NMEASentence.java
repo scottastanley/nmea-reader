@@ -21,8 +21,10 @@ import com.bb.nmea.sentences.common.Direction;
 import com.bb.nmea.sentences.common.FAAModeIndicator;
 import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.LatLong;
+import com.bb.nmea.sentences.common.SpeedUnits;
 import com.bb.nmea.sentences.common.Status;
 import com.bb.nmea.sentences.common.TemperatureUnits;
+import com.bb.nmea.sentences.common.WindReference;
 
 /**
  * The abstract base class for all NMEA sentences.  
@@ -273,6 +275,28 @@ public abstract class NMEASentence {
     protected TemperatureUnits getFieldAsTemperatureUnits(final int index) {
         String strValue = getField(index);
         return strValue != null && !strValue.equals("") ? TemperatureUnits.getTemperatureUnits(strValue) : null;
+    }
+    
+    /**
+     * Get the value of the specified field index as a value in the SpeedUnits enumeration.
+     * 
+     * @param index The index of the field to retrieve
+     * @return The field value
+     */
+    protected SpeedUnits getFieldAsSpeedUnits(final int index) {
+        String strValue = getField(index);
+        return strValue != null && !strValue.equals("") ? SpeedUnits.getSpeedUnits(strValue) : null;
+    }
+    
+    /**
+     * Get the value of the specified field index as a value in the WindReference enumeration.
+     * 
+     * @param index The index of the field to retrieve
+     * @return The field value
+     */
+    protected WindReference getFieldAsWindReference(final int index) {
+        String strValue = getField(index);
+        return strValue != null && !strValue.equals("") ? WindReference.getWindReference(strValue) : null;
     }
     
     /**

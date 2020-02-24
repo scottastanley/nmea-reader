@@ -24,13 +24,16 @@ import com.bb.nmea.sentences.DPT;
 import com.bb.nmea.sentences.HDG;
 import com.bb.nmea.sentences.HDM;
 import com.bb.nmea.sentences.InvalidSentence;
+import com.bb.nmea.sentences.MWV;
 import com.bb.nmea.sentences.RSA;
 import com.bb.nmea.sentences.UnsupportedSentence;
 import com.bb.nmea.sentences.VTG;
 import com.bb.nmea.sentences.common.Direction;
 import com.bb.nmea.sentences.common.FAAModeIndicator;
 import com.bb.nmea.sentences.common.HeadingType;
+import com.bb.nmea.sentences.common.SpeedUnits;
 import com.bb.nmea.sentences.common.Status;
+import com.bb.nmea.sentences.common.WindReference;
 
 import junit.framework.Assert;
 
@@ -307,6 +310,33 @@ public class SentenceFactoryTest {
             
             Assert.assertEquals("Invalid depth below transducer", new Float(5.3), s.getDepthBelowTransducer());
             Assert.assertEquals("Invalid traansducer offset", null, s.getTransducerOffset());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testMWV() {
+        String rawStr = "$ECMWV,359.0,R,0.0,N,A*34";
+
+        try {
+            SentenceFactory fact = new SentenceFactory();
+            NMEASentence sentObj = fact.getNMEASentence(rawStr);
+            
+            Assert.assertEquals("Incorrect class", MWV.class, sentObj.getClass());
+            MWV s = MWV.class.cast(sentObj);
+            
+            Assert.assertEquals("Invalid tag", "ECMWV", s.getTag());
+            Assert.assertEquals("Invalid talked ID", "EC", s.getTalkerId());
+            Assert.assertEquals("Invalid type code", "MWV", s.getTypeCode());
+            Assert.assertEquals("Invalid checksum", "34", s.getChecksum());
+            
+            Assert.assertEquals("Invalid wind angle", new Float(359.0), s.getWindAngle());
+            Assert.assertEquals("Invalid wind reference", WindReference.RELATIVE, s.getWindReference());
+            Assert.assertEquals("Invalid wind speed", new Float(0.0), s.getWindSpeed());
+            Assert.assertEquals("Invalid speed units", SpeedUnits.KNOTS, s.getSpeedUnits());
+            Assert.assertEquals("Invalid status", Status.VALID, s.getStatus());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
