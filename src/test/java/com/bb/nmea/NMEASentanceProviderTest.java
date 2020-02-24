@@ -25,6 +25,7 @@ import org.junit.Test;
 
 import com.bb.nmea.dataproviders.TestPassThroughDataProvider;
 import com.bb.nmea.sentences.DBT;
+import com.bb.nmea.sentences.DPT;
 import com.bb.nmea.sentences.HDG;
 import com.bb.nmea.sentences.HDM;
 import com.bb.nmea.sentences.RSA;
@@ -314,7 +315,8 @@ public class NMEASentanceProviderTest {
                 "$APRSA,8.6,A*30",
                 "$APHDG,096.2,,,13.0,E*0C",
                 "$GPVTG,077.2,T,064.0,M,0.1,N,0.2,K,D*25",
-                "$SDDBT,16.5,f,5.0,M,2.8,F*3B"
+                "$SDDBT,16.5,f,5.0,M,2.8,F*3B",
+                "$SDDPT,5.0,*7C"
             };
         byte[][] origBytes = getBytes(origStr);
         
@@ -324,6 +326,7 @@ public class NMEASentanceProviderTest {
         expRes.addResult(new ExpectedSentence(origStr[2], "AP", "HDG", HDG.class));
         expRes.addResult(new ExpectedSentence(origStr[3], "GP", "VTG", VTG.class));
         expRes.addResult(new ExpectedSentence(origStr[4], "SD", "DBT", DBT.class));
+        expRes.addResult(new ExpectedSentence(origStr[5], "SD", "DPT", DPT.class));
         
         try {
             TestPassThroughDataProvider dp = new TestPassThroughDataProvider(origBytes);

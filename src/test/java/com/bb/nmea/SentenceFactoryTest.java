@@ -20,6 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.bb.nmea.sentences.DBT;
+import com.bb.nmea.sentences.DPT;
 import com.bb.nmea.sentences.HDG;
 import com.bb.nmea.sentences.HDM;
 import com.bb.nmea.sentences.InvalidSentence;
@@ -283,6 +284,29 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid depth in feet", new Float(16.6), s.getWaterDepthInFeet());
             Assert.assertEquals("Invalid depth in meters", new Float(5.0), s.getWaterDepthInMeters());
             Assert.assertEquals("Invalid depth in fathoms", new Float(2.8), s.getWaterDepthInFathoms());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testDPT() {
+        String rawStr = "$SDDPT,5.3,*7F";
+
+        try {
+            SentenceFactory fact = new SentenceFactory();
+            NMEASentence sentObj = fact.getNMEASentence(rawStr);
+            
+            Assert.assertEquals("Incorrect class", DPT.class, sentObj.getClass());
+            DPT s = DPT.class.cast(sentObj);
+            Assert.assertEquals("Invalid tag", "SDDPT", s.getTag());
+            Assert.assertEquals("Invalid talked ID", "SD", s.getTalkerId());
+            Assert.assertEquals("Invalid type code", "DPT", s.getTypeCode());
+            Assert.assertEquals("Invalid checksum", "7F", s.getChecksum());
+            
+            Assert.assertEquals("Invalid depth below transducer", new Float(5.3), s.getDepthBelowTransducer());
+            Assert.assertEquals("Invalid traansducer offset", null, s.getTransducerOffset());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
