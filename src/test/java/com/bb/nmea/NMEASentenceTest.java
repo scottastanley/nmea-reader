@@ -19,6 +19,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.bb.nmea.sentences.common.LatLongTest;
+import com.bb.nmea.sentences.common.UtcTimeTest;
+
 import junit.framework.Assert;
 
 public class NMEASentenceTest {
@@ -87,13 +90,13 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "HDT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "31", s.getChecksum());
-            Assert.assertEquals("Incorrect number of fields", new Integer(3), s.getNumFields());
+            Assert.assertEquals("Incorrect number of fields", Integer.valueOf(3), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "APHDT", s.getField(0));
             
             Assert.assertEquals("Invalid field 1 string", "357.3", s.getField(1));
-            Assert.assertEquals("Invalid field 1 float", new Float(357.3), s.getFieldAsFloat(1));
+            Assert.assertEquals("Invalid field 1 float", Float.valueOf(357.3F), s.getFieldAsFloat(1));
             
             Assert.assertEquals("Invalid field 2 string", "T", s.getField(2));
         } catch (Exception e) {
@@ -122,13 +125,13 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "HDT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "31", s.getChecksum());
-            Assert.assertEquals("Incorrect number of fields", new Integer(3), s.getNumFields());
+            Assert.assertEquals("Incorrect number of fields", Integer.valueOf(3), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "APHDT", s.getField(0));
             
             Assert.assertEquals("Invalid field 1 string", "357.3", s.getField(1));
-            Assert.assertEquals("Invalid field 1 float", new Float(357.3), s.getFieldAsFloat(1));
+            Assert.assertEquals("Invalid field 1 float", Float.valueOf(357.3F), s.getFieldAsFloat(1));
             
             Assert.assertEquals("Invalid field 2 string", "T", s.getField(2));
         } catch (Exception e) {
@@ -169,38 +172,38 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "RMC", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "08", s.getChecksum());
-            Assert.assertEquals("Incorrect number of fields", new Integer(13), s.getNumFields());
+            Assert.assertEquals("Incorrect number of fields", Integer.valueOf(13), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "GPRMC", s.getField(0));
             
             Assert.assertEquals("Invalid field 1 string", "065830", s.getField(1));
-            Assert.assertEquals("Invalid field 1 float", new Integer(65830), s.getFieldAsInteger(1));
+            Assert.assertEquals("Invalid field 1 float", Integer.valueOf(65830), s.getFieldAsInteger(1));
             
             Assert.assertEquals("Invalid field 2 string", "A", s.getField(2));
             
             Assert.assertEquals("Invalid field 3 string", "3746.830", s.getField(3));
-            Assert.assertEquals("Invalid field 3 string", new Float(3746.830), s.getFieldAsFloat(3));
-            LatLongTest.validateLatLong("Invalid field 3 LatLong", 37, 46.83F, s.getFieldAsLatLong(3));
+            Assert.assertEquals("Invalid field 3 string", Float.valueOf(3746.830F), s.getFieldAsFloat(3));
+            LatLongTest.validateLatLong("Invalid field 3 LatLong", 37, 46.83F, s.getFieldAsLatitude(3));
             
             Assert.assertEquals("Invalid field 4 string", "N", s.getField(4));
             
             Assert.assertEquals("Invalid field 5 string", "12223.251", s.getField(5));
-            Assert.assertEquals("Invalid field 5 string", new Float(12223.251), s.getFieldAsFloat(5));
-            LatLongTest.validateLatLong("Invalid field 5 LatLong", 122, 23.251F, s.getFieldAsLatLong(5));
+            Assert.assertEquals("Invalid field 5 string", Float.valueOf(12223.251F), s.getFieldAsFloat(5));
+            LatLongTest.validateLatLong("Invalid field 5 LatLong", 122, 23.251F, s.getFieldAsLongitude(5));
             
             Assert.assertEquals("Invalid field 6 string", "W", s.getField(6));
             
             Assert.assertEquals("Invalid field 7 string", "0.0", s.getField(7));
-            Assert.assertEquals("Invalid field 7 string", new Float(0.0), s.getFieldAsFloat(7));
+            Assert.assertEquals("Invalid field 7 string", Float.valueOf(0.0F), s.getFieldAsFloat(7));
             
             Assert.assertEquals("Invalid field 8 string", "000.0", s.getField(8));
-            Assert.assertEquals("Invalid field 8 string", new Float(000.0), s.getFieldAsFloat(8));
+            Assert.assertEquals("Invalid field 8 string", Float.valueOf(000.0F), s.getFieldAsFloat(8));
             
-            Assert.assertEquals("Invalid field 9 float", new Integer(291219), s.getFieldAsInteger(9));
+            Assert.assertEquals("Invalid field 9 float", Integer.valueOf(291219), s.getFieldAsInteger(9));
             
             Assert.assertEquals("Invalid field 10 string", "013.0", s.getField(10));
-            Assert.assertEquals("Invalid field 10 string", new Float(013.0), s.getFieldAsFloat(10));
+            Assert.assertEquals("Invalid field 10 string", Float.valueOf(013.0F), s.getFieldAsFloat(10));
             
             Assert.assertEquals("Invalid field 11 string", "E", s.getField(11));
             
@@ -243,20 +246,20 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "08", s.getChecksum());
-            Assert.assertEquals("Incorrect number of fields", new Integer(6), s.getNumFields());
+            Assert.assertEquals("Incorrect number of fields", Integer.valueOf(6), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "APHDG", s.getField(0));
             
             Assert.assertEquals("Invalid field 1 string", "257.9", s.getField(1));
-            Assert.assertEquals("Invalid field 1 float", new Float(257.9), s.getFieldAsFloat(1));
+            Assert.assertEquals("Invalid field 1 float", Float.valueOf(257.9F), s.getFieldAsFloat(1));
             
             Assert.assertEquals("Invalid field 2 string", "", s.getField(2));
             
             Assert.assertEquals("Invalid field 3 string", "", s.getField(3));
             
             Assert.assertEquals("Invalid field 4 string", "13.0", s.getField(4));
-            Assert.assertEquals("Invalid field 4 float", new Float(13.0), s.getFieldAsFloat(4));
+            Assert.assertEquals("Invalid field 4 float", Float.valueOf(13.0F), s.getFieldAsFloat(4));
             
             Assert.assertEquals("Invalid field 5 string", "E", s.getField(5));
         } catch (Exception e) {
@@ -297,25 +300,26 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "GLL", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "59", s.getChecksum());
-            Assert.assertEquals("Incorrect number of fields", new Integer(8), s.getNumFields());
+            Assert.assertEquals("Incorrect number of fields", Integer.valueOf(8), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "GPGLL", s.getField(0));
             
             Assert.assertEquals("Invalid field 1 string", "3747.150", s.getField(1));
-            Assert.assertEquals("Invalid field 1 string", new Float(3747.150), s.getFieldAsFloat(1));
-            LatLongTest.validateLatLong("Invalid field 1 LatLong", 37, 47.15F, s.getFieldAsLatLong(1));
+            Assert.assertEquals("Invalid field 1 string", Float.valueOf(3747.150F), s.getFieldAsFloat(1));
+            LatLongTest.validateLatLong("Invalid field 1 LatLong", 37, 47.15F, s.getFieldAsLatitude(1));
             
             Assert.assertEquals("Invalid field 2 string", "N", s.getField(2));
             
             Assert.assertEquals("Invalid field 3 string", "12216.060", s.getField(3));
-            Assert.assertEquals("Invalid field 3 string", new Float(12216.060), s.getFieldAsFloat(3));
-            LatLongTest.validateLatLong("Invalid field 3 LatLong", 122, 16.06F, s.getFieldAsLatLong(3));
+            Assert.assertEquals("Invalid field 3 string", Float.valueOf(12216.060F), s.getFieldAsFloat(3));
+            LatLongTest.validateLatLong("Invalid field 3 LatLong", 122, 16.06F, s.getFieldAsLongitude(3));
             
             Assert.assertEquals("Invalid field 4 string", "W", s.getField(4));
             
             Assert.assertEquals("Invalid field 5 string", "205910", s.getField(5));
-            Assert.assertEquals("Invalid field 5 string", new Integer(205910), s.getFieldAsInteger(5));
+            UtcTimeTest.validateUTCTime(20, 59, 10F, s.getFieldAsUTCTime(5));
+            Assert.assertEquals("Invalid field 5 string", Integer.valueOf(205910), s.getFieldAsInteger(5));
             
             Assert.assertEquals("Invalid field 6 string", "A", s.getField(6));
             
@@ -346,25 +350,26 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
             Assert.assertEquals("Invalid type code", "GLL", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "59", s.getChecksum());
-            Assert.assertEquals("Incorrect number of fields", new Integer(8), s.getNumFields());
+            Assert.assertEquals("Incorrect number of fields", Integer.valueOf(8), s.getNumFields());
             
             // Validate raw fields
             Assert.assertEquals("Invalid field 0 string", "GPGLL", s.getField(0));
             
             Assert.assertEquals("Invalid field 1 string", "3747.150", s.getField(1));
-            Assert.assertEquals("Invalid field 1 string", new Float(3747.150), s.getFieldAsFloat(1));
-            LatLongTest.validateLatLong("Invalid field 1 LatLong", 37, 47.15F, s.getFieldAsLatLong(1));
+            Assert.assertEquals("Invalid field 1 string", Float.valueOf(3747.150F), s.getFieldAsFloat(1));
+            LatLongTest.validateLatLong("Invalid field 1 LatLong", 37, 47.15F, s.getFieldAsLatitude(1));
             
             Assert.assertEquals("Invalid field 2 string", "N", s.getField(2));
             
             Assert.assertEquals("Invalid field 3 string", "12216.060", s.getField(3));
-            Assert.assertEquals("Invalid field 3 string", new Float(12216.060), s.getFieldAsFloat(3));
-            LatLongTest.validateLatLong("Invalid field 3 LatLong", 122, 16.06F, s.getFieldAsLatLong(3));
+            Assert.assertEquals("Invalid field 3 string", Float.valueOf(12216.060F), s.getFieldAsFloat(3));
+            LatLongTest.validateLatLong("Invalid field 3 LatLong", 122, 16.06F, s.getFieldAsLongitude(3));
             
             Assert.assertEquals("Invalid field 4 string", "W", s.getField(4));
             
             Assert.assertEquals("Invalid field 5 string", "205910", s.getField(5));
-            Assert.assertEquals("Invalid field 5 string", new Integer(205910), s.getFieldAsInteger(5));
+            UtcTimeTest.validateUTCTime(20, 59, 10F, s.getFieldAsUTCTime(5));
+            Assert.assertEquals("Invalid field 5 string", Integer.valueOf(205910), s.getFieldAsInteger(5));
             
             Assert.assertEquals("Invalid field 6 string", "A", s.getField(6));
             

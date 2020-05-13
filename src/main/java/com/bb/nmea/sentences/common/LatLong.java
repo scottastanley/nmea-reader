@@ -21,9 +21,9 @@ package com.bb.nmea.sentences.common;
  * NMEA specification for parsing a string representation of a latitude or longitude 
  * value in to the degrees and minutes.
  * 
- * @author sstanley
+ * @author Scott Stanley
  */
-public class LatLong {
+abstract class LatLong {
     final Integer m_degrees;
     final Float m_minutes;
 
@@ -32,7 +32,7 @@ public class LatLong {
      * 
      * @param str
      */
-    public LatLong(final String str) {
+    LatLong(final String str) {
         m_degrees = Integer.valueOf(str.substring(0, str.indexOf(".") - 2));
         m_minutes = Float.valueOf(str.substring(str.indexOf(".") - 2, str.length()));
     }

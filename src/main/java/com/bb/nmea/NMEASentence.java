@@ -20,10 +20,12 @@ import java.util.regex.Pattern;
 import com.bb.nmea.sentences.common.Direction;
 import com.bb.nmea.sentences.common.FAAModeIndicator;
 import com.bb.nmea.sentences.common.HeadingType;
-import com.bb.nmea.sentences.common.LatLong;
+import com.bb.nmea.sentences.common.Latitude;
+import com.bb.nmea.sentences.common.Longitude;
 import com.bb.nmea.sentences.common.SpeedUnits;
 import com.bb.nmea.sentences.common.Status;
 import com.bb.nmea.sentences.common.TemperatureUnits;
+import com.bb.nmea.sentences.common.UTCTime;
 import com.bb.nmea.sentences.common.WindReference;
 
 /**
@@ -207,14 +209,25 @@ public abstract class NMEASentence {
     }
     
     /**
-     * Get the value of the specified field index as a LatLong instance.
+     * Get the value of the specified field index as a Latitude instance.
      * 
      * @param index The index of the field to retrieve
      * @return The field value
      */
-    protected LatLong getFieldAsLatLong(final int index) {
+    protected Latitude getFieldAsLatitude(final int index) {
         String strValue = getField(index);
-        return strValue != null && !strValue.equals("") ? new LatLong(strValue) : null;
+        return strValue != null && !strValue.equals("") ? new Latitude(strValue) : null;
+    }
+    
+    /**
+     * Get the value of the specified field index as a Longitude instance.
+     * 
+     * @param index The index of the field to retrieve
+     * @return The field value
+     */
+    protected Longitude getFieldAsLongitude(final int index) {
+        String strValue = getField(index);
+        return strValue != null && !strValue.equals("") ? new Longitude(strValue) : null;
     }
     
     /**
@@ -297,6 +310,17 @@ public abstract class NMEASentence {
     protected WindReference getFieldAsWindReference(final int index) {
         String strValue = getField(index);
         return strValue != null && !strValue.equals("") ? WindReference.getWindReference(strValue) : null;
+    }
+    
+    /**
+     * Get the value of the specified field index as a UTCTime instance.
+     * 
+     * @param index
+     * @return The field value
+     */
+    protected UTCTime getFieldAsUTCTime(final int index) {
+        String strValue = getField(index);
+        return new UTCTime(strValue);
     }
     
     /**
