@@ -43,7 +43,7 @@ class PortConfig {
         
         String baudRateStr = props.getProperty(PORT_PREFIX +portId + "." + BAUDRATE_PROPERTY);
         if (baudRateStr != null) {
-            m_baudRate = new Integer(baudRateStr);
+            m_baudRate = Integer.valueOf(baudRateStr);
         } else {
             m_baudRate = null;
         }

@@ -32,7 +32,7 @@ import com.bb.nmea.NMEASentence;
  * 
  * @author Scott Stanley
  */
-public class StatsCollector implements NMEAListener {
+public class StatsCollector extends NMEAListener {
     private static final Logger LOG = LogManager.getLogger(StatsCollector.class);
     private static final String INVALID_TYPE = "INVALID";
     private final Map<String,Counter> m_counters = new HashMap<String,Counter>();

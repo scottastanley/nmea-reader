@@ -34,7 +34,7 @@ import com.bb.nmea.NMEASentence;
  * 
  * @author Scott Stanley
  */
-public class SentenceLogger implements NMEAListener {
+public class SentenceLogger extends NMEAListener {
     private static final Logger LOG = LogManager.getLogger(SentenceLogger.class);
     private static final String FILENAME_TEMPLATE = "raw_{TIMESTAMP}.nmea";
     

@@ -29,8 +29,6 @@ import com.bb.nmea.NMEASentenceProvider;
 import com.bb.nmea.NMEASentenceProviderException;
 import com.bb.nmea.dataproviders.inputfile.InputFileDataProvider;
 import com.bb.nmea.dataproviders.port.PortListenerDataProvider;
-import com.bb.nmea.listeners.SentenceLogger;
-import com.bb.nmea.listeners.StatsCollector;
 
 /**
  * The Main class for the example client using the {@link com.bb.nmea.NMEASentenceProvider} to 
@@ -70,8 +68,10 @@ public class Main {
         }
         
         List<NMEAListener> listeners = new ArrayList<NMEAListener>();
-        listeners.add(new SentenceLogger());
-        listeners.add(new StatsCollector());
+        List<ListenerConfig> listConfigs = config.getListenerConfigs();
+        for (ListenerConfig cfg : listConfigs) {
+            listeners.add(cfg.getListenerInstance());
+        }
         
         //
         // Set up the NMEA sentence provider and start it

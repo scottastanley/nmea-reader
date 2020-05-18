@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -105,5 +106,58 @@ class Configuration {
         }
         
         return configs;
+    }
+    
+    /**
+     * Get the list of {@link com.bb.nmea.main.ListenerConfig}s to process the NMEA
+     * data from the input sources.  If no listeners have been configured, then
+     * an empty list is returned.
+     * 
+     * @return A list of {@link com.bb.nmea.main.ListenerConfig} instances
+     */
+    List<ListenerConfig> getListenerConfigs() {
+        List<ListenerConfig> configs = new ArrayList<ListenerConfig>();
+        
+        for (String portId : ListenerConfig.getListenerIds(m_props)) {
+            Properties listProps = filterPropertiesOnPrefix(ListenerConfig.getListenerPropertyPrefix(portId), m_props);
+            
+            ListenerConfig cfg = new ListenerConfig(listProps);
+            configs.add(cfg);
+        }
+        
+        return configs;
+    }
+    
+    
+    /**
+     * Obtain a Properties object from the specified Properties by finding
+     * all entries that have a key starting with the specified prefix.
+     * The key values in the returned Properties object have the prefix
+     * removed.
+     *
+     * @param prefix The prefix to filter the Properties object on.
+     * @param props The parent Properties object to search.
+     * @return A Properties object with all of the entries from the original
+     * Properties object whose key starts witht he specified suffix.
+     */
+    private static Properties filterPropertiesOnPrefix(String prefix,
+                                                       Properties props)
+    {
+        Properties retProps = new Properties();
+        int suffixStrtIndx = prefix.length();
+
+        Iterator<String> names = props.stringPropertyNames().iterator();
+        while (names.hasNext())
+        {
+            String name = names.next();
+
+            if (name.startsWith(prefix))
+            {
+                String suffix = name.substring(suffixStrtIndx);
+                retProps.setProperty(suffix, props.getProperty(name));
+            }
+        }
+
+        return retProps;
     }
 }

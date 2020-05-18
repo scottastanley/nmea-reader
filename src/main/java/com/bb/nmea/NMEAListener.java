@@ -15,12 +15,16 @@
  */
 package com.bb.nmea;
 
+import java.util.Properties;
+
 /**
- * The interface which must be implemented by all listeners for NMEA sentences.
+ * The abstract class which must be extended by all listeners for NMEA sentences.
  * 
  * @author Scott Stanley
  */
-public interface NMEAListener {
+public abstract class NMEAListener {
+    private Properties m_properties;
+    
     /**
      * Process the provided NMEASentence.  This method will be called with all
      * sentences received by the system, including invalid sentences as well as those 
@@ -28,10 +32,28 @@ public interface NMEAListener {
      * 
      * @param sentence The NMEA sentence
      */
-    public void processEvent(final NMEASentence sentence);
+    abstract public void processEvent(final NMEASentence sentence);
     
     /**
      * Stop processing data in the listener and close all open resources.
      */
-    public void stop();
+    abstract public void stop();
+    
+    /**
+     * Set the properties for this NMEAListener.
+     * 
+     * @param properties The properties providing configuration details
+     */
+    public void setProperties(final Properties properties) {
+        m_properties = properties;
+    }
+    
+    /**
+     * Get the properties.
+     * 
+     * @return The Properties containing configuration details for this NMEAListener.
+     */
+    protected Properties getProperties() {
+        return m_properties;
+    }
 }

@@ -43,7 +43,7 @@ class FileConfig {
         
         String pauseMillisStr = props.getProperty(FILE_PREFIX + fileId + "." + PAUSE_MILLIS_PROPERTY);
         if (pauseMillisStr != null) {
-            m_pauseMillis = new Long(pauseMillisStr);
+            m_pauseMillis = Long.valueOf(pauseMillisStr);
         } else {
             m_pauseMillis = 0L;
         }

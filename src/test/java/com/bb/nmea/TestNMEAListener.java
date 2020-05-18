@@ -22,7 +22,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class TestNMEAListener implements NMEAListener {
+public class TestNMEAListener extends NMEAListener {
     private static final Logger LOG = LogManager.getLogger(TestNMEAListener.class);
     List<NMEASentence> m_rcvdSentences = Collections.synchronizedList(new ArrayList<NMEASentence>());
 
