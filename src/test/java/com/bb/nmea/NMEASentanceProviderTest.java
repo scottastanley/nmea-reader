@@ -29,9 +29,11 @@ import com.bb.nmea.sentences.DPT;
 import com.bb.nmea.sentences.GLL;
 import com.bb.nmea.sentences.HDG;
 import com.bb.nmea.sentences.HDM;
+import com.bb.nmea.sentences.MTW;
 import com.bb.nmea.sentences.MWV;
 import com.bb.nmea.sentences.RSA;
 import com.bb.nmea.sentences.VTG;
+import com.bb.nmea.sentences.ZDA;
 
 import junit.framework.Assert;
 
@@ -319,7 +321,9 @@ public class NMEASentanceProviderTest {
                 "$SDDBT,16.5,f,5.0,M,2.8,F*3B",
                 "$SDDPT,5.0,*7C",
                 "$ECMWV,269.0,R,1.2,N,A*35",
-                "$GPGLL,3746.823,N,12223.246,W,193520,A,A*56"
+                "$GPGLL,3746.823,N,12223.246,W,193520,A,A*56",
+                "$VWMTW,18.50,C*2E",
+                "$GPZDA,190107.66,10,05,2020,,*6C"
             };
         byte[][] origBytes = getBytes(origStr);
         
@@ -332,6 +336,8 @@ public class NMEASentanceProviderTest {
         expRes.addResult(new ExpectedSentence(origStr[5], "SD", "DPT", DPT.class));
         expRes.addResult(new ExpectedSentence(origStr[6], "EC", "MWV", MWV.class));
         expRes.addResult(new ExpectedSentence(origStr[7], "GP", "GLL", GLL.class));
+        expRes.addResult(new ExpectedSentence(origStr[8], "VW", "MTW", MTW.class));
+        expRes.addResult(new ExpectedSentence(origStr[9], "GP", "ZDA", ZDA.class));
         
         try {
             TestPassThroughDataProvider dp = new TestPassThroughDataProvider(origBytes);
@@ -422,7 +428,7 @@ public class NMEASentanceProviderTest {
                 Pair<Integer, ExpectedSentence> pNew = new Pair<Integer, ExpectedSentence>(cnt, r);
                 m_expResults.put(r.m_rawSentence, pNew);
             } else {
-                Integer cnt = new Integer(1);
+                Integer cnt = Integer.valueOf(1);
                 Pair<Integer, ExpectedSentence> p = new Pair<Integer, ExpectedSentence>(cnt, r);
 
                 m_expResults.put(r.m_rawSentence, p);

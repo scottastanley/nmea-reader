@@ -381,4 +381,11 @@ public abstract class NMEASentence {
     protected void setInValid() {
         m_isValid = Boolean.FALSE;
     }
+    
+    /**
+     * Get a string representation of this NMEA sentence.
+     */
+    public String toString() {
+        return this.getRawSentence();
+    }
 }
