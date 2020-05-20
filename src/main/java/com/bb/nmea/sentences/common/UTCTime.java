@@ -15,6 +15,8 @@
  */
 package com.bb.nmea.sentences.common;
 
+import java.time.LocalTime;
+
 public class UTCTime {
     final Integer m_hour;
     final Integer m_minutes;
@@ -45,5 +47,18 @@ public class UTCTime {
      */
     public Float getSeconds() {
         return m_seconds;
+    }
+    
+    /**
+     * Get the LocalTime instance for this UTC time.  
+     * 
+     * @return A LocalTime instance
+     */
+    public LocalTime getLocalTime() {
+        Integer seconds = m_seconds.intValue();
+        float fractSec = m_seconds - seconds;
+        int nanoSeconds = (int) (fractSec * 1000000000);
+        
+        return LocalTime.of(m_hour, m_minutes, seconds, nanoSeconds);
     }
 }

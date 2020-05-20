@@ -15,6 +15,7 @@
  */
 package com.bb.nmea.sentences;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.bb.nmea.NMEASentence;
@@ -50,12 +51,31 @@ public class ZDA extends NMEASentence {
         m_localZoneMinutes = this.getFieldAsInteger(6);
     }
 
+    /**
+     * Get the LocalDateTime instance for the UTC date/time provided by this ZDA sentence.  Since
+     * the data provided by the ZDA sentence is a date/time in UTC this LocalDateTime
+     * instance represents the instant in time as defined in UTC timezone.
+     * 
+     * @return A LocalDateTime instance
+     */
     public LocalDateTime getLocalDateTime() {
         Integer seconds = m_seconds.intValue();
         float fractSec = m_seconds - seconds;
         int nanoSeconds = (int) (fractSec * 1000000000);
         
         return LocalDateTime.of(m_year, m_month, m_day, m_hours, m_minutes, seconds, nanoSeconds);
+    }
+    
+
+    /**
+     * Get the LocalDate instance for the UTC date provided by this ZDA sentence.  Since
+     * the data provided by the ZDA sentence is a date/time in UTC this LocalDate
+     * instance represents the date as defined in UTC timezone.
+     * 
+     * @return A LocalDate instance
+     */
+    public LocalDate getLocalDate() {
+        return LocalDate.of(m_year, m_month, m_day);
     }
 
     /**
