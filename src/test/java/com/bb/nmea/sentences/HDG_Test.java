@@ -36,10 +36,10 @@ public class HDG_Test {
             Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "05", s.getChecksum());
             
-            Assert.assertEquals("Invalid heading", new Float(252.1), s.getHeadingDegrees());
-            Assert.assertEquals("Invalid deviation degrees", new Float(5.3), s.getDeviationDegrees());
+            Assert.assertEquals("Invalid heading", Float.valueOf(252.1f), s.getHeadingDegrees());
+            Assert.assertEquals("Invalid deviation degrees", Float.valueOf(5.3f), s.getDeviationDegrees());
             Assert.assertEquals("Invalid deviation direction", Direction.NORTH, s.getDeviationDirection());
-            Assert.assertEquals("Invalid variation degrees", new Float(13.0), s.getVariationDegrees());
+            Assert.assertEquals("Invalid variation degrees", Float.valueOf(13.0f), s.getVariationDegrees());
             Assert.assertEquals("Invalid variation direction", Direction.EAST, s.getVariationDirection());
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,10 +65,10 @@ public class HDG_Test {
             Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "05", s.getChecksum());
             
-            Assert.assertEquals("Invalid heading", new Float(252.1), s.getHeadingDegrees());
+            Assert.assertEquals("Invalid heading", Float.valueOf(252.1f), s.getHeadingDegrees());
             Assert.assertEquals("Invalid deviation degrees", null, s.getDeviationDegrees());
             Assert.assertEquals("Invalid deviation direction", null, s.getDeviationDirection());
-            Assert.assertEquals("Invalid variation degrees", new Float(13.0), s.getVariationDegrees());
+            Assert.assertEquals("Invalid variation degrees", Float.valueOf(13.0f), s.getVariationDegrees());
             Assert.assertEquals("Invalid variation direction", Direction.EAST, s.getVariationDirection());
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,8 +94,8 @@ public class HDG_Test {
             Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "05", s.getChecksum());
             
-            Assert.assertEquals("Invalid heading", new Float(252.1), s.getHeadingDegrees());
-            Assert.assertEquals("Invalid deviation degrees", new Float(15.1), s.getDeviationDegrees());
+            Assert.assertEquals("Invalid heading", Float.valueOf(252.1f), s.getHeadingDegrees());
+            Assert.assertEquals("Invalid deviation degrees", Float.valueOf(15.1f), s.getDeviationDegrees());
             Assert.assertEquals("Invalid deviation direction", Direction.SOUTH, s.getDeviationDirection());
             Assert.assertEquals("Invalid variation degrees", null, s.getVariationDegrees());
             Assert.assertEquals("Invalid variation direction", null, s.getVariationDirection());

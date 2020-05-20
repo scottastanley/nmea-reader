@@ -34,7 +34,7 @@ public class DPT_Test {
             Assert.assertEquals("Invalid type code", "DPT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "7D", s.getChecksum());
             
-            Assert.assertEquals("Invalid depth below transducer", new Float(5.1), s.getDepthBelowTransducer());
+            Assert.assertEquals("Invalid depth below transducer", Float.valueOf(5.1f), s.getDepthBelowTransducer());
             Assert.assertEquals("Invalid traansducer offset", null, s.getTransducerOffset());
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,8 +60,8 @@ public class DPT_Test {
             Assert.assertEquals("Invalid type code", "DPT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "7D", s.getChecksum());
             
-            Assert.assertEquals("Invalid depth below transducer", new Float(14.9), s.getDepthBelowTransducer());
-            Assert.assertEquals("Invalid traansducer offset", new Float(1.3), s.getTransducerOffset());
+            Assert.assertEquals("Invalid depth below transducer", Float.valueOf(14.9f), s.getDepthBelowTransducer());
+            Assert.assertEquals("Invalid traansducer offset", Float.valueOf(1.3f), s.getTransducerOffset());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -86,8 +86,8 @@ public class DPT_Test {
             Assert.assertEquals("Invalid type code", "DPT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "7D", s.getChecksum());
             
-            Assert.assertEquals("Invalid depth below transducer", new Float(32.5), s.getDepthBelowTransducer());
-            Assert.assertEquals("Invalid traansducer offset", new Float(-2.1), s.getTransducerOffset());
+            Assert.assertEquals("Invalid depth below transducer", Float.valueOf(32.5f), s.getDepthBelowTransducer());
+            Assert.assertEquals("Invalid traansducer offset", Float.valueOf(-2.1f), s.getTransducerOffset());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());

@@ -36,10 +36,10 @@ public class VTG_Test {
             Assert.assertEquals("Invalid type code", "VTG", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "25", s.getChecksum());
             
-            Assert.assertEquals("Invalid true course", new Float(77.2), s.getCourseOverGroundDegrTrue());
-            Assert.assertEquals("Invalid magnetic course", new Float(64.0), s.getCourseOverGroundDegrMagnetic());
-            Assert.assertEquals("Invalid true course", new Float(0.1), s.getSpeedOverGroundKnots());
-            Assert.assertEquals("Invalid true course", new Float(0.2), s.getSpeedOverGroundKmPerHr());
+            Assert.assertEquals("Invalid true course", Float.valueOf(77.2f), s.getCourseOverGroundDegrTrue());
+            Assert.assertEquals("Invalid magnetic course", Float.valueOf(64.0f), s.getCourseOverGroundDegrMagnetic());
+            Assert.assertEquals("Invalid true course", Float.valueOf(0.1f), s.getSpeedOverGroundKnots());
+            Assert.assertEquals("Invalid true course", Float.valueOf(0.2f), s.getSpeedOverGroundKmPerHr());
             Assert.assertEquals("Invalid FAA mode", FAAModeIndicator.DIFFERENTIAL_MODE, s.getFaaModeIndicator());
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,10 +65,10 @@ public class VTG_Test {
             Assert.assertEquals("Invalid type code", "VTG", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "25", s.getChecksum());
             
-            Assert.assertEquals("Invalid true course", new Float(77.2), s.getCourseOverGroundDegrTrue());
-            Assert.assertEquals("Invalid magnetic course", new Float(64.0), s.getCourseOverGroundDegrMagnetic());
-            Assert.assertEquals("Invalid true course", new Float(0.1), s.getSpeedOverGroundKnots());
-            Assert.assertEquals("Invalid true course", new Float(0.2), s.getSpeedOverGroundKmPerHr());
+            Assert.assertEquals("Invalid true course", Float.valueOf(77.2f), s.getCourseOverGroundDegrTrue());
+            Assert.assertEquals("Invalid magnetic course", Float.valueOf(64.0f), s.getCourseOverGroundDegrMagnetic());
+            Assert.assertEquals("Invalid true course", Float.valueOf(0.1f), s.getSpeedOverGroundKnots());
+            Assert.assertEquals("Invalid true course", Float.valueOf(0.2f), s.getSpeedOverGroundKmPerHr());
             Assert.assertEquals("Invalid FAA mode", FAAModeIndicator.AUTONOMOUS_MODE, s.getFaaModeIndicator());
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,10 +94,10 @@ public class VTG_Test {
             Assert.assertEquals("Invalid type code", "VTG", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "25", s.getChecksum());
             
-            Assert.assertEquals("Invalid true course", new Float(77.2), s.getCourseOverGroundDegrTrue());
-            Assert.assertEquals("Invalid magnetic course", new Float(64.0), s.getCourseOverGroundDegrMagnetic());
-            Assert.assertEquals("Invalid true course", new Float(0.1), s.getSpeedOverGroundKnots());
-            Assert.assertEquals("Invalid true course", new Float(0.2), s.getSpeedOverGroundKmPerHr());
+            Assert.assertEquals("Invalid true course", Float.valueOf(77.2f), s.getCourseOverGroundDegrTrue());
+            Assert.assertEquals("Invalid magnetic course", Float.valueOf(64.0f), s.getCourseOverGroundDegrMagnetic());
+            Assert.assertEquals("Invalid true course", Float.valueOf(0.1f), s.getSpeedOverGroundKnots());
+            Assert.assertEquals("Invalid true course", Float.valueOf(0.2f), s.getSpeedOverGroundKmPerHr());
             Assert.assertEquals("Invalid FAA mode", null, s.getFaaModeIndicator());
         } catch (Exception e) {
             e.printStackTrace();

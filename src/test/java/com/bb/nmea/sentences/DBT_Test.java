@@ -34,9 +34,9 @@ public class DBT_Test {
             Assert.assertEquals("Invalid type code", "DBT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "3E", s.getChecksum());
             
-            Assert.assertEquals("Invalid depth in feet", new Float(17.0), s.getWaterDepthInFeet());
-            Assert.assertEquals("Invalid depth in meters", new Float(5.1), s.getWaterDepthInMeters());
-            Assert.assertEquals("Invalid depth in fathoms", new Float(2.8), s.getWaterDepthInFathoms());
+            Assert.assertEquals("Invalid depth in feet", Float.valueOf(17.0f), s.getWaterDepthInFeet());
+            Assert.assertEquals("Invalid depth in meters", Float.valueOf(5.1f), s.getWaterDepthInMeters());
+            Assert.assertEquals("Invalid depth in fathoms", Float.valueOf(2.8f), s.getWaterDepthInFathoms());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -61,9 +61,9 @@ public class DBT_Test {
             Assert.assertEquals("Invalid type code", "DBT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "3B", s.getChecksum());
             
-            Assert.assertEquals("Invalid depth in feet", new Float(16.5), s.getWaterDepthInFeet());
-            Assert.assertEquals("Invalid depth in meters", new Float(5.0), s.getWaterDepthInMeters());
-            Assert.assertEquals("Invalid depth in fathoms", new Float(2.8), s.getWaterDepthInFathoms());
+            Assert.assertEquals("Invalid depth in feet", Float.valueOf(16.5f), s.getWaterDepthInFeet());
+            Assert.assertEquals("Invalid depth in meters", Float.valueOf(5.0f), s.getWaterDepthInMeters());
+            Assert.assertEquals("Invalid depth in fathoms", Float.valueOf(2.8f), s.getWaterDepthInFathoms());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -88,9 +88,9 @@ public class DBT_Test {
             Assert.assertEquals("Invalid type code", "DBT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "3B", s.getChecksum());
             
-            Assert.assertEquals("Invalid depth in feet", new Float(17.6), s.getWaterDepthInFeet());
-            Assert.assertEquals("Invalid depth in meters", new Float(5.3), s.getWaterDepthInMeters());
-            Assert.assertEquals("Invalid depth in fathoms", new Float(2.9), s.getWaterDepthInFathoms());
+            Assert.assertEquals("Invalid depth in feet", Float.valueOf(17.6f), s.getWaterDepthInFeet());
+            Assert.assertEquals("Invalid depth in meters", Float.valueOf(5.3f), s.getWaterDepthInMeters());
+            Assert.assertEquals("Invalid depth in fathoms", Float.valueOf(2.9f), s.getWaterDepthInFathoms());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());

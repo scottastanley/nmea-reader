@@ -205,11 +205,11 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid checksum", "55", rsaS.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.TRUE, rsaS.isDualRudder());
-            Assert.assertEquals("Invalid rudder angle, single rudder", new Float(8.6), rsaS.getRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, single rudder", Float.valueOf(8.6f), rsaS.getRudderAngle());
             Assert.assertEquals("Invalid rudder status, single rudder", Status.VALID, rsaS.getRudderStatus());
-            Assert.assertEquals("Invalid rudder angle, starboard rudder", new Float(8.6), rsaS.getStarboardRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, starboard rudder", Float.valueOf(8.6f), rsaS.getStarboardRudderAngle());
             Assert.assertEquals("Invalid rudder status, starboard rudder", Status.VALID, rsaS.getStarboardRudderStatus());
-            Assert.assertEquals("Invalid rudder angle, port rudder", new Float(8.2), rsaS.getPortRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, port rudder", Float.valueOf(8.2f), rsaS.getPortRudderAngle());
             Assert.assertEquals("Invalid rudder status, port rudder", Status.VALID, rsaS.getPortRudderStatus());
         } catch (Exception e) {
             e.printStackTrace();
@@ -232,10 +232,10 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "63", s.getChecksum());
             
-            Assert.assertEquals("Invalid heading", new Float(252.1), s.getHeadingDegrees());
-            Assert.assertEquals("Invalid deviation degrees", new Float(5.3), s.getDeviationDegrees());
+            Assert.assertEquals("Invalid heading", Float.valueOf(252.1f), s.getHeadingDegrees());
+            Assert.assertEquals("Invalid deviation degrees", Float.valueOf(5.3f), s.getDeviationDegrees());
             Assert.assertEquals("Invalid deviation direction", Direction.NORTH, s.getDeviationDirection());
-            Assert.assertEquals("Invalid variation degrees", new Float(13.0), s.getVariationDegrees());
+            Assert.assertEquals("Invalid variation degrees", Float.valueOf(13.0f), s.getVariationDegrees());
             Assert.assertEquals("Invalid variation direction", Direction.EAST, s.getVariationDirection());
         } catch (Exception e) {
             e.printStackTrace();
@@ -258,10 +258,10 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid type code", "VTG", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "25", s.getChecksum());
             
-            Assert.assertEquals("Invalid true course", new Float(77.2), s.getCourseOverGroundDegrTrue());
-            Assert.assertEquals("Invalid magnetic course", new Float(64.0), s.getCourseOverGroundDegrMagnetic());
-            Assert.assertEquals("Invalid true course", new Float(0.1), s.getSpeedOverGroundKnots());
-            Assert.assertEquals("Invalid true course", new Float(0.2), s.getSpeedOverGroundKmPerHr());
+            Assert.assertEquals("Invalid true course", Float.valueOf(77.2f), s.getCourseOverGroundDegrTrue());
+            Assert.assertEquals("Invalid magnetic course", Float.valueOf(64.0f), s.getCourseOverGroundDegrMagnetic());
+            Assert.assertEquals("Invalid true course", Float.valueOf(0.1f), s.getSpeedOverGroundKnots());
+            Assert.assertEquals("Invalid true course", Float.valueOf(0.2f), s.getSpeedOverGroundKmPerHr());
             Assert.assertEquals("Invalid FAA mode", FAAModeIndicator.DIFFERENTIAL_MODE, s.getFaaModeIndicator());
         } catch (Exception e) {
             e.printStackTrace();
@@ -284,9 +284,9 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid type code", "DBT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "38", s.getChecksum());
             
-            Assert.assertEquals("Invalid depth in feet", new Float(16.6), s.getWaterDepthInFeet());
-            Assert.assertEquals("Invalid depth in meters", new Float(5.0), s.getWaterDepthInMeters());
-            Assert.assertEquals("Invalid depth in fathoms", new Float(2.8), s.getWaterDepthInFathoms());
+            Assert.assertEquals("Invalid depth in feet", Float.valueOf(16.6f), s.getWaterDepthInFeet());
+            Assert.assertEquals("Invalid depth in meters", Float.valueOf(5.0f), s.getWaterDepthInMeters());
+            Assert.assertEquals("Invalid depth in fathoms", Float.valueOf(2.8f), s.getWaterDepthInFathoms());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -308,7 +308,7 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid type code", "DPT", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "7F", s.getChecksum());
             
-            Assert.assertEquals("Invalid depth below transducer", new Float(5.3), s.getDepthBelowTransducer());
+            Assert.assertEquals("Invalid depth below transducer", Float.valueOf(5.3f), s.getDepthBelowTransducer());
             Assert.assertEquals("Invalid traansducer offset", null, s.getTransducerOffset());
         } catch (Exception e) {
             e.printStackTrace();
@@ -332,9 +332,9 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid type code", "MWV", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "34", s.getChecksum());
             
-            Assert.assertEquals("Invalid wind angle", new Float(359.0), s.getWindAngle());
+            Assert.assertEquals("Invalid wind angle", Float.valueOf(359.0f), s.getWindAngle());
             Assert.assertEquals("Invalid wind reference", WindReference.RELATIVE, s.getWindReference());
-            Assert.assertEquals("Invalid wind speed", new Float(0.0), s.getWindSpeed());
+            Assert.assertEquals("Invalid wind speed", Float.valueOf(0.0f), s.getWindSpeed());
             Assert.assertEquals("Invalid speed units", SpeedUnits.KNOTS, s.getSpeedUnits());
             Assert.assertEquals("Invalid status", Status.VALID, s.getStatus());
         } catch (Exception e) {

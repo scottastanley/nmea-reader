@@ -36,7 +36,7 @@ public class MTW_Test {
             Assert.assertEquals("Invalid type code", "MTW", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "10", s.getChecksum());
             
-            Assert.assertEquals("Invalid temperature", new Float(13.0), s.getMeanWaterTemp());
+            Assert.assertEquals("Invalid temperature", Float.valueOf(13.0f), s.getMeanWaterTemp());
             Assert.assertEquals("Invalid units", TemperatureUnits.CELCIUS, s.getUnits());
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,7 +62,7 @@ public class MTW_Test {
             Assert.assertEquals("Invalid type code", "MTW", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "10", s.getChecksum());
             
-            Assert.assertEquals("Invalid temperature", new Float(21.2), s.getMeanWaterTemp());
+            Assert.assertEquals("Invalid temperature", Float.valueOf(21.2f), s.getMeanWaterTemp());
             Assert.assertEquals("Invalid units", TemperatureUnits.CELCIUS, s.getUnits());
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,7 +88,7 @@ public class MTW_Test {
             Assert.assertEquals("Invalid type code", "MTW", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "10", s.getChecksum());
             
-            Assert.assertEquals("Invalid temperature", new Float(32.1), s.getMeanWaterTemp());
+            Assert.assertEquals("Invalid temperature", Float.valueOf(32.1f), s.getMeanWaterTemp());
             Assert.assertEquals("Invalid units", TemperatureUnits.CELCIUS, s.getUnits());
         } catch (Exception e) {
             e.printStackTrace();

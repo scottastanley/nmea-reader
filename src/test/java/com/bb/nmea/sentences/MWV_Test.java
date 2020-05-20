@@ -38,9 +38,9 @@ public class MWV_Test {
             Assert.assertEquals("Invalid type code", "MWV", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "3D", s.getChecksum());
             
-            Assert.assertEquals("Invalid wind angle", new Float(123.5), s.getWindAngle());
+            Assert.assertEquals("Invalid wind angle", Float.valueOf(123.5f), s.getWindAngle());
             Assert.assertEquals("Invalid wind reference", WindReference.RELATIVE, s.getWindReference());
-            Assert.assertEquals("Invalid wind speed", new Float(1.2), s.getWindSpeed());
+            Assert.assertEquals("Invalid wind speed", Float.valueOf(1.2f), s.getWindSpeed());
             Assert.assertEquals("Invalid speed units", SpeedUnits.KNOTS, s.getSpeedUnits());
             Assert.assertEquals("Invalid status", Status.VALID, s.getStatus());
         } catch (Exception e) {
@@ -67,9 +67,9 @@ public class MWV_Test {
             Assert.assertEquals("Invalid type code", "MWV", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "3D", s.getChecksum());
             
-            Assert.assertEquals("Invalid wind angle", new Float(359.9), s.getWindAngle());
+            Assert.assertEquals("Invalid wind angle", Float.valueOf(359.9f), s.getWindAngle());
             Assert.assertEquals("Invalid wind reference", WindReference.TRUE, s.getWindReference());
-            Assert.assertEquals("Invalid wind speed", new Float(17.3), s.getWindSpeed());
+            Assert.assertEquals("Invalid wind speed", Float.valueOf(17.3f), s.getWindSpeed());
             Assert.assertEquals("Invalid speed units", SpeedUnits.KNOTS, s.getSpeedUnits());
             Assert.assertEquals("Invalid status", Status.VALID, s.getStatus());
         } catch (Exception e) {
@@ -96,9 +96,9 @@ public class MWV_Test {
             Assert.assertEquals("Invalid type code", "MWV", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "3D", s.getChecksum());
             
-            Assert.assertEquals("Invalid wind angle", new Float(231.1), s.getWindAngle());
+            Assert.assertEquals("Invalid wind angle", Float.valueOf(231.1f), s.getWindAngle());
             Assert.assertEquals("Invalid wind reference", WindReference.RELATIVE, s.getWindReference());
-            Assert.assertEquals("Invalid wind speed", new Float(8.6), s.getWindSpeed());
+            Assert.assertEquals("Invalid wind speed", Float.valueOf(8.6f), s.getWindSpeed());
             Assert.assertEquals("Invalid speed units", SpeedUnits.KM_PER_HR, s.getSpeedUnits());
             Assert.assertEquals("Invalid status", Status.VALID, s.getStatus());
         } catch (Exception e) {
@@ -125,9 +125,9 @@ public class MWV_Test {
             Assert.assertEquals("Invalid type code", "MWV", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "3D", s.getChecksum());
             
-            Assert.assertEquals("Invalid wind angle", new Float(13.2), s.getWindAngle());
+            Assert.assertEquals("Invalid wind angle", Float.valueOf(13.2f), s.getWindAngle());
             Assert.assertEquals("Invalid wind reference", WindReference.TRUE, s.getWindReference());
-            Assert.assertEquals("Invalid wind speed", new Float(12.7), s.getWindSpeed());
+            Assert.assertEquals("Invalid wind speed", Float.valueOf(12.7f), s.getWindSpeed());
             Assert.assertEquals("Invalid speed units", SpeedUnits.KM_PER_HR, s.getSpeedUnits());
             Assert.assertEquals("Invalid status", Status.VALID, s.getStatus());
         } catch (Exception e) {

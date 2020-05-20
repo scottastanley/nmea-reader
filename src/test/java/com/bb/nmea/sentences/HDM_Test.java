@@ -51,7 +51,7 @@ public class HDM_Test {
             Assert.assertEquals("Invalid type code", "HDM", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "34", s.getChecksum());
             
-            Assert.assertEquals("Invalid heading", new Float(345.5), s.getHeadingDegrees());
+            Assert.assertEquals("Invalid heading", Float.valueOf(345.5f), s.getHeadingDegrees());
             Assert.assertEquals("Invalid heading type", HeadingType.MAGNETIC, s.getHeadingType());
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class HDM_Test {
             Assert.assertEquals("Invalid type code", "HDM", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "38", s.getChecksum());
             
-            Assert.assertEquals("Invalid heading", new Float(344.8), s.getHeadingDegrees());
+            Assert.assertEquals("Invalid heading", Float.valueOf(344.8f), s.getHeadingDegrees());
             Assert.assertEquals("Invalid heading type", HeadingType.MAGNETIC, s.getHeadingType());
         } catch (Exception e) {
             e.printStackTrace();

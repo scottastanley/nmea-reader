@@ -52,9 +52,9 @@ public class RSA_Test {
             Assert.assertEquals("Invalid checksum", "30", s.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.FALSE, s.isDualRudder());
-            Assert.assertEquals("Invalid rudder angle, single rudder", new Float(8.6), s.getRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, single rudder", Float.valueOf(8.6f), s.getRudderAngle());
             Assert.assertEquals("Invalid rudder status, single rudder", Status.VALID, s.getRudderStatus());
-            Assert.assertEquals("Invalid rudder angle, starboard rudder", new Float(8.6), s.getStarboardRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, starboard rudder", Float.valueOf(8.6f), s.getStarboardRudderAngle());
             Assert.assertEquals("Invalid rudder status, starboard rudder", Status.VALID, s.getStarboardRudderStatus());
             Assert.assertEquals("Invalid rudder angle, port rudder", null, s.getPortRudderAngle());
             Assert.assertEquals("Invalid rudder status, port rudder", null, s.getPortRudderStatus());
@@ -83,9 +83,9 @@ public class RSA_Test {
             Assert.assertEquals("Invalid checksum", "21", s.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.FALSE, s.isDualRudder());
-            Assert.assertEquals("Invalid rudder angle, single rudder", new Float(-11.2), s.getRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, single rudder", Float.valueOf(-11.2f), s.getRudderAngle());
             Assert.assertEquals("Invalid rudder status, single rudder", Status.VALID, s.getRudderStatus());
-            Assert.assertEquals("Invalid rudder angle, starboard rudder", new Float(-11.2), s.getStarboardRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, starboard rudder", Float.valueOf(-11.2f), s.getStarboardRudderAngle());
             Assert.assertEquals("Invalid rudder status, starboard rudder", Status.VALID, s.getStarboardRudderStatus());
             Assert.assertEquals("Invalid rudder angle, port rudder", null, s.getPortRudderAngle());
             Assert.assertEquals("Invalid rudder status, port rudder", null, s.getPortRudderStatus());
@@ -114,11 +114,11 @@ public class RSA_Test {
             Assert.assertEquals("Invalid checksum", "30", s.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.TRUE, s.isDualRudder());
-            Assert.assertEquals("Invalid rudder angle, single rudder", new Float(8.6), s.getRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, single rudder", Float.valueOf(8.6f), s.getRudderAngle());
             Assert.assertEquals("Invalid rudder status, single rudder", Status.VALID, s.getRudderStatus());
-            Assert.assertEquals("Invalid rudder angle, starboard rudder", new Float(8.6), s.getStarboardRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, starboard rudder", Float.valueOf(8.6f), s.getStarboardRudderAngle());
             Assert.assertEquals("Invalid rudder status, starboard rudder", Status.VALID, s.getStarboardRudderStatus());
-            Assert.assertEquals("Invalid rudder angle, port rudder", new Float(8.2), s.getPortRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, port rudder", Float.valueOf(8.2f), s.getPortRudderAngle());
             Assert.assertEquals("Invalid rudder status, port rudder", Status.VALID, s.getPortRudderStatus());
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,11 +145,11 @@ public class RSA_Test {
             Assert.assertEquals("Invalid checksum", "21", s.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.TRUE, s.isDualRudder());
-            Assert.assertEquals("Invalid rudder angle, single rudder", new Float(-11.2), s.getRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, single rudder", Float.valueOf(-11.2f), s.getRudderAngle());
             Assert.assertEquals("Invalid rudder status, single rudder", Status.VALID, s.getRudderStatus());
-            Assert.assertEquals("Invalid rudder angle, starboard rudder", new Float(-11.2), s.getStarboardRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, starboard rudder", Float.valueOf(-11.2f), s.getStarboardRudderAngle());
             Assert.assertEquals("Invalid rudder status, starboard rudder", Status.VALID, s.getStarboardRudderStatus());
-            Assert.assertEquals("Invalid rudder angle, port rudder", new Float(-10.9), s.getPortRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, port rudder", Float.valueOf(-10.9f), s.getPortRudderAngle());
             Assert.assertEquals("Invalid rudder status, port rudder", Status.VALID, s.getPortRudderStatus());
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,11 +176,11 @@ public class RSA_Test {
             Assert.assertEquals("Invalid checksum", "30", s.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.TRUE, s.isDualRudder());
-            Assert.assertEquals("Invalid rudder angle, single rudder", new Float(8.6), s.getRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, single rudder", Float.valueOf(8.6f), s.getRudderAngle());
             Assert.assertEquals("Invalid rudder status, single rudder", Status.INVALID, s.getRudderStatus());
-            Assert.assertEquals("Invalid rudder angle, starboard rudder", new Float(8.6), s.getStarboardRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, starboard rudder", Float.valueOf(8.6f), s.getStarboardRudderAngle());
             Assert.assertEquals("Invalid rudder status, starboard rudder", Status.INVALID, s.getStarboardRudderStatus());
-            Assert.assertEquals("Invalid rudder angle, port rudder", new Float(8.2), s.getPortRudderAngle());
+            Assert.assertEquals("Invalid rudder angle, port rudder", Float.valueOf(8.2f), s.getPortRudderAngle());
             Assert.assertEquals("Invalid rudder status, port rudder", Status.INVALID, s.getPortRudderStatus());
         } catch (Exception e) {
             e.printStackTrace();
