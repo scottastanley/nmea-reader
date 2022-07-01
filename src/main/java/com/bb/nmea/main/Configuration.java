@@ -41,11 +41,23 @@ class Configuration {
     /**
      * Construct the configuration object.
      */
-    Configuration() {
+    Configuration(final String[] args) {
         //
         // Check for an override configuration file name
         //
+        // If we have a single argument, then use it as a properties file name
+        //
         String overrideFilename = System.getProperties().getProperty(NMEA_CONFIG_FILE_PROP);
+        
+        if (args.length > 0) {
+            if (args.length > 1) {
+                System.err.println("Only a single command line argument supported.  " +
+                                   args.length + " arguments provided.");
+                System.exit(-1);
+            } else {
+                overrideFilename = args[0];
+            }
+        }
         if (overrideFilename != null) {
             m_propertiesFile = overrideFilename;
         }

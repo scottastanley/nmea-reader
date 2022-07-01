@@ -45,7 +45,7 @@ public class Main {
     private static final Logger LOG = LogManager.getLogger(Main.class);
     
     public static void main(String[] args) {
-        Configuration config = new Configuration();
+        Configuration config = new Configuration(args);
         
         //
         // Configure all data providers

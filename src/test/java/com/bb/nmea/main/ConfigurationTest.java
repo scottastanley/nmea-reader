@@ -106,6 +106,7 @@ public class ConfigurationTest {
 
     @Test
     public void testSinglePort() {
+        String[] args = {};
         String[] ids = {"id1"};
         String[] descriptors = {"/dev/port1"};
         Integer[] baudRates = {1234};
@@ -115,7 +116,7 @@ public class ConfigurationTest {
             addPortProperties(props, ids, descriptors, baudRates);
             writeTestFile(props);
             
-            Configuration conf = new Configuration();
+            Configuration conf = new Configuration(args);
             List<PortConfig> pCfgs = conf.getPortConfigs();
             
             validatePorts(pCfgs, ids, descriptors, baudRates);
@@ -128,6 +129,7 @@ public class ConfigurationTest {
 
     @Test
     public void testMultiPort() {
+        String[] args = {};
         String[] ids = {"id1", "id2"};
         String[] descriptors = {"/dev/port1", "/dev/port2"};
         Integer[] baudRates = {1234, 4321};
@@ -137,7 +139,7 @@ public class ConfigurationTest {
             addPortProperties(props, ids, descriptors, baudRates);
             writeTestFile(props);
             
-            Configuration conf = new Configuration();
+            Configuration conf = new Configuration(args);
             List<PortConfig> pCfgs = conf.getPortConfigs();
             
             validatePorts(pCfgs, ids, descriptors, baudRates);
@@ -150,6 +152,7 @@ public class ConfigurationTest {
 
     @Test
     public void testSingleFile() {
+        String[] args = {};
         String[] ids = {"fid1"};
         String[] filenames = {"file1.nmea"};
         Long[] pauseMillis = {1234L};
@@ -159,7 +162,7 @@ public class ConfigurationTest {
             addFileProperties(props, ids, filenames, pauseMillis);
             writeTestFile(props);
             
-            Configuration conf = new Configuration();
+            Configuration conf = new Configuration(args);
             List<FileConfig> pCfgs = conf.getFileConfigs();
             
             validateFiles(pCfgs, ids, filenames, pauseMillis);
@@ -172,6 +175,7 @@ public class ConfigurationTest {
 
     @Test
     public void testMultiFile() {
+        String[] args = {};
         String[] ids = {"fid1", "fid2"};
         String[] filenames = {"file1.nmea", "file2.nmea"};
         Long[] pauseMillis = {1234L, 4321L};
@@ -181,7 +185,7 @@ public class ConfigurationTest {
             addFileProperties(props, ids, filenames, pauseMillis);
             writeTestFile(props);
             
-            Configuration conf = new Configuration();
+            Configuration conf = new Configuration(args);
             List<FileConfig> pCfgs = conf.getFileConfigs();
             
             validateFiles(pCfgs, ids, filenames, pauseMillis);
@@ -194,6 +198,7 @@ public class ConfigurationTest {
 
     @Test
     public void testMixedMulti() {
+        String[] args = {};
         String[] pids = {"id1", "id2"};
         String[] descriptors = {"/dev/port1", "/dev/port2"};
         Integer[] baudRates = {1234, 4321};
@@ -208,7 +213,7 @@ public class ConfigurationTest {
             addFileProperties(props, fids, filenames, pauseMillis);
             writeTestFile(props);
             
-            Configuration conf = new Configuration();
+            Configuration conf = new Configuration(args);
             List<PortConfig> pCfgs = conf.getPortConfigs();
             validatePorts(pCfgs, pids, descriptors, baudRates);
             

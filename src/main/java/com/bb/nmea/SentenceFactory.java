@@ -26,6 +26,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.bb.nmea.sentences.InvalidSentence;
+import com.bb.nmea.sentences.UnparsableSentence;
 import com.bb.nmea.sentences.UnsupportedSentence;
 
 /**
@@ -67,21 +68,44 @@ public class SentenceFactory {
         try {
             Boolean isValid = NMEASentence.isValidRawSentence(rawSentence);
             if (isValid) {
-                String type = NMEASentence.getTypeFromTag(NMEASentence.getTag(rawSentence));
-                Class<? extends NMEASentence> clazz = SENTENCE_CLASSES.get(type.toLowerCase());
+                String type = null;
+                try {
+                    type = NMEASentence.getTypeFromTag(NMEASentence.getTag(rawSentence));                    
+                } catch (Throwable t) {
+                    LOG.error("Unable to identify type for raw sentence: " + rawSentence);
+                    instance = new UnparsableSentence(rawSentence);
+                }
                 
-                if (clazz != null) {
-                    instance = clazz.getConstructor(String.class).newInstance(rawSentence);
-                } else {
-                    instance = new UnsupportedSentence(rawSentence);
+                // If we identified the type for the sentence parse it if supported
+                if (type != null) {
+                    Class<? extends NMEASentence> clazz = SENTENCE_CLASSES.get(type.toLowerCase());
+                    
+                    if (clazz != null) {
+                        try {
+                            instance = clazz.getConstructor(String.class).newInstance(rawSentence);
+                        } catch (InvocationTargetException e) {
+                            // If an error occurs parsing the message, treat it as an unsupported
+                            // except log the error
+                            instance = new UnparsableSentence(rawSentence);
+                            LOG.error("Failed to parse sentence: " + rawSentence);
+                            LOG.debug("Parsing error", e);
+                        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+                            // We should never see these.  If we do simply halt processing.
+                            LOG.error("Unexpected exception", e);
+                        }
+                    } else {
+                        instance = new UnsupportedSentence(rawSentence);
+                    }
                 }
             } else {
                 instance = new InvalidSentence(rawSentence);
             }
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-                | NoSuchMethodException | SecurityException e) {
-            LOG.error("Failed to instantiate sentence: " + rawSentence, e);
+        } catch (Throwable t) {
+            LOG.error("Failed getting NMEA sentence: " + rawSentence);
         }
+//        } catch (IllegalArgumentException | SecurityException e) {
+//            LOG.error("Failed to instantiate sentence: " + rawSentence, e);
+//        }
         
         return instance;
     }
