@@ -18,7 +18,7 @@ package com.bb.nmea.sentences;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.bb.nmea.NMEASentence;
+import com.bb.nmea.TalkerSentence;
 
 /**
  * ZDA: Time & Date. 
@@ -26,7 +26,7 @@ import com.bb.nmea.NMEASentence;
  * 
  * @author Scott Stanley
  */
-public class ZDA extends NMEASentence {
+public class ZDA extends TalkerSentence {
     private final Integer m_hours;
     private final Integer m_minutes;
     private final Float m_seconds;

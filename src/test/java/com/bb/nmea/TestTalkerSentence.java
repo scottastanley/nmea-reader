@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Scott Alan Stanley
+ * Copyright 2022 Scott Alan Stanley
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,9 @@
  */
 package com.bb.nmea;
 
-public class TestNMEASentence extends NMEASentence {
+public class TestTalkerSentence extends TalkerSentence {
 
-    public TestNMEASentence(String sentenceStr) {
+    public TestTalkerSentence(String sentenceStr) {
         super(sentenceStr);
-    }
-    
-    /**
-     * Get the type code for this NMEA sentence.
-     * 
-     * @return The type code
-     */
-    public String getTypeCode() {
-        return null;
     }
 }

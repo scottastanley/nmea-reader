@@ -15,7 +15,7 @@
  */
 package com.bb.nmea.sentences;
 
-import com.bb.nmea.NMEASentence;
+import com.bb.nmea.TalkerSentence;
 import com.bb.nmea.sentences.common.FAAModeIndicator;
 
 /**
@@ -24,7 +24,7 @@ import com.bb.nmea.sentences.common.FAAModeIndicator;
  * @author Scott Stanley
  */
 public class VTG 
-        extends NMEASentence {
+        extends TalkerSentence {
     private final Float m_courseOverGroundDegrTrue;
     private final Float m_courseOverGroundDegrMagnetic;
     private final Float m_speedOverGroundKnots;

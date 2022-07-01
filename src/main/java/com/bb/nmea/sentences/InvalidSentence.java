@@ -35,4 +35,9 @@ public class InvalidSentence extends NMEASentence {
     public InvalidSentence(String rawSentence) {
         super(rawSentence, Boolean.FALSE);
     }
+
+    @Override
+    public String getTypeCode() {
+        return "INVALID TAG: " + super.getTag();
+    }
 }

@@ -377,9 +377,13 @@ public class NMEASentanceProviderTest {
 
             ExpectedSentence expSent = expRes.getExpected(sentence.getRawSentence());
 
-            Assert.assertEquals("Incorrect talker ID " + n, expSent.m_talkerId, sentence.getTalkerId());
             Assert.assertEquals("Incorrect type code " + n, expSent.m_typeCode, sentence.getTypeCode());
             Assert.assertTrue("Incorrect class " + n, expSent.m_clazz.isInstance(sentence));
+            
+            if (TalkerSentence.class.isInstance(sentence)) {
+                TalkerSentence tSentence = TalkerSentence.class.cast(sentence);
+                Assert.assertEquals("Incorrect talker ID " + n, expSent.m_talkerId, tSentence.getTalkerId());
+            }
         }
         
         if (expRes.size() != 0) {

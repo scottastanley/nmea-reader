@@ -15,7 +15,7 @@
  */
 package com.bb.nmea.sentences;
 
-import com.bb.nmea.NMEASentence;
+import com.bb.nmea.TalkerSentence;
 import com.bb.nmea.sentences.common.Direction;
 import com.bb.nmea.sentences.common.FAAModeIndicator;
 import com.bb.nmea.sentences.common.Latitude;
@@ -31,7 +31,7 @@ import com.bb.nmea.sentences.common.UTCTime;
  * 
  * @author Scott Stanley
  */
-public class GLL extends NMEASentence {
+public class GLL extends TalkerSentence {
     private final Latitude m_latitude;
     private final Direction m_latitudeDir;
     private final Longitude m_longitude;

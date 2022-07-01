@@ -15,7 +15,7 @@
  */
 package com.bb.nmea.sentences;
 
-import com.bb.nmea.NMEASentence;
+import com.bb.nmea.TalkerSentence;
 
 /**
  * DPT : Depth of water
@@ -23,7 +23,7 @@ import com.bb.nmea.NMEASentence;
  * @author Scott Stanley
  */
 public class DPT 
-        extends NMEASentence {
+        extends TalkerSentence {
     private final Float m_depthBelowTransducer;
     private final Float m_transducerOffset;
 

@@ -80,6 +80,11 @@ public abstract class NMEASentence {
             m_checksum = rawSentence.substring(rawSentence.length() - 2, rawSentence.length());
             m_fields = rawSentence.substring(1, rawSentence.length() - 3).split(",", -1);
             m_tag = m_fields[0];
+        } else {
+            // Make a best attempt to extract a tag
+            int firstCommaIndx = rawSentence.indexOf(",");
+            int lgth = firstCommaIndx > 1 ? firstCommaIndx : 5;
+            m_tag = rawSentence.substring(1, lgth);
         }
     }
     
@@ -137,22 +142,20 @@ public abstract class NMEASentence {
     }
     
     /**
-     * Get the talked ID of this NMEA sentence.
+     * Get the talker ID of this NMEA sentence.
      * 
      * @return The talker ID
      */
-    public String getTalkerId() {
-        return m_tag != null ? m_tag.substring(0, 2) : null;
-    }
+//    public String getTalkerId() {
+//        return m_tag != null ? m_tag.substring(0, 2) : null;
+//    }
     
     /**
      * Get the type code for this NMEA sentence.
      * 
      * @return The type code
      */
-    public String getTypeCode() {
-        return m_tag != null ? NMEASentence.getTypeFromTag(m_tag) : null;
-    }
+    abstract public String getTypeCode();
 
     /**
      * Get the checksum provided in the original NMEA sentence.

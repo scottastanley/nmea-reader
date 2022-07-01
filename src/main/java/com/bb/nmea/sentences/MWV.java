@@ -15,7 +15,7 @@
  */
 package com.bb.nmea.sentences;
 
-import com.bb.nmea.NMEASentence;
+import com.bb.nmea.TalkerSentence;
 import com.bb.nmea.sentences.common.SpeedUnits;
 import com.bb.nmea.sentences.common.Status;
 import com.bb.nmea.sentences.common.WindReference;
@@ -25,7 +25,7 @@ import com.bb.nmea.sentences.common.WindReference;
  * 
  * @author Scott Stanley
  */
-public class MWV extends NMEASentence {
+public class MWV extends TalkerSentence {
     private final Float m_windAngle;
     private final WindReference m_windReference;
     private final Float m_windSpeed;

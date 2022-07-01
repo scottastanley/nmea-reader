@@ -15,7 +15,7 @@
  */
 package com.bb.nmea.sentences;
 
-import com.bb.nmea.NMEASentence;
+import com.bb.nmea.TalkerSentence;
 import com.bb.nmea.sentences.common.Direction;
 
 /**
@@ -24,7 +24,7 @@ import com.bb.nmea.sentences.common.Direction;
  * @author Scott Stanley
  */
 public class HDG 
-        extends NMEASentence {
+        extends TalkerSentence {
     private final Float m_headingDegrees;
     private final Float m_deviationDegrees;
     private final Direction m_deviationDirection;

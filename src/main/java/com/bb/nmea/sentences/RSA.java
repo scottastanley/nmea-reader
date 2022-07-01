@@ -15,14 +15,14 @@
  */
 package com.bb.nmea.sentences;
 
-import com.bb.nmea.NMEASentence;
+import com.bb.nmea.TalkerSentence;
 import com.bb.nmea.sentences.common.Status;
 /**
  * RSA: Rudder Sensor Angle
  * 
  * @author Scott Stanley
  */
-public class RSA extends NMEASentence {
+public class RSA extends TalkerSentence {
     private final Float m_starboardRudderAngle;
     private final Status m_starboardRudderStatus;
     private final Float m_portRudderAngle;

@@ -15,7 +15,7 @@
  */
 package com.bb.nmea.sentences;
 
-import com.bb.nmea.NMEASentence;
+import com.bb.nmea.TalkerSentence;
 
 /**
  * DBT : Depth Below Transducer
@@ -23,7 +23,7 @@ import com.bb.nmea.NMEASentence;
  * @author Scott Stanley
  */
 public class DBT 
-        extends NMEASentence {
+        extends TalkerSentence {
     private final Float m_waterDepthInFeet;
     private final Float m_waterDepthInMeters;
     private final Float m_waterDepthInFathoms;

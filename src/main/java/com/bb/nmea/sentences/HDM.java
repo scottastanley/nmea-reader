@@ -15,7 +15,7 @@
  */
 package com.bb.nmea.sentences;
 
-import com.bb.nmea.NMEASentence;
+import com.bb.nmea.TalkerSentence;
 import com.bb.nmea.sentences.common.HeadingType;
 
 /**
@@ -23,7 +23,7 @@ import com.bb.nmea.sentences.common.HeadingType;
  * 
  * @author Scott A Stanley
  */
-public class HDM extends NMEASentence {
+public class HDM extends TalkerSentence {
     private final Float m_headingDegrees;
     private final HeadingType m_headingType;
 

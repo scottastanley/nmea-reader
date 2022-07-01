@@ -46,4 +46,10 @@ public class UnsupportedSentence
     public String getUnknownField(final int n) {
         return this.getField(n);
     }
+    
+
+    @Override
+    public String getTypeCode() {
+        return "UNSUPPORTED TAG: " + super.getTag();
+    }
 }

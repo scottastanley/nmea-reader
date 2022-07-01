@@ -26,6 +26,7 @@ import com.bb.nmea.sentences.HDM;
 import com.bb.nmea.sentences.InvalidSentence;
 import com.bb.nmea.sentences.MWV;
 import com.bb.nmea.sentences.RSA;
+import com.bb.nmea.sentences.UnparsableSentence;
 import com.bb.nmea.sentences.UnsupportedSentence;
 import com.bb.nmea.sentences.VTG;
 import com.bb.nmea.sentences.common.Direction;
@@ -82,9 +83,8 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Incorrect class", InvalidSentence.class, s.getClass());
             Assert.assertFalse("Message should be invalid", s.isValid());
             Assert.assertEquals("Incorrect raw sentence", rawStr, s.getRawSentence());
-            Assert.assertEquals("Incorrect tag", null, s.getTag());
-            Assert.assertEquals("Incorrect talker ID", null, s.getTalkerId());
-            Assert.assertEquals("Incorrect type", null, s.getTypeCode());
+            Assert.assertEquals("Incorrect tag", "APHDT", s.getTag());
+            Assert.assertEquals("Incorrect type", "INVALID TAG: APHDT", s.getTypeCode());
             Assert.assertEquals("Incorrect checksum", null, s.getChecksum());
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,9 +103,8 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Incorrect class", InvalidSentence.class, s.getClass());
             Assert.assertFalse("Message should be invalid", s.isValid());
             Assert.assertEquals("Incorrect raw sentence", rawStr, s.getRawSentence());
-            Assert.assertEquals("Incorrect tag", null, s.getTag());
-            Assert.assertEquals("Incorrect talker ID", null, s.getTalkerId());
-            Assert.assertEquals("Incorrect type", null, s.getTypeCode());
+            Assert.assertEquals("Incorrect tag", "APHDG", s.getTag());
+            Assert.assertEquals("Incorrect type", "INVALID TAG: APHDG", s.getTypeCode());
             Assert.assertEquals("Incorrect checksum", null, s.getChecksum());
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,8 +131,7 @@ public class SentenceFactoryTest {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "APZZZ", s.getTag());
-            Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "ZZZ", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "UNSUPPORTED TAG: APZZZ", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "33", s.getChecksum());
 
             // Validate raw fields
@@ -165,8 +163,7 @@ public class SentenceFactoryTest {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "GPZZZ", s.getTag());
-            Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "ZZZ", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "UNSUPPORTED TAG: GPZZZ", s.getTypeCode());
             Assert.assertEquals("Invalid checksum", "0E", s.getChecksum());
             
             // Validate raw fields
@@ -183,6 +180,46 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid field 10 string", "013.0", sUnsp.getUnknownField(10));
             Assert.assertEquals("Invalid field 11 string", "E", sUnsp.getUnknownField(11));
             Assert.assertEquals("Invalid field 12 string", "A", sUnsp.getUnknownField(12));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+    
+    @Test
+    public void testAPRSA_Unparsable() {
+        String rawStr = "$APRSA,Z.6,A,8.2,A*37";
+        
+        try {
+            SentenceFactory fact = new SentenceFactory();
+            NMEASentence s = fact.getNMEASentence(rawStr);
+            
+            Assert.assertEquals("Incorrect class", UnparsableSentence.class, s.getClass());
+            Assert.assertFalse("Message should be invalid", s.isValid());
+            Assert.assertEquals("Incorrect raw sentence", rawStr, s.getRawSentence());
+            Assert.assertEquals("Incorrect tag", "APRSA", s.getTag());
+            Assert.assertEquals("Incorrect type", "UNPARSABLE TAG: APRSA", s.getTypeCode());
+            Assert.assertEquals("Incorrect checksum", null, s.getChecksum());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testParseAPHDG_Unparsable() {
+        String rawStr = "$APHDG,2ZZ.1,5.3,N,13.0,E*64";
+                        
+        try {
+            SentenceFactory fact = new SentenceFactory();
+            NMEASentence s = fact.getNMEASentence(rawStr);
+            
+            Assert.assertEquals("Incorrect class", UnparsableSentence.class, s.getClass());
+            Assert.assertFalse("Message should be invalid", s.isValid());
+            Assert.assertEquals("Incorrect raw sentence", rawStr, s.getRawSentence());
+            Assert.assertEquals("Incorrect tag", "APHDG", s.getTag());
+            Assert.assertEquals("Incorrect type", "UNPARSABLE TAG: APHDG", s.getTypeCode());
+            Assert.assertEquals("Incorrect checksum", null, s.getChecksum());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());

@@ -10,7 +10,7 @@ public class UnparsableSentence extends NMEASentence {
      * @param rawSentence The raw sentence
      */
     public UnparsableSentence(String rawSentence) {
-        super(rawSentence);
+        super(rawSentence, Boolean.FALSE);
     }
 
     @Override

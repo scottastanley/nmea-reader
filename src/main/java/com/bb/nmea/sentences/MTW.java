@@ -15,7 +15,7 @@
  */
 package com.bb.nmea.sentences;
 
-import com.bb.nmea.NMEASentence;
+import com.bb.nmea.TalkerSentence;
 import com.bb.nmea.sentences.common.TemperatureUnits;
 
 /**
@@ -23,7 +23,7 @@ import com.bb.nmea.sentences.common.TemperatureUnits;
  * 
  * @author Scott Stanley
  */
-public class MTW extends NMEASentence {
+public class MTW extends TalkerSentence {
     private Float m_meanWaterTemp;
     private TemperatureUnits m_units;
 
