@@ -52,7 +52,7 @@ public abstract class NMEASentence {
      * 
      * @param rawSentence
      */
-    public NMEASentence(final String rawSentence) {
+    NMEASentence(final String rawSentence) {
         initFields(rawSentence);
     }
 
@@ -62,7 +62,7 @@ public abstract class NMEASentence {
      * @param rawSentence
      * @param isValid Is this raw sentence valid?
      */
-    public NMEASentence(final String rawSentence, final Boolean isValid) {
+    NMEASentence(final String rawSentence, final Boolean isValid) {
         m_isValid = isValid;
         initFields(rawSentence);
     }

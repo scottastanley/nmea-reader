@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bb.nmea.sentences;
-
-import com.bb.nmea.NMEASentence;
+package com.bb.nmea;
 
 /**
  * UnsupportedSentence is the NMEASentence type which is returned if no explicit

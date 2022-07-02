@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bb.nmea.sentences;
+package com.bb.nmea;
 
 import org.junit.After;
 import org.junit.Assert;

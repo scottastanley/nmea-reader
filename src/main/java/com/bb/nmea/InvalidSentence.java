@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bb.nmea.sentences;
-
-import com.bb.nmea.NMEASentence;
+package com.bb.nmea;
 
 /**
  * A sub-class of NMEASentence reserved for use with NMEA sentences which 

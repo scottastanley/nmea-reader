@@ -25,10 +25,6 @@ import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.bb.nmea.sentences.InvalidSentence;
-import com.bb.nmea.sentences.UnparsableSentence;
-import com.bb.nmea.sentences.UnsupportedSentence;
-
 /**
  * SentenceFactory is a factory class providing instances of the specific NMEASentence classes.  The
  * classes supported by this factory are specified in the resource file nmea.properties with the

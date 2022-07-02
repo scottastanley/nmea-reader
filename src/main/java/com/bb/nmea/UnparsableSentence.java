@@ -1,6 +1,4 @@
-package com.bb.nmea.sentences;
-
-import com.bb.nmea.NMEASentence;
+package com.bb.nmea;
 
 public class UnparsableSentence extends NMEASentence {
 
