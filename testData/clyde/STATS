@@ -1,0 +1,14 @@
+2022-06-30 22:08:21,142 INFO  [main] StatsCollector - GGA: 171
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - RSA: 162
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - UNPARSABLE TAG: PFEC: 50
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - XTE: 41
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - DPT: 172
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - RMC: 86
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - INVALID: 3
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - MDC: 1338
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - UNPARSABLE TAG: APGLL: 150
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - APB: 43
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - ZDA: 167
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - UNPARSABLE TAG: APVTG: 156
+2022-06-30 22:08:21,143 INFO  [main] StatsCollector - DBT: 140
+
