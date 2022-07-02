@@ -1,6 +1,6 @@
 package com.bb.nmea.sentences.common;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class LatLongTest {
     

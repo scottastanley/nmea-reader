@@ -16,6 +16,7 @@
 package com.bb.nmea;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,8 +36,6 @@ import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.SpeedUnits;
 import com.bb.nmea.sentences.common.Status;
 import com.bb.nmea.sentences.common.WindReference;
-
-import junit.framework.Assert;
 
 public class SentenceFactoryTest {
 
@@ -64,7 +63,7 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Incorrect tag", "AP", hdmS.getTalkerId());
             Assert.assertEquals("Incorrect tag", "HDM", hdmS.getTypeCode());
             Assert.assertEquals("Incorrect tag", "34", hdmS.getChecksum());
-            Assert.assertEquals("Incorrect heading", 344.4F, hdmS.getHeadingDegrees());
+            Assert.assertEquals("Incorrect heading", new Float(344.4F), hdmS.getHeadingDegrees());
             Assert.assertEquals("Incorrect heading type", HeadingType.MAGNETIC, hdmS.getHeadingType());
         } catch (Exception e) {
             e.printStackTrace();

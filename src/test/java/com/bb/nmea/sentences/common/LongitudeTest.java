@@ -16,10 +16,9 @@
 package com.bb.nmea.sentences.common;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import junit.framework.Assert;
 
 public class LongitudeTest {
 
@@ -39,7 +38,7 @@ public class LongitudeTest {
             
             Assert.assertEquals("Incorrect degrees", Integer.valueOf(37), l.getDegrees());
             Assert.assertEquals("Incorrect minutes", Float.valueOf(46.830F), l.getMinutes());
-            Assert.assertEquals("Invalid decimal longitude", 37.7805F, l.getDecimalLongitude(Direction.EAST));
+            Assert.assertEquals("Invalid decimal longitude", new Float(37.7805F), l.getDecimalLongitude(Direction.EAST));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -54,7 +53,7 @@ public class LongitudeTest {
             
             Assert.assertEquals("Incorrect degrees", Integer.valueOf(37), l.getDegrees());
             Assert.assertEquals("Incorrect minutes", Float.valueOf(47.556F), l.getMinutes());
-            Assert.assertEquals("Invalid decimal longitude", -37.7926F, l.getDecimalLongitude(Direction.WEST));
+            Assert.assertEquals("Invalid decimal longitude", new Float(-37.7926F), l.getDecimalLongitude(Direction.WEST));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -69,7 +68,7 @@ public class LongitudeTest {
             
             Assert.assertEquals("Incorrect degrees", Integer.valueOf(122), l.getDegrees());
             Assert.assertEquals("Incorrect minutes", Float.valueOf(16.764F), l.getMinutes());
-            Assert.assertEquals("Invalid decimal longitude", 122.2794F, l.getDecimalLongitude(Direction.EAST));
+            Assert.assertEquals("Invalid decimal longitude", new Float(122.2794F), l.getDecimalLongitude(Direction.EAST));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -84,7 +83,7 @@ public class LongitudeTest {
             
             Assert.assertEquals("Incorrect degrees", Integer.valueOf(179), l.getDegrees());
             Assert.assertEquals("Incorrect minutes", Float.valueOf(16.057F), l.getMinutes());
-            Assert.assertEquals("Invalid decimal longitude", -179.26762F, l.getDecimalLongitude(Direction.WEST));
+            Assert.assertEquals("Invalid decimal longitude", new Float(-179.26762F), l.getDecimalLongitude(Direction.WEST));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -102,7 +101,7 @@ public class LongitudeTest {
             
             Assert.assertEquals("Wrong degrees", degrees, l.getDegrees());
             Assert.assertEquals("Wrong minutes", minutes, l.getMinutes());
-            Assert.assertEquals("Invalid decimal longitude", 122.335F, l.getDecimalLongitude(Direction.EAST));
+            Assert.assertEquals("Invalid decimal longitude", new Float(122.335F), l.getDecimalLongitude(Direction.EAST));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
@@ -120,7 +119,7 @@ public class LongitudeTest {
             
             Assert.assertEquals("Wrong degrees", degrees, l.getDegrees());
             Assert.assertEquals("Wrong minutes", minutes, l.getMinutes());
-            Assert.assertEquals("Invalid decimal longitude", -122.335F, l.getDecimalLongitude(Direction.WEST));
+            Assert.assertEquals("Invalid decimal longitude", new Float(-122.335F), l.getDecimalLongitude(Direction.WEST));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());

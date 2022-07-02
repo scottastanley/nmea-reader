@@ -16,13 +16,12 @@
 package com.bb.nmea;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.bb.nmea.sentences.common.LatLongTest;
 import com.bb.nmea.sentences.common.UtcTimeTest;
-
-import junit.framework.Assert;
 
 public class TalkerSentenceTest {
 

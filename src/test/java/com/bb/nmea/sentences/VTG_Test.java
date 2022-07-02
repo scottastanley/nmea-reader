@@ -1,12 +1,11 @@
 package com.bb.nmea.sentences;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.bb.nmea.sentences.common.FAAModeIndicator;
-
-import junit.framework.Assert;
 
 public class VTG_Test {
 

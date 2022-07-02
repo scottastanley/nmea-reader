@@ -16,6 +16,7 @@
 package com.bb.nmea.sentences;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,8 +26,6 @@ import com.bb.nmea.sentences.common.LatitudeTest;
 import com.bb.nmea.sentences.common.LongitudeTest;
 import com.bb.nmea.sentences.common.Status;
 import com.bb.nmea.sentences.common.UtcTimeTest;
-
-import junit.framework.Assert;
 
 public class GLL_Test {
 

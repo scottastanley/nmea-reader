@@ -15,21 +15,20 @@
  */
 package com.bb.nmea;
 
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.doThrow;
 
 import java.io.IOException;
 import java.io.PipedOutputStream;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.bb.nmea.dataproviders.TestPassThroughDataProvider;
-
-import junit.framework.Assert;
 
 public class DataProviderTest {
 

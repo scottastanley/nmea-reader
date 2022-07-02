@@ -16,12 +16,11 @@
 package com.bb.nmea.sentences;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.bb.nmea.sentences.common.HeadingType;
-
-import junit.framework.Assert;
 
 public class HDM_Test {
 

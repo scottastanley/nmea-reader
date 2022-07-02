@@ -16,10 +16,9 @@
 package com.bb.nmea.sentences.common;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import junit.framework.Assert;
 
 public class LatitudeTest {
 
@@ -42,7 +41,7 @@ public class LatitudeTest {
             
             Assert.assertEquals("Wrong degrees", degrees, l.getDegrees());
             Assert.assertEquals("Wrong minutes", minutes, l.getMinutes());
-            Assert.assertEquals("Invalid decimal latitude", 37.78585F, l.getDecimalLatitude(Direction.NORTH));
+            Assert.assertEquals("Invalid decimal latitude", new Float(37.78585F), l.getDecimalLatitude(Direction.NORTH));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
@@ -60,7 +59,7 @@ public class LatitudeTest {
             
             Assert.assertEquals("Wrong degrees", degrees, l.getDegrees());
             Assert.assertEquals("Wrong minutes", minutes, l.getMinutes());
-            Assert.assertEquals("Invalid decimal latitude", -37.78585F, l.getDecimalLatitude(Direction.SOUTH));
+            Assert.assertEquals("Invalid decimal latitude", new Float(-37.78585F), l.getDecimalLatitude(Direction.SOUTH));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
@@ -78,7 +77,7 @@ public class LatitudeTest {
             
             Assert.assertEquals("Wrong degrees", degrees, l.getDegrees());
             Assert.assertEquals("Wrong minutes", minutes, l.getMinutes());
-            Assert.assertEquals("Invalid decimal latitude", -122.38755F, l.getDecimalLatitude(Direction.SOUTH));
+            Assert.assertEquals("Invalid decimal latitude", new Float(-122.38755F), l.getDecimalLatitude(Direction.SOUTH));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
@@ -96,7 +95,7 @@ public class LatitudeTest {
             
             Assert.assertEquals("Wrong degrees", degrees, l.getDegrees());
             Assert.assertEquals("Wrong minutes", minutes, l.getMinutes());
-            Assert.assertEquals("Invalid decimal latitude", 167.15055F, l.getDecimalLatitude(Direction.NORTH));
+            Assert.assertEquals("Invalid decimal latitude", new Float(167.15055F), l.getDecimalLatitude(Direction.NORTH));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
@@ -114,7 +113,7 @@ public class LatitudeTest {
             
             Assert.assertEquals("Wrong degrees", degrees, l.getDegrees());
             Assert.assertEquals("Wrong minutes", minutes, l.getMinutes());
-            Assert.assertEquals("Invalid decimal latitude", 45.556F, l.getDecimalLatitude(Direction.NORTH));
+            Assert.assertEquals("Invalid decimal latitude", new Float(45.556F), l.getDecimalLatitude(Direction.NORTH));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,8 +35,6 @@ import com.bb.nmea.sentences.MWV;
 import com.bb.nmea.sentences.RSA;
 import com.bb.nmea.sentences.VTG;
 import com.bb.nmea.sentences.ZDA;
-
-import junit.framework.Assert;
 
 public class NMEASentanceProviderTest {
 ////  "$GPVTG,126.0,T,113.0,M,0.1,N,,K,A*0A\n" 
