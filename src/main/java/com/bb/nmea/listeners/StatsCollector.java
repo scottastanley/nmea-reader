@@ -45,7 +45,7 @@ public class StatsCollector extends NMEAListener {
     public void processEvent(NMEASentence sentence) {
         
         if (sentence.isValid()) {
-            incrementCounter(sentence.getTypeCode());
+            incrementCounter(sentence.getSentenceId());
         } else {
             incrementCounter(INVALID_TYPE);
         }

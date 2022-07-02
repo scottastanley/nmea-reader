@@ -20,19 +20,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.bb.nmea.sentences.DBT;
-import com.bb.nmea.sentences.DPT;
-import com.bb.nmea.sentences.HDG;
-import com.bb.nmea.sentences.HDM;
-import com.bb.nmea.sentences.MWV;
-import com.bb.nmea.sentences.RSA;
-import com.bb.nmea.sentences.VTG;
 import com.bb.nmea.sentences.common.Direction;
 import com.bb.nmea.sentences.common.FAAModeIndicator;
 import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.SpeedUnits;
 import com.bb.nmea.sentences.common.Status;
 import com.bb.nmea.sentences.common.WindReference;
+import com.bb.nmea.sentences.talker.DBT;
+import com.bb.nmea.sentences.talker.DPT;
+import com.bb.nmea.sentences.talker.HDG;
+import com.bb.nmea.sentences.talker.HDM;
+import com.bb.nmea.sentences.talker.MWV;
+import com.bb.nmea.sentences.talker.RSA;
+import com.bb.nmea.sentences.talker.VTG;
 
 public class SentenceFactoryTest {
 
@@ -58,7 +58,7 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Incorrect raw sentence", rawStr, hdmS.getRawSentence());
             Assert.assertEquals("Incorrect tag", "APHDM", hdmS.getTag());
             Assert.assertEquals("Incorrect tag", "AP", hdmS.getTalkerId());
-            Assert.assertEquals("Incorrect tag", "HDM", hdmS.getTypeCode());
+            Assert.assertEquals("Incorrect tag", "HDM", hdmS.getSentenceId());
             Assert.assertEquals("Incorrect tag", "34", hdmS.getChecksum());
             Assert.assertEquals("Incorrect heading", new Float(344.4F), hdmS.getHeadingDegrees());
             Assert.assertEquals("Incorrect heading type", HeadingType.MAGNETIC, hdmS.getHeadingType());
@@ -80,7 +80,7 @@ public class SentenceFactoryTest {
             Assert.assertFalse("Message should be invalid", s.isValid());
             Assert.assertEquals("Incorrect raw sentence", rawStr, s.getRawSentence());
             Assert.assertEquals("Incorrect tag", "APHDT", s.getTag());
-            Assert.assertEquals("Incorrect type", "INVALID TAG: APHDT", s.getTypeCode());
+            Assert.assertEquals("Incorrect type", "INVALID TAG: APHDT", s.getSentenceId());
             Assert.assertEquals("Incorrect checksum", null, s.getChecksum());
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,7 +100,7 @@ public class SentenceFactoryTest {
             Assert.assertFalse("Message should be invalid", s.isValid());
             Assert.assertEquals("Incorrect raw sentence", rawStr, s.getRawSentence());
             Assert.assertEquals("Incorrect tag", "APHDG", s.getTag());
-            Assert.assertEquals("Incorrect type", "INVALID TAG: APHDG", s.getTypeCode());
+            Assert.assertEquals("Incorrect type", "INVALID TAG: APHDG", s.getSentenceId());
             Assert.assertEquals("Incorrect checksum", null, s.getChecksum());
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +127,7 @@ public class SentenceFactoryTest {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "APZZZ", s.getTag());
-            Assert.assertEquals("Invalid type code", "UNSUPPORTED TAG: APZZZ", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "UNSUPPORTED TAG: APZZZ", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "33", s.getChecksum());
 
             // Validate raw fields
@@ -159,7 +159,7 @@ public class SentenceFactoryTest {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "GPZZZ", s.getTag());
-            Assert.assertEquals("Invalid type code", "UNSUPPORTED TAG: GPZZZ", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "UNSUPPORTED TAG: GPZZZ", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "0E", s.getChecksum());
             
             // Validate raw fields
@@ -194,7 +194,7 @@ public class SentenceFactoryTest {
             Assert.assertFalse("Message should be invalid", s.isValid());
             Assert.assertEquals("Incorrect raw sentence", rawStr, s.getRawSentence());
             Assert.assertEquals("Incorrect tag", "APRSA", s.getTag());
-            Assert.assertEquals("Incorrect type", "UNPARSABLE TAG: APRSA", s.getTypeCode());
+            Assert.assertEquals("Incorrect type", "UNPARSABLE TAG: APRSA", s.getSentenceId());
             Assert.assertEquals("Incorrect checksum", null, s.getChecksum());
         } catch (Exception e) {
             e.printStackTrace();
@@ -214,7 +214,7 @@ public class SentenceFactoryTest {
             Assert.assertFalse("Message should be invalid", s.isValid());
             Assert.assertEquals("Incorrect raw sentence", rawStr, s.getRawSentence());
             Assert.assertEquals("Incorrect tag", "APHDG", s.getTag());
-            Assert.assertEquals("Incorrect type", "UNPARSABLE TAG: APHDG", s.getTypeCode());
+            Assert.assertEquals("Incorrect type", "UNPARSABLE TAG: APHDG", s.getSentenceId());
             Assert.assertEquals("Incorrect checksum", null, s.getChecksum());
         } catch (Exception e) {
             e.printStackTrace();
@@ -234,7 +234,7 @@ public class SentenceFactoryTest {
             RSA rsaS = RSA.class.cast(s);
             Assert.assertEquals("Invalid tag", "APRSA", rsaS.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", rsaS.getTalkerId());
-            Assert.assertEquals("Invalid type code", "RSA", rsaS.getTypeCode());
+            Assert.assertEquals("Invalid type code", "RSA", rsaS.getSentenceId());
             Assert.assertEquals("Invalid checksum", "55", rsaS.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.TRUE, rsaS.isDualRudder());
@@ -262,7 +262,7 @@ public class SentenceFactoryTest {
             HDG s = HDG.class.cast(sentObj);
             Assert.assertEquals("Invalid tag", "APHDG", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "HDG", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "63", s.getChecksum());
             
             Assert.assertEquals("Invalid heading", Float.valueOf(252.1f), s.getHeadingDegrees());
@@ -288,7 +288,7 @@ public class SentenceFactoryTest {
             VTG s = VTG.class.cast(sentObj);
             Assert.assertEquals("Invalid tag", "GPVTG", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "VTG", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "VTG", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "25", s.getChecksum());
             
             Assert.assertEquals("Invalid true course", Float.valueOf(77.2f), s.getCourseOverGroundDegrTrue());
@@ -314,7 +314,7 @@ public class SentenceFactoryTest {
             DBT s = DBT.class.cast(sentObj);
             Assert.assertEquals("Invalid tag", "SDDBT", s.getTag());
             Assert.assertEquals("Invalid talked ID", "SD", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "DBT", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "DBT", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "38", s.getChecksum());
             
             Assert.assertEquals("Invalid depth in feet", Float.valueOf(16.6f), s.getWaterDepthInFeet());
@@ -338,7 +338,7 @@ public class SentenceFactoryTest {
             DPT s = DPT.class.cast(sentObj);
             Assert.assertEquals("Invalid tag", "SDDPT", s.getTag());
             Assert.assertEquals("Invalid talked ID", "SD", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "DPT", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "DPT", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "7F", s.getChecksum());
             
             Assert.assertEquals("Invalid depth below transducer", Float.valueOf(5.3f), s.getDepthBelowTransducer());
@@ -362,7 +362,7 @@ public class SentenceFactoryTest {
             
             Assert.assertEquals("Invalid tag", "ECMWV", s.getTag());
             Assert.assertEquals("Invalid talked ID", "EC", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "MWV", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "MWV", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "34", s.getChecksum());
             
             Assert.assertEquals("Invalid wind angle", Float.valueOf(359.0f), s.getWindAngle());

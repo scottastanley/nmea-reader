@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bb.nmea.sentences;
+package com.bb.nmea.sentences.talker;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -47,7 +47,7 @@ public class HDM_Test {
             
             Assert.assertEquals("Invalid tag", "APHDM", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "HDM", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "HDM", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "34", s.getChecksum());
             
             Assert.assertEquals("Invalid heading", Float.valueOf(345.5f), s.getHeadingDegrees());
@@ -73,7 +73,7 @@ public class HDM_Test {
             
             Assert.assertEquals("Invalid tag", "APHDM", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "HDM", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "HDM", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "38", s.getChecksum());
             
             Assert.assertEquals("Invalid heading", Float.valueOf(344.8f), s.getHeadingDegrees());

@@ -11,8 +11,13 @@ public class UnparsableSentence extends NMEASentence {
         super(rawSentence, Boolean.FALSE);
     }
 
+    /**
+     * Get the sentence ID for this NMEA sentence.
+     * 
+     * @return The sentence ID
+     */
     @Override
-    public String getTypeCode() {
+    protected String initSentenceId() {
         return "UNPARSABLE TAG: " + super.getTag();
     }
 }

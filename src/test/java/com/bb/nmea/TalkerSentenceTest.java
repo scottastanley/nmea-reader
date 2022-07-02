@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Scott Alan Stanley
+ * Copyright 2022 Scott Alan Stanley
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ public class TalkerSentenceTest {
             
             Assert.assertEquals("Invalid tag", "APHDT", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "HDT", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "HDT", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "31", s.getChecksum());
             Assert.assertEquals("Incorrect number of fields", Integer.valueOf(3), s.getNumFields());
             
@@ -86,7 +86,7 @@ public class TalkerSentenceTest {
             
             Assert.assertEquals("Invalid tag", "APHDT", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "HDT", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "HDT", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "31", s.getChecksum());
             Assert.assertEquals("Incorrect number of fields", Integer.valueOf(3), s.getNumFields());
             
@@ -121,7 +121,7 @@ public class TalkerSentenceTest {
             
             Assert.assertEquals("Invalid tag", "GPRMC", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "RMC", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "RMC", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "08", s.getChecksum());
             Assert.assertEquals("Incorrect number of fields", Integer.valueOf(13), s.getNumFields());
             
@@ -183,7 +183,7 @@ public class TalkerSentenceTest {
             
             Assert.assertEquals("Invalid tag", "APHDG", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "HDG", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "08", s.getChecksum());
             Assert.assertEquals("Incorrect number of fields", Integer.valueOf(6), s.getNumFields());
             
@@ -225,7 +225,7 @@ public class TalkerSentenceTest {
             
             Assert.assertEquals("Invalid tag", "GPGLL", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "GLL", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "GLL", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "59", s.getChecksum());
             Assert.assertEquals("Incorrect number of fields", Integer.valueOf(8), s.getNumFields());
             
@@ -275,7 +275,7 @@ public class TalkerSentenceTest {
             
             Assert.assertEquals("Invalid tag", "GPGLL", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "GLL", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "GLL", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "59", s.getChecksum());
             Assert.assertEquals("Incorrect number of fields", Integer.valueOf(8), s.getNumFields());
             

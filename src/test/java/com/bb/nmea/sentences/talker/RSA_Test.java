@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bb.nmea.sentences;
+package com.bb.nmea.sentences.talker;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -47,7 +47,7 @@ public class RSA_Test {
             
             Assert.assertEquals("Invalid tag", "APRSA", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "RSA", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "RSA", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "30", s.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.FALSE, s.isDualRudder());
@@ -78,7 +78,7 @@ public class RSA_Test {
             
             Assert.assertEquals("Invalid tag", "APRSA", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "RSA", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "RSA", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "21", s.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.FALSE, s.isDualRudder());
@@ -109,7 +109,7 @@ public class RSA_Test {
             
             Assert.assertEquals("Invalid tag", "APRSA", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "RSA", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "RSA", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "30", s.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.TRUE, s.isDualRudder());
@@ -140,7 +140,7 @@ public class RSA_Test {
             
             Assert.assertEquals("Invalid tag", "APRSA", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "RSA", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "RSA", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "21", s.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.TRUE, s.isDualRudder());
@@ -171,7 +171,7 @@ public class RSA_Test {
             
             Assert.assertEquals("Invalid tag", "APRSA", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "RSA", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "RSA", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "30", s.getChecksum());
             
             Assert.assertEquals("Invalid dual rudder", Boolean.TRUE, s.isDualRudder());

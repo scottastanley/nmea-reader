@@ -34,8 +34,13 @@ public class InvalidSentence extends NMEASentence {
         super(rawSentence, Boolean.FALSE);
     }
 
+    /**
+     * Get the sentence ID for this NMEA sentence.
+     * 
+     * @return The sentence ID
+     */
     @Override
-    public String getTypeCode() {
+    protected String initSentenceId() {
         return "INVALID TAG: " + super.getTag();
     }
 }

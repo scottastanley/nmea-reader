@@ -12,10 +12,10 @@ import java.util.List;
 
 import com.bb.nmea.NMEAListener;
 import com.bb.nmea.NMEASentence;
-import com.bb.nmea.sentences.GLL;
-import com.bb.nmea.sentences.MTW;
-import com.bb.nmea.sentences.MWV;
-import com.bb.nmea.sentences.ZDA;
+import com.bb.nmea.sentences.talker.GLL;
+import com.bb.nmea.sentences.talker.MTW;
+import com.bb.nmea.sentences.talker.MWV;
+import com.bb.nmea.sentences.talker.ZDA;
 
 import io.jenetics.jpx.GPX;
 import io.jenetics.jpx.GPX.Builder;
@@ -47,7 +47,7 @@ public class GPXWriter extends NMEAListener {
             m_lastSentences.setSentence(sentence);
 
             // Process the GLL sentences
-            if (sentence.getTypeCode().equals("GLL")) {
+            if (sentence.getSentenceId().equals("GLL")) {
                 //
                 // Save the point on the track segment
                 //
@@ -155,7 +155,7 @@ public class GPXWriter extends NMEAListener {
         private GLL m_gll = null;
         
         void setSentence(final NMEASentence sent) {
-            switch (sent.getTypeCode()) {
+            switch (sent.getSentenceId()) {
                 case "MTW":
                     m_mtw = MTW.class.cast(sent);
                     break;

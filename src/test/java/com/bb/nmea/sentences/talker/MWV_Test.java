@@ -1,4 +1,4 @@
-package com.bb.nmea.sentences;
+package com.bb.nmea.sentences.talker;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -34,7 +34,7 @@ public class MWV_Test {
             
             Assert.assertEquals("Invalid tag", "ECMWV", s.getTag());
             Assert.assertEquals("Invalid talked ID", "EC", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "MWV", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "MWV", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "3D", s.getChecksum());
             
             Assert.assertEquals("Invalid wind angle", Float.valueOf(123.5f), s.getWindAngle());
@@ -63,7 +63,7 @@ public class MWV_Test {
             
             Assert.assertEquals("Invalid tag", "ECMWV", s.getTag());
             Assert.assertEquals("Invalid talked ID", "EC", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "MWV", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "MWV", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "3D", s.getChecksum());
             
             Assert.assertEquals("Invalid wind angle", Float.valueOf(359.9f), s.getWindAngle());
@@ -92,7 +92,7 @@ public class MWV_Test {
             
             Assert.assertEquals("Invalid tag", "ECMWV", s.getTag());
             Assert.assertEquals("Invalid talked ID", "EC", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "MWV", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "MWV", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "3D", s.getChecksum());
             
             Assert.assertEquals("Invalid wind angle", Float.valueOf(231.1f), s.getWindAngle());
@@ -121,7 +121,7 @@ public class MWV_Test {
             
             Assert.assertEquals("Invalid tag", "ECMWV", s.getTag());
             Assert.assertEquals("Invalid talked ID", "EC", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "MWV", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "MWV", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "3D", s.getChecksum());
             
             Assert.assertEquals("Invalid wind angle", Float.valueOf(13.2f), s.getWindAngle());

@@ -16,33 +16,33 @@
 package com.bb.nmea;
 
 /**
- * The abstract parent class for all talker sentences. Provides the logic for obtaining 
- * type for the sentence as well as the talker ID.
+ * The abstract parent class for all proprietary sentences. Provides the logic for obtaining 
+ * type for the sentence.
  * 
  * @author Scott Stanley
  */
-public abstract class TalkerSentence extends NMEASentence {
+public abstract class ProprietarySentence extends NMEASentence {
 
-    public TalkerSentence(final String rawSentence) {
+    ProprietarySentence(String rawSentence) {
         super(rawSentence);
     }
 
     /**
-     * Get the type code for this NMEA sentence.
+     * Get the sentence ID for this NMEA sentence.
      * 
-     * @return The type code
+     * @return The sentence ID
      */
     @Override
-    protected String initSentenceId() {
-        return getTag() != null ? NMEASentence.getTypeFromTag(getTag()) : null;
-    }
+    abstract protected String initSentenceId();
     
     /**
-     * Get the talker ID of this NMEA sentence.
+     * Utility method to get the base form of the sentence ID from the tag.  Basically,
+     * this returns the tag minus the leading P indicating it is proprietary.
      * 
-     * @return The talker ID
+     * @return The portion of the tag excluding the leading P
      */
-    public String getTalkerId() {
-        return getTag() != null ? getTag().substring(0, 2) : null;
-    }    
+    protected String getSentenceIdFromTag() {
+        String tag = getTag();
+        return tag != null ? tag.substring(1) : null;
+    }
 }

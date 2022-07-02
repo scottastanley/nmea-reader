@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bb.nmea.sentences;
+package com.bb.nmea.sentences.talker;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -52,7 +52,7 @@ public class GLL_Test {
             
             Assert.assertEquals("Invalid tag", "GPGLL", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "GLL", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "GLL", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "53", s.getChecksum());
             
             LatitudeTest.validateLatitude(35, 13.123F, s.getLatitude(), s.getLatitudeDir());
@@ -85,7 +85,7 @@ public class GLL_Test {
             
             Assert.assertEquals("Invalid tag", "GPGLL", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "GLL", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "GLL", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "79", s.getChecksum());
             
             LatitudeTest.validateLatitude(37, 47.741F, s.getLatitude(), s.getLatitudeDir());

@@ -44,6 +44,7 @@ public abstract class NMEASentence {
     private long m_collectedTimestamp;
     private String m_checksum;
     private String m_tag;
+    private String m_sentenceId;
     private String[] m_fields;
     private Boolean m_isValid = true;
 
@@ -67,6 +68,14 @@ public abstract class NMEASentence {
         initFields(rawSentence);
     }
     
+    
+    /**
+     * Calculate the value for the sentence ID.
+     * 
+     * @return The sentence ID
+     */
+    abstract protected String initSentenceId();
+    
     /**
      * Initialize the core fields for the sentence
      * 
@@ -86,6 +95,9 @@ public abstract class NMEASentence {
             int lgth = firstCommaIndx > 1 ? firstCommaIndx : 5;
             m_tag = rawSentence.substring(1, lgth);
         }
+        
+        // Initialize fields from the child classes
+        m_sentenceId = initSentenceId();
     }
     
     /**
@@ -137,32 +149,25 @@ public abstract class NMEASentence {
      * 
      * @return The tag value
      */
-    public String getTag() {
+    public final String getTag() {
         return m_tag;
     }
     
     /**
-     * Get the talker ID of this NMEA sentence.
+     * Get the sentence ID for this NMEA sentence.
      * 
-     * @return The talker ID
+     * @return The sentence ID
      */
-//    public String getTalkerId() {
-//        return m_tag != null ? m_tag.substring(0, 2) : null;
-//    }
-    
-    /**
-     * Get the type code for this NMEA sentence.
-     * 
-     * @return The type code
-     */
-    abstract public String getTypeCode();
+    public final String getSentenceId() {
+        return m_sentenceId;
+    }
 
     /**
      * Get the checksum provided in the original NMEA sentence.
      * 
      * @return The checksum from the original sentence
      */
-    public String getChecksum() {
+    public final String getChecksum() {
         return m_checksum;
     }
     

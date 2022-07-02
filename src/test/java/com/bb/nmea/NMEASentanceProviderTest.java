@@ -25,16 +25,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.bb.nmea.dataproviders.TestPassThroughDataProvider;
-import com.bb.nmea.sentences.DBT;
-import com.bb.nmea.sentences.DPT;
-import com.bb.nmea.sentences.GLL;
-import com.bb.nmea.sentences.HDG;
-import com.bb.nmea.sentences.HDM;
-import com.bb.nmea.sentences.MTW;
-import com.bb.nmea.sentences.MWV;
-import com.bb.nmea.sentences.RSA;
-import com.bb.nmea.sentences.VTG;
-import com.bb.nmea.sentences.ZDA;
+import com.bb.nmea.sentences.talker.DBT;
+import com.bb.nmea.sentences.talker.DPT;
+import com.bb.nmea.sentences.talker.GLL;
+import com.bb.nmea.sentences.talker.HDG;
+import com.bb.nmea.sentences.talker.HDM;
+import com.bb.nmea.sentences.talker.MTW;
+import com.bb.nmea.sentences.talker.MWV;
+import com.bb.nmea.sentences.talker.RSA;
+import com.bb.nmea.sentences.talker.VTG;
+import com.bb.nmea.sentences.talker.ZDA;
 
 public class NMEASentanceProviderTest {
 ////  "$GPVTG,126.0,T,113.0,M,0.1,N,,K,A*0A\n" 
@@ -376,7 +376,7 @@ public class NMEASentanceProviderTest {
 
             ExpectedSentence expSent = expRes.getExpected(sentence.getRawSentence());
 
-            Assert.assertEquals("Incorrect type code " + n, expSent.m_typeCode, sentence.getTypeCode());
+            Assert.assertEquals("Incorrect type code " + n, expSent.m_typeCode, sentence.getSentenceId());
             Assert.assertTrue("Incorrect class " + n, expSent.m_clazz.isInstance(sentence));
             
             if (TalkerSentence.class.isInstance(sentence)) {

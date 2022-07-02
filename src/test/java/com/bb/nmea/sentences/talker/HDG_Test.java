@@ -1,4 +1,4 @@
-package com.bb.nmea.sentences;
+package com.bb.nmea.sentences.talker;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -32,7 +32,7 @@ public class HDG_Test {
             
             Assert.assertEquals("Invalid tag", "APHDG", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "HDG", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "05", s.getChecksum());
             
             Assert.assertEquals("Invalid heading", Float.valueOf(252.1f), s.getHeadingDegrees());
@@ -61,7 +61,7 @@ public class HDG_Test {
             
             Assert.assertEquals("Invalid tag", "APHDG", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "HDG", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "05", s.getChecksum());
             
             Assert.assertEquals("Invalid heading", Float.valueOf(252.1f), s.getHeadingDegrees());
@@ -90,7 +90,7 @@ public class HDG_Test {
             
             Assert.assertEquals("Invalid tag", "APHDG", s.getTag());
             Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "HDG", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "HDG", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "05", s.getChecksum());
             
             Assert.assertEquals("Invalid heading", Float.valueOf(252.1f), s.getHeadingDegrees());

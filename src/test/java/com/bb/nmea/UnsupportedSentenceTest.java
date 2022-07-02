@@ -45,7 +45,7 @@ public class UnsupportedSentenceTest {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "APZZZ", s.getTag());
-            Assert.assertEquals("Invalid type code", "UNSUPPORTED TAG: APZZZ", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "UNSUPPORTED TAG: APZZZ", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "31", s.getChecksum());
 
             // Validate raw fields
@@ -73,7 +73,7 @@ public class UnsupportedSentenceTest {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "GPZZZ", s.getTag());
-            Assert.assertEquals("Invalid type code", "UNSUPPORTED TAG: GPZZZ", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "UNSUPPORTED TAG: GPZZZ", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "08", s.getChecksum());
             
             // Validate raw fields

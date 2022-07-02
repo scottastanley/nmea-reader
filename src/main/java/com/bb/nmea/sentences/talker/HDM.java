@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bb.nmea.sentences;
+package com.bb.nmea.sentences.talker;
 
 import com.bb.nmea.TalkerSentence;
 import com.bb.nmea.sentences.common.HeadingType;

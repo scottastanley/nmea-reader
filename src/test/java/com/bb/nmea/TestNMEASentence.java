@@ -22,11 +22,12 @@ public class TestNMEASentence extends NMEASentence {
     }
     
     /**
-     * Get the type code for this NMEA sentence.
+     * Get the sentence ID for this NMEA sentence.
      * 
-     * @return The type code
+     * @return The sentence ID
      */
-    public String getTypeCode() {
+    @Override
+    protected String initSentenceId() {
         return null;
     }
 }

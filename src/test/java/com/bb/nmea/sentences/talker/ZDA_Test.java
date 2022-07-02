@@ -1,4 +1,4 @@
-package com.bb.nmea.sentences;
+package com.bb.nmea.sentences.talker;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -30,7 +30,7 @@ public class ZDA_Test {
             
             Assert.assertEquals("Invalid tag", "GPZDA", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "ZDA", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "ZDA", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "63", s.getChecksum());
             
             Assert.assertEquals("Invalid hours", Integer.valueOf(21), s.getHours());
@@ -62,7 +62,7 @@ public class ZDA_Test {
             
             Assert.assertEquals("Invalid tag", "GPZDA", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "ZDA", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "ZDA", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "63", s.getChecksum());
             
             Assert.assertEquals("Invalid hours", Integer.valueOf(21), s.getHours());
@@ -94,7 +94,7 @@ public class ZDA_Test {
             
             Assert.assertEquals("Invalid tag", "GPZDA", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "ZDA", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "ZDA", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "63", s.getChecksum());
             
             Assert.assertEquals("Invalid hours", Integer.valueOf(21), s.getHours());

@@ -45,9 +45,13 @@ public class UnsupportedSentence
         return this.getField(n);
     }
     
-
+    /**
+     * Get the sentence ID for this NMEA sentence.
+     * 
+     * @return The sentence ID
+     */
     @Override
-    public String getTypeCode() {
+    protected String initSentenceId() {
         return "UNSUPPORTED TAG: " + super.getTag();
     }
 }

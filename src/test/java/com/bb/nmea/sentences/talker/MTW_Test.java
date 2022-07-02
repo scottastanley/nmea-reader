@@ -1,4 +1,4 @@
-package com.bb.nmea.sentences;
+package com.bb.nmea.sentences.talker;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -32,7 +32,7 @@ public class MTW_Test {
             
             Assert.assertEquals("Invalid tag", "VWMTW", s.getTag());
             Assert.assertEquals("Invalid talked ID", "VW", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "MTW", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "MTW", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "10", s.getChecksum());
             
             Assert.assertEquals("Invalid temperature", Float.valueOf(13.0f), s.getMeanWaterTemp());
@@ -58,7 +58,7 @@ public class MTW_Test {
             
             Assert.assertEquals("Invalid tag", "VWMTW", s.getTag());
             Assert.assertEquals("Invalid talked ID", "VW", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "MTW", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "MTW", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "10", s.getChecksum());
             
             Assert.assertEquals("Invalid temperature", Float.valueOf(21.2f), s.getMeanWaterTemp());
@@ -84,7 +84,7 @@ public class MTW_Test {
             
             Assert.assertEquals("Invalid tag", "VWMTW", s.getTag());
             Assert.assertEquals("Invalid talked ID", "VW", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "MTW", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "MTW", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "10", s.getChecksum());
             
             Assert.assertEquals("Invalid temperature", Float.valueOf(32.1f), s.getMeanWaterTemp());

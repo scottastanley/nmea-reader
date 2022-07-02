@@ -1,11 +1,11 @@
-package com.bb.nmea.sentences;
+package com.bb.nmea.sentences.talker;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DBT_Test {
+public class DPT_Test {
 
     @Before
     public void setUp() throws Exception {
@@ -16,26 +16,25 @@ public class DBT_Test {
     }
 
     @Test
-    public void testCase1() {
-        String rawStr = "$SDDBT,17.0,f,5.1,M,2.8,F*3E";
+    public void testMissingOffset() {
+        String rawStr = "$SDDPT,5.1,*7D";
         
         try {
             long preTime = System.currentTimeMillis();
-            DBT s = new DBT(rawStr);
+            DPT s = new DPT(rawStr);
             long postTime = System.currentTimeMillis();
             
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
-            Assert.assertEquals("Invalid tag", "SDDBT", s.getTag());
+            Assert.assertEquals("Invalid tag", "SDDPT", s.getTag());
             Assert.assertEquals("Invalid talked ID", "SD", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "DBT", s.getTypeCode());
-            Assert.assertEquals("Invalid checksum", "3E", s.getChecksum());
+            Assert.assertEquals("Invalid type code", "DPT", s.getSentenceId());
+            Assert.assertEquals("Invalid checksum", "7D", s.getChecksum());
             
-            Assert.assertEquals("Invalid depth in feet", Float.valueOf(17.0f), s.getWaterDepthInFeet());
-            Assert.assertEquals("Invalid depth in meters", Float.valueOf(5.1f), s.getWaterDepthInMeters());
-            Assert.assertEquals("Invalid depth in fathoms", Float.valueOf(2.8f), s.getWaterDepthInFathoms());
+            Assert.assertEquals("Invalid depth below transducer", Float.valueOf(5.1f), s.getDepthBelowTransducer());
+            Assert.assertEquals("Invalid traansducer offset", null, s.getTransducerOffset());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -43,26 +42,25 @@ public class DBT_Test {
     }
 
     @Test
-    public void testCase2() {
-        String rawStr = "$SDDBT,16.5,f,5.0,M,2.8,F*3B";
+    public void testPositiveOffset() {
+        String rawStr = "$SDDPT,14.9,1.3*7D";
         
         try {
             long preTime = System.currentTimeMillis();
-            DBT s = new DBT(rawStr);
+            DPT s = new DPT(rawStr);
             long postTime = System.currentTimeMillis();
             
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
-            Assert.assertEquals("Invalid tag", "SDDBT", s.getTag());
+            Assert.assertEquals("Invalid tag", "SDDPT", s.getTag());
             Assert.assertEquals("Invalid talked ID", "SD", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "DBT", s.getTypeCode());
-            Assert.assertEquals("Invalid checksum", "3B", s.getChecksum());
+            Assert.assertEquals("Invalid type code", "DPT", s.getSentenceId());
+            Assert.assertEquals("Invalid checksum", "7D", s.getChecksum());
             
-            Assert.assertEquals("Invalid depth in feet", Float.valueOf(16.5f), s.getWaterDepthInFeet());
-            Assert.assertEquals("Invalid depth in meters", Float.valueOf(5.0f), s.getWaterDepthInMeters());
-            Assert.assertEquals("Invalid depth in fathoms", Float.valueOf(2.8f), s.getWaterDepthInFathoms());
+            Assert.assertEquals("Invalid depth below transducer", Float.valueOf(14.9f), s.getDepthBelowTransducer());
+            Assert.assertEquals("Invalid traansducer offset", Float.valueOf(1.3f), s.getTransducerOffset());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());
@@ -70,26 +68,25 @@ public class DBT_Test {
     }
 
     @Test
-    public void testCase3() {
-        String rawStr = "$SDDBT,17.6,f,5.3,M,2.9,F*3B";
+    public void testNegativeOffset() {
+        String rawStr = "$SDDPT,32.5,-2.1*7D";
         
         try {
             long preTime = System.currentTimeMillis();
-            DBT s = new DBT(rawStr);
+            DPT s = new DPT(rawStr);
             long postTime = System.currentTimeMillis();
             
             Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
             Assert.assertTrue("Invalid collected timestamp", 
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
-            Assert.assertEquals("Invalid tag", "SDDBT", s.getTag());
+            Assert.assertEquals("Invalid tag", "SDDPT", s.getTag());
             Assert.assertEquals("Invalid talked ID", "SD", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "DBT", s.getTypeCode());
-            Assert.assertEquals("Invalid checksum", "3B", s.getChecksum());
+            Assert.assertEquals("Invalid type code", "DPT", s.getSentenceId());
+            Assert.assertEquals("Invalid checksum", "7D", s.getChecksum());
             
-            Assert.assertEquals("Invalid depth in feet", Float.valueOf(17.6f), s.getWaterDepthInFeet());
-            Assert.assertEquals("Invalid depth in meters", Float.valueOf(5.3f), s.getWaterDepthInMeters());
-            Assert.assertEquals("Invalid depth in fathoms", Float.valueOf(2.9f), s.getWaterDepthInFathoms());
+            Assert.assertEquals("Invalid depth below transducer", Float.valueOf(32.5f), s.getDepthBelowTransducer());
+            Assert.assertEquals("Invalid traansducer offset", Float.valueOf(-2.1f), s.getTransducerOffset());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());

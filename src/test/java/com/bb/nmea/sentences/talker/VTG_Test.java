@@ -1,4 +1,4 @@
-package com.bb.nmea.sentences;
+package com.bb.nmea.sentences.talker;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -32,7 +32,7 @@ public class VTG_Test {
             
             Assert.assertEquals("Invalid tag", "GPVTG", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "VTG", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "VTG", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "25", s.getChecksum());
             
             Assert.assertEquals("Invalid true course", Float.valueOf(77.2f), s.getCourseOverGroundDegrTrue());
@@ -61,7 +61,7 @@ public class VTG_Test {
             
             Assert.assertEquals("Invalid tag", "GPVTG", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "VTG", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "VTG", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "25", s.getChecksum());
             
             Assert.assertEquals("Invalid true course", Float.valueOf(77.2f), s.getCourseOverGroundDegrTrue());
@@ -90,7 +90,7 @@ public class VTG_Test {
             
             Assert.assertEquals("Invalid tag", "GPVTG", s.getTag());
             Assert.assertEquals("Invalid talked ID", "GP", s.getTalkerId());
-            Assert.assertEquals("Invalid type code", "VTG", s.getTypeCode());
+            Assert.assertEquals("Invalid type code", "VTG", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "25", s.getChecksum());
             
             Assert.assertEquals("Invalid true course", Float.valueOf(77.2f), s.getCourseOverGroundDegrTrue());
