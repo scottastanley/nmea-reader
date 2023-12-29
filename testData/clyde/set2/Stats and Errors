@@ -1,0 +1,44 @@
+2023-12-27 22:03:02,384 INFO  [main] StatsCollector - RSA: 152
+2023-12-27 22:03:10,274 INFO  [main] StatsCollector - UNSUPPORTED TAG: GPGGA: 159
+2023-12-27 22:03:11,048 INFO  [main] StatsCollector - UNSUPPORTED TAG: PSMDCN: 1191
+2023-12-27 22:03:11,640 INFO  [main] StatsCollector - ZDA: 154
+2023-12-27 22:03:11,945 INFO  [main] StatsCollector - DBT: 139
+2023-12-27 22:03:12,202 INFO  [main] StatsCollector - DPT: 158
+2023-12-27 22:03:12,466 INFO  [main] StatsCollector - UNSUPPORTED TAG: GPRMC: 80
+2023-12-27 22:03:12,731 INFO  [main] StatsCollector - INVALID: 351
+
+
+2023-12-27 22:01:59,077 DEBUG [Sentence Reader 0] SentenceFactory - Parsing error
+java.lang.reflect.InvocationTargetException: null
+    at sun.reflect.GeneratedConstructorAccessor7.newInstance(Unknown Source) ~[?:?]
+    at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_281]
+    at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_281]
+    at com.bb.nmea.SentenceFactory.getNMEASentence(SentenceFactory.java:81) [classes/:?]
+    at com.bb.nmea.SentenceReaderRunnable.run(SentenceReaderRunnable.java:55) [classes/:?]
+    at java.lang.Thread.run(Thread.java:748) [?:1.8.0_281]
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 7
+    at com.bb.nmea.NMEASentence.getField(NMEASentence.java:194) ~[classes/:?]
+    at com.bb.nmea.NMEASentence.getFieldAsFAAModeIndicator(NMEASentence.java:286) ~[classes/:?]
+    at com.bb.nmea.sentences.talker.GLL.<init>(GLL.java:52) ~[classes/:?]
+    ... 6 more
+2023-12-27 22:01:59,078 DEBUG [Sentence Reader 0] SentenceLogger - processing: $APGLL,3806.9680,N,12137.4580,W,055210.00,A*16  false
+2023-12-27 22:01:59,078 DEBUG [Sentence Reader 0] SentenceReaderRunnable - New sentence: $PSMDCN,4*1F
+2023-12-27 22:01:59,078 DEBUG [Sentence Reader 0] SentenceLogger - processing: $PSMDCN,4*1F  true
+2023-12-27 22:01:59,081 DEBUG [Sentence Reader 0] SentenceReaderRunnable - New sentence: $APVTG,191.5,T,176.4,M,0.0,N,0.0,K*40
+2023-12-27 22:01:59,084 ERROR [Sentence Reader 0] SentenceFactory - Failed to parse sentence: $APVTG,191.5,T,176.4,M,0.0,N,0.0,K*40
+2023-12-27 22:01:59,084 DEBUG [Sentence Reader 0] SentenceFactory - Parsing error
+java.lang.reflect.InvocationTargetException: null
+    at sun.reflect.GeneratedConstructorAccessor8.newInstance(Unknown Source) ~[?:?]
+    at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_281]
+    at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_281]
+    at com.bb.nmea.SentenceFactory.getNMEASentence(SentenceFactory.java:81) [classes/:?]
+    at com.bb.nmea.SentenceReaderRunnable.run(SentenceReaderRunnable.java:55) [classes/:?]
+    at java.lang.Thread.run(Thread.java:748) [?:1.8.0_281]
+Caused by: java.lang.NumberFormatException: For input string: "T"
+    at sun.misc.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:2043) ~[?:1.8.0_281]
+    at sun.misc.FloatingDecimal.parseFloat(FloatingDecimal.java:122) ~[?:1.8.0_281]
+    at java.lang.Float.parseFloat(Float.java:451) ~[?:1.8.0_281]
+    at java.lang.Float.valueOf(Float.java:416) ~[?:1.8.0_281]
+    at com.bb.nmea.NMEASentence.getFieldAsFloat(NMEASentence.java:205) ~[classes/:?]
+    at com.bb.nmea.sentences.talker.VTG.<init>(VTG.java:54) ~[classes/:?]
+    ... 6 more
