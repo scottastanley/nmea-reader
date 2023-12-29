@@ -23,7 +23,7 @@ package com.bb.nmea;
  */
 public abstract class ProprietarySentence extends NMEASentence {
 
-    ProprietarySentence(String rawSentence) {
+    public ProprietarySentence(String rawSentence) {
         super(rawSentence);
     }
 
@@ -33,16 +33,30 @@ public abstract class ProprietarySentence extends NMEASentence {
      * @return The sentence ID
      */
     @Override
-    abstract protected String initSentenceId();
+    final protected String initSentenceId() {
+        String manufacturerId = getManufacturerID();
+        manufacturerId = manufacturerId != null ? manufacturerId : "null";
+        
+        String manufactSentenceId = getManufacturerSentenceId();
+        manufactSentenceId = manufactSentenceId != null ? manufactSentenceId : "null";
+        
+        return manufacturerId + "-" + manufactSentenceId;
+    }
     
     /**
-     * Utility method to get the base form of the sentence ID from the tag.  Basically,
-     * this returns the tag minus the leading P indicating it is proprietary.
+     * Get the sentence ID defined by the manufacturer.
      * 
-     * @return The portion of the tag excluding the leading P
+     * @return The sentence ID defined by the manufacturer
      */
-    protected String getSentenceIdFromTag() {
+    public abstract String getManufacturerSentenceId();
+    
+    /**
+     * Get the Manufacturer ID for this proprietary sentence.
+     * 
+     * @return The Manufacturer ID
+     */
+    public String getManufacturerID() {
         String tag = getTag();
-        return tag != null ? tag.substring(1) : null;
+        return tag != null ? tag.substring(1,4) : null;
     }
 }

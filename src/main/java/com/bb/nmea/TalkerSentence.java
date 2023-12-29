@@ -33,7 +33,7 @@ public abstract class TalkerSentence extends NMEASentence {
      * @return The type code
      */
     @Override
-    protected String initSentenceId() {
+    final protected String initSentenceId() {
         return getTag() != null ? NMEASentence.getTypeFromTag(getTag()) : null;
     }
     
