@@ -342,16 +342,6 @@ public abstract class NMEASentence {
     }
     
     /**
-     * Parse the NMEA sentence type from the provided tag value.
-     * 
-     * @param tag The NMEA tag value
-     * @return The NMEA type field
-     */
-    static String getTypeFromTag(final String tag) {
-        return tag.substring(2, 5);
-    }
-    
-    /**
      * Evaluate whether the provided raw sentence is a valid NMEA sentence.  A sentence
      * is considered valid if it meets the following criteria;
      * 

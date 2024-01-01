@@ -34,7 +34,7 @@ public abstract class TalkerSentence extends NMEASentence {
      */
     @Override
     final protected String initSentenceId() {
-        return getTag() != null ? NMEASentence.getTypeFromTag(getTag()) : null;
+        return getTag() != null ? TalkerSentence.getTypeFromTag(getTag()) : null;
     }
     
     /**
@@ -44,5 +44,16 @@ public abstract class TalkerSentence extends NMEASentence {
      */
     public String getTalkerId() {
         return getTag() != null ? getTag().substring(0, 2) : null;
-    }    
+    } 
+    
+    
+    /**
+     * Parse the NMEA sentence type from the provided tag value.
+     * 
+     * @param tag The NMEA tag value
+     * @return The NMEA type field
+     */
+    static String getTypeFromTag(final String tag) {
+        return tag.substring(2, 5);
+    }
 }

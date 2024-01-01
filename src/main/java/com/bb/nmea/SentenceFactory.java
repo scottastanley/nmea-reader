@@ -66,7 +66,7 @@ public class SentenceFactory {
             if (isValid) {
                 String type = null;
                 try {
-                    type = NMEASentence.getTypeFromTag(NMEASentence.getTag(rawSentence));                    
+                    type = TalkerSentence.getTypeFromTag(NMEASentence.getTag(rawSentence));                    
                 } catch (Throwable t) {
                     LOG.error("Unable to identify type for raw sentence: " + rawSentence);
                     instance = new UnparsableSentence(rawSentence);
@@ -147,5 +147,22 @@ public class SentenceFactory {
         }
         
         return classMap;
+    }
+   
+    /**
+     * Simple main method to call the factory on a set of provided NMEA sentence strings.
+     * 
+     * @param args The sentences
+     */
+    public static void main(String[] args) {
+        SentenceFactory sentFact = new SentenceFactory();
+        
+        for (String sentenceRaw : args) {
+            LOG.info("==================================================================");
+            LOG.info("Processing: " + sentenceRaw);
+            NMEASentence sentence = sentFact.getNMEASentence(sentenceRaw);           
+            
+            LOG.info("Completed:" + sentence.toString());
+        }        
     }
 }
