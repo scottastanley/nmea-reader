@@ -19,8 +19,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,11 +41,14 @@ public class SentenceFactory {
     private static final Logger LOG = LogManager.getLogger(SentenceFactory.class);
 
     private static final String BASE_SENTENCE_LIST_FILE = "sentences.properties";
+    private static final String MFG_KEY_PREFIX = "mfg.";
+    private static final String SENTENCE_KEY_PREFIX = "sentence.";
+    
     private static final Map<String,Class<? extends NMEASentence>> SENTENCE_CLASSES = new HashMap<String,Class<? extends NMEASentence>>();
     static {
         // Load the included NMEASentence classes
         InputStream inStrm = SentenceFactory.class.getClassLoader().getResourceAsStream(BASE_SENTENCE_LIST_FILE);
-        SENTENCE_CLASSES.putAll(SentenceFactory.loadSentenceClassMap(inStrm));
+        SentenceFactory.loadSentenceClassMap(inStrm);
     }
 
     /**
@@ -99,9 +104,6 @@ public class SentenceFactory {
         } catch (Throwable t) {
             LOG.error("Failed getting NMEA sentence: " + rawSentence);
         }
-//        } catch (IllegalArgumentException | SecurityException e) {
-//            LOG.error("Failed to instantiate sentence: " + rawSentence, e);
-//        }
         
         return instance;
     }
@@ -113,22 +115,28 @@ public class SentenceFactory {
      * @param inStrm An InputStream for a properties file
      * @return The map of NMEA type string -> class extends NMEASentence
      */
-    private static Map<String,Class<? extends NMEASentence>> loadSentenceClassMap(final InputStream inStrm) {
-        Map<String,Class<? extends NMEASentence>> classMap = new HashMap<String,Class<? extends NMEASentence>>();
-        
+    private static void loadSentenceClassMap(final InputStream inStrm) {
         try {
             Properties prop = new Properties();
             prop.load(inStrm);
             
-            for (String sentenceType : prop.stringPropertyNames()) {
-                String className = prop.getProperty(sentenceType);
+            //
+            // Load the sentence classes
+            //
+            List<String> sentenceKeys = prop.stringPropertyNames().stream()
+                                            .filter(ip -> ip.startsWith(SENTENCE_KEY_PREFIX))
+                                            .collect(Collectors.toList());
+            
+            for (String sentenceKey : sentenceKeys) {
+                String className = prop.getProperty(sentenceKey);
+                String sentenceId = sentenceKey.substring(SENTENCE_KEY_PREFIX.length());
                 
                 try {
                     Class<?> clazz = Class.forName(className);
                     
                     if (NMEASentence.class.isAssignableFrom(clazz)) {
                         LOG.debug("Preparing NMEASentence class " + clazz.getName());
-                        classMap.put(sentenceType.toLowerCase(), clazz.asSubclass(NMEASentence.class));
+                        SENTENCE_CLASSES.put(sentenceId.toLowerCase(), clazz.asSubclass(NMEASentence.class));
                     } else {
                         LOG.error("Class " + clazz.getName() + " is not an NMEASentence");
                     }
@@ -145,8 +153,6 @@ public class SentenceFactory {
                 } catch (IOException e) {}
             }
         }
-        
-        return classMap;
     }
    
     /**
