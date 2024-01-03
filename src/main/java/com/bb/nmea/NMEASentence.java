@@ -66,8 +66,7 @@ public abstract class NMEASentence {
     NMEASentence(final String rawSentence, final Boolean isValid) {
         m_isValid = isValid;
         initFields(rawSentence);
-    }
-    
+    }    
     
     /**
      * Calculate the value for the sentence ID.
