@@ -60,7 +60,7 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Incorrect tag", "AP", hdmS.getTalkerId());
             Assert.assertEquals("Incorrect tag", "HDM", hdmS.getSentenceId());
             Assert.assertEquals("Incorrect tag", "34", hdmS.getChecksum());
-            Assert.assertEquals("Incorrect heading", new Float(344.4F), hdmS.getHeadingDegrees());
+            Assert.assertEquals("Incorrect heading", Float.valueOf(344.4F), hdmS.getHeadingDegrees());
             Assert.assertEquals("Incorrect heading type", HeadingType.MAGNETIC, hdmS.getHeadingType());
         } catch (Exception e) {
             e.printStackTrace();
