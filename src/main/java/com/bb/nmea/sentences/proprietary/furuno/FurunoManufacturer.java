@@ -15,14 +15,19 @@
  */
 package com.bb.nmea.sentences.proprietary.furuno;
 
-import com.bb.nmea.ManufacturerSentenceIdExtractor;
+import com.bb.nmea.ProprietarySentenceManufacturer;
 
-public class FurunoSentenceIdExtractor implements ManufacturerSentenceIdExtractor {
+/**
+ * The manufactorer definition for Furuno.
+ * 
+ * @author Scott Stanley
+ */
+public class FurunoManufacturer implements ProprietarySentenceManufacturer {
     
     /** 
      * Construct an instance.
      */
-    FurunoSentenceIdExtractor() {
+    FurunoManufacturer() {
     }
 
     

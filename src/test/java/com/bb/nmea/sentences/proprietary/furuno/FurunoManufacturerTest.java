@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FurunoSentenceIdExtractorTest {
+public class FurunoManufacturerTest {
 
     @Before
     public void setUp() throws Exception {
@@ -20,7 +20,7 @@ public class FurunoSentenceIdExtractorTest {
         String sentence = "$PFEC,GPint,ast01*13";
         
         try {
-            FurunoSentenceIdExtractor idEx = new FurunoSentenceIdExtractor();
+            FurunoManufacturer idEx = new FurunoManufacturer();
             String result = idEx.getManufacturerSentenceId(sentence);
             
             Assert.assertEquals("Incorrect sentence ID", "GPint", result);
@@ -35,7 +35,7 @@ public class FurunoSentenceIdExtractorTest {
         String sentence = "$PFEC,idfnc,R,*08";
         
         try {
-            FurunoSentenceIdExtractor idEx = new FurunoSentenceIdExtractor();
+            FurunoManufacturer idEx = new FurunoManufacturer();
             String result = idEx.getManufacturerSentenceId(sentence);
             
             Assert.assertEquals("Incorrect sentence ID", "idfnc", result);

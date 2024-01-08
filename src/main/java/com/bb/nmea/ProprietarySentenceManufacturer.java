@@ -25,7 +25,7 @@ package com.bb.nmea;
  * 
  * @author Scott Stanley
  */
-public interface ManufacturerSentenceIdExtractor {
+public interface ProprietarySentenceManufacturer {
     
     /**
      * Get the manufacturer defined sentence ID for the provided 
