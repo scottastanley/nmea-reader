@@ -22,12 +22,13 @@ import com.bb.nmea.ProprietarySentenceManufacturer;
  * 
  * @author Scott Stanley
  */
-public class FurunoManufacturer implements ProprietarySentenceManufacturer {
+public class FurunoManufacturer extends ProprietarySentenceManufacturer {
     
     /** 
      * Construct an instance.
      */
     FurunoManufacturer() {
+        super("FEC");
     }
 
     

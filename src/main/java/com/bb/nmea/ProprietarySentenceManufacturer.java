@@ -25,7 +25,18 @@ package com.bb.nmea;
  * 
  * @author Scott Stanley
  */
-public interface ProprietarySentenceManufacturer {
+public abstract class ProprietarySentenceManufacturer {
+    final private String m_manufacturerId;
+    
+    /**
+     * Create a new instance of ProprietarySentenceManufacturer for the 
+     * given manufacturer ID.
+     * 
+     * @param manufacturerId The manufacturer ID
+     */
+    public ProprietarySentenceManufacturer(final String manufacturerId) {
+        m_manufacturerId = manufacturerId;
+    }
     
     /**
      * Get the manufacturer defined sentence ID for the provided 
@@ -34,5 +45,14 @@ public interface ProprietarySentenceManufacturer {
      * @param rawSentence The raw sentence
      * @return The manufacturer defined sentence ID
      */
-    public String getManufacturerSentenceId(final String rawSentence);
+    public abstract String getManufacturerSentenceId(final String rawSentence);
+    
+    /**
+     * Get the manufacturer ID represented by the instance.
+     * 
+     * @return 
+     */
+    public String getManufacturerId() {
+        return m_manufacturerId;
+    }
 }
