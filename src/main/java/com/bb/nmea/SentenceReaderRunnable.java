@@ -40,6 +40,12 @@ public class SentenceReaderRunnable implements Runnable {
     private BufferedReader m_sentRdr;
     private final NMEASentenceProvider m_nmeaSentProv;
 
+    /**
+     * Create a sentence reader runnable
+     * 
+     * @param sentRdr
+     * @param nmeaSentProv
+     */
     public SentenceReaderRunnable(final BufferedReader sentRdr, final NMEASentenceProvider nmeaSentProv) {
         m_sentRdr = sentRdr;
         m_nmeaSentProv = nmeaSentProv;
