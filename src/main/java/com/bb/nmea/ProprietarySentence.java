@@ -22,7 +22,13 @@ package com.bb.nmea;
  * @author Scott Stanley
  */
 public abstract class ProprietarySentence extends NMEASentence {
+    private String m_manufacturerId;
 
+    /**
+     * Create the proprietary sentence
+     * 
+     * @param rawSentence The raw sentence string
+     */
     public ProprietarySentence(String rawSentence) {
         super(rawSentence);
     }
@@ -34,13 +40,16 @@ public abstract class ProprietarySentence extends NMEASentence {
      */
     @Override
     final protected String initSentenceId() {
-        String manufacturerId = getManufacturerID();
-        manufacturerId = manufacturerId != null ? manufacturerId : "null";
         
+        // Extract the manufacturer ID
+        String tag = getTag();
+        m_manufacturerId = tag != null ? tag.substring(1,4) : null;
+
+        // Get the manufacturer specific sentence ID
         String manufactSentenceId = getManufacturerSentenceId();
         manufactSentenceId = manufactSentenceId != null ? manufactSentenceId : "null";
         
-        return manufacturerId + "-" + manufactSentenceId;
+        return m_manufacturerId + "-" + manufactSentenceId;
     }
     
     /**
@@ -56,7 +65,6 @@ public abstract class ProprietarySentence extends NMEASentence {
      * @return The Manufacturer ID
      */
     public String getManufacturerID() {
-        String tag = getTag();
-        return tag != null ? tag.substring(1,4) : null;
+        return m_manufacturerId;
     }
 }
