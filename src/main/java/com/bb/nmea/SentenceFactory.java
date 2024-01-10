@@ -44,19 +44,63 @@ public class SentenceFactory {
     private static final String MFG_KEY_PREFIX = "mfg.";
     private static final String SENTENCE_KEY_PREFIX = "sentence.";
     
-    private static final Map<String,Class<? extends NMEASentence>> SENTENCE_CLASSES = new HashMap<String,Class<? extends NMEASentence>>();
-    static {
-        // Load the included NMEASentence classes
-        InputStream inStrm = SentenceFactory.class.getClassLoader().getResourceAsStream(BASE_SENTENCE_LIST_FILE);
-        SentenceFactory.loadSentenceClassMap(inStrm);
-    }
+    private final Map<String,ProprietarySentenceManufacturer> m_proprietaryMfgs = new HashMap<String,ProprietarySentenceManufacturer>();
+    private final Map<String,Class<? extends NMEASentence>> m_sentenceClasses = new HashMap<String,Class<? extends NMEASentence>>();
 
     /**
      * Create an instance of the SentenceFactory.
      */
-    public SentenceFactory() {
+    SentenceFactory() {
+        // Load the included NMEASentence classes
+        InputStream inStrm = SentenceFactory.class.getClassLoader().getResourceAsStream(BASE_SENTENCE_LIST_FILE);
+        loadSentenceConfig(inStrm);
     }
     
+    /**
+     * Create an instance of the SentenceFactory.
+     */
+    SentenceFactory(final InputStream inStrm) {
+        loadSentenceConfig(inStrm);
+    }
+    
+    /**
+     * Get the number of manufacturer IDs configured
+     * 
+     * @return The number of manufacturer IDs
+     */
+    public int numMfgIds() {
+        return m_proprietaryMfgs.size();
+    }
+    
+    /**
+     * Get the number of sentence IDs configured
+     * 
+     * @return The number of sentence IDs
+     */
+    public int numSentenceIds() {
+        return m_sentenceClasses.size();
+    }
+    
+    /**
+     * Does this sentence factory contain the given manufacturer ID
+     * 
+     * @param mfgId The manufacturer ID
+     * @return True if we have this manufacturer ID
+     */
+    public boolean containsMfgId(final String mfgId) {
+        return m_proprietaryMfgs.containsKey(mfgId.toLowerCase());
+    }
+    
+    /**
+     * Does this sentence factory contain the given sentence ID
+     * 
+     * @param sentenceId The sentence ID
+     * @return True if we have this sentence ID
+     */
+    public boolean containsSentenceId(final String sentenceId) {
+        return m_sentenceClasses.containsKey(sentenceId.toLowerCase());
+    }
+
     /**
      * Create an instance of the appropriate NMEASentence type for the provided
      * raw NMEA sentence string.
@@ -79,7 +123,7 @@ public class SentenceFactory {
                 
                 // If we identified the type for the sentence parse it if supported
                 if (type != null) {
-                    Class<? extends NMEASentence> clazz = SENTENCE_CLASSES.get(type.toLowerCase());
+                    Class<? extends NMEASentence> clazz = m_sentenceClasses.get(type.toLowerCase());
                     
                     if (clazz != null) {
                         try {
@@ -115,11 +159,43 @@ public class SentenceFactory {
      * @param inStrm An InputStream for a properties file
      * @return The map of NMEA type string -> class extends NMEASentence
      */
-    private static void loadSentenceClassMap(final InputStream inStrm) {
+    private void loadSentenceConfig(final InputStream inStrm) {
         try {
             Properties prop = new Properties();
             prop.load(inStrm);
             
+            //
+            // Load the proprietary sentence manufacturers
+            //
+            List<String> mfgKeys = prop.stringPropertyNames().stream()
+                .filter(ip -> ip.startsWith(MFG_KEY_PREFIX))
+                .collect(Collectors.toList());
+
+            for (String mfgKey : mfgKeys) {
+                String className = prop.getProperty(mfgKey);
+
+                try {
+                    Class<?> clazz = Class.forName(className);
+                    
+                    if (ProprietarySentenceManufacturer.class.isAssignableFrom(clazz)) {
+                        LOG.debug("Preparing ProprietarySentenceManufacturer class " + clazz.getName());
+                        
+                        Object newInst = clazz.getConstructor().newInstance();
+                        ProprietarySentenceManufacturer instance = ProprietarySentenceManufacturer.class.cast(newInst);
+                        m_proprietaryMfgs.put(instance.getManufacturerId().toLowerCase(), instance);
+                    } else {
+                        LOG.error("Class " + clazz.getName() + " is not an NMEASentence");
+                    }
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | 
+                         IllegalArgumentException | InvocationTargetException | NoSuchMethodException | 
+                         SecurityException e) {
+                    LOG.error("Failed to instantiate manufacturer instance " + className, e);
+                    throw new RuntimeException("Failed to instantiate manufacturer instance " + className,
+                                               e);
+                }
+            }            
+            
+
             //
             // Load the sentence classes
             //
@@ -136,16 +212,19 @@ public class SentenceFactory {
                     
                     if (NMEASentence.class.isAssignableFrom(clazz)) {
                         LOG.debug("Preparing NMEASentence class " + clazz.getName());
-                        SENTENCE_CLASSES.put(sentenceId.toLowerCase(), clazz.asSubclass(NMEASentence.class));
+                        m_sentenceClasses.put(sentenceId.toLowerCase(), clazz.asSubclass(NMEASentence.class));
                     } else {
                         LOG.error("Class " + clazz.getName() + " is not an NMEASentence");
                     }
                 } catch (ClassNotFoundException e) {
                     LOG.error("Failed to instantiate sentence class " + className, e);
+                    throw new RuntimeException("Failed to instantiate sentence class " + className,
+                                               e);
                 }
             }
         } catch (IOException e) {
             LOG.error("Failed to load sentence classes", e);
+            throw new RuntimeException("Failed to load sentence classes", e);
         } finally {
             if (inStrm != null) {
                 try {

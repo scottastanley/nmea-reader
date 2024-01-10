@@ -15,6 +15,10 @@
  */
 package com.bb.nmea;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -42,6 +46,74 @@ public class SentenceFactoryTest {
 
     @After
     public void tearDown() throws Exception {
+    }
+
+    @Test
+    public void testReadConfig() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("sentence.hdm=com.bb.nmea.sentences.talker.HDM").append("\n");
+        sb.append("sentence.rsa=com.bb.nmea.sentences.talker.RSA").append("\n");
+        sb.append("mfg.zzz=com.bb.nmea.TestProprietarySentenceMfgZZZ").append("\n");
+        
+        InputStream cfgStrm = new ByteArrayInputStream(sb.toString().getBytes(StandardCharsets.UTF_8));
+        
+        try {
+            SentenceFactory fact = new SentenceFactory(cfgStrm);
+
+            Assert.assertEquals("Incorrect number of manufacturers", 1, fact.numMfgIds());
+            Assert.assertTrue("Missing manufacturer ZZZ", fact.containsMfgId("ZZZ"));
+            Assert.assertFalse("Missing manufacturer MISSING", fact.containsMfgId("MISSING"));
+
+            Assert.assertEquals("Incorrect number of sentences", 2, fact.numSentenceIds());
+            Assert.assertTrue("Missing sentence HDM", fact.containsSentenceId("HDM"));
+            Assert.assertTrue("Missing sentence RSA", fact.containsSentenceId("RSA"));
+            Assert.assertFalse("Unexpected sentence MISSING", fact.containsSentenceId("MISSING"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testReadConfigFailMissingSentenceClass() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("sentence.hdm=com.bb.nmea.sentences.talker.MISSING").append("\n");
+        sb.append("sentence.rsa=com.bb.nmea.sentences.talker.RSA").append("\n");
+        
+        InputStream cfgStrm = new ByteArrayInputStream(sb.toString().getBytes(StandardCharsets.UTF_8));
+        
+        try {
+            try {
+                new SentenceFactory(cfgStrm);       
+                Assert.fail("Should have thrown an exception");
+            } catch (RuntimeException t) {
+                // Ignore expected exception
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testReadConfigFailMissingMfgClass() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("mfg.zzz=com.bb.nmea.MISSING").append("\n");
+        sb.append("sentence.rsa=com.bb.nmea.sentences.talker.RSA").append("\n");
+        
+        InputStream cfgStrm = new ByteArrayInputStream(sb.toString().getBytes(StandardCharsets.UTF_8));
+        
+        try {
+            try {
+                new SentenceFactory(cfgStrm);       
+                Assert.fail("Should have thrown an exception");
+            } catch (RuntimeException t) {
+                // Ignore expected exception
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
     }
 
     @Test
