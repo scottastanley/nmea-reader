@@ -30,6 +30,7 @@ import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.SpeedUnits;
 import com.bb.nmea.sentences.common.Status;
 import com.bb.nmea.sentences.common.WindReference;
+import com.bb.nmea.sentences.proprietary.furuno.FEC_GPint;
 import com.bb.nmea.sentences.talker.DBT;
 import com.bb.nmea.sentences.talker.DPT;
 import com.bb.nmea.sentences.talker.HDG;
@@ -442,6 +443,60 @@ public class SentenceFactoryTest {
             Assert.assertEquals("Invalid wind speed", Float.valueOf(0.0f), s.getWindSpeed());
             Assert.assertEquals("Invalid speed units", SpeedUnits.KNOTS, s.getSpeedUnits());
             Assert.assertEquals("Invalid status", Status.VALID, s.getStatus());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testProprietary_FEC_GPint() {
+        String rawStr = "$PFEC,GPint,ast01*13";
+
+        try {
+            SentenceFactory fact = new SentenceFactory();
+            NMEASentence sentObj = fact.getNMEASentence(rawStr);
+            
+            Assert.assertEquals("Incorrect class", FEC_GPint.class, sentObj.getClass());
+            FEC_GPint s = FEC_GPint.class.cast(sentObj);
+            
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertEquals("Invalid tag", "PFEC", s.getTag());
+            Assert.assertEquals("Invalid manufacterer ID", "FEC", s.getSupportedManufacturerID());
+            Assert.assertEquals("Invalid manufacterer sentence ID", "GPint", s.getManufacturerSentenceId());
+            Assert.assertEquals("Invalid sentence ID", "FEC-GPint", s.getSentenceId());
+            Assert.assertEquals("Invalid checksum", "13", s.getChecksum());
+            
+            Assert.assertEquals("Invalid number of log requests", 1, s.getLogOutputIntervals().size());
+            Assert.assertEquals("Invalid request 1", "ast01", s.getLogOutputIntervals().get(0));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testProprietary_UnsupportedMfg() {
+        String rawStr = "$PFZC,GPint,ast01*0C";
+        
+        try {
+            SentenceFactory fact = new SentenceFactory();
+            
+            NMEASentence s = fact.getNMEASentence(rawStr);
+            
+            Assert.assertEquals("Incorrect class", UnsupportedManufacturer.class, s.getClass());
+            UnsupportedManufacturer sUnsp = UnsupportedManufacturer.class.cast(s);
+            Assert.assertTrue("Sentence should be valid", s.isValid());
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            
+            Assert.assertEquals("Invalid tag", "PFZC", s.getTag());
+            Assert.assertEquals("Invalid type code", "UNSUPPORTED MFG: FZC", s.getSentenceId());
+            Assert.assertEquals("Invalid checksum", "0C", s.getChecksum());
+
+            // Validate raw fields
+            Assert.assertEquals("Invalid field 0 string", "PFZC", sUnsp.getUnknownField(0));
+            Assert.assertEquals("Invalid field 1 string", "GPint", sUnsp.getUnknownField(1));
+            Assert.assertEquals("Invalid field 2 string", "ast01", sUnsp.getUnknownField(2));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());

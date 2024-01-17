@@ -27,7 +27,7 @@ public class FurunoManufacturer extends ProprietarySentenceManufacturer {
     /** 
      * Construct an instance.
      */
-    FurunoManufacturer() {
+    public FurunoManufacturer() {
         super("FEC");
     }
 

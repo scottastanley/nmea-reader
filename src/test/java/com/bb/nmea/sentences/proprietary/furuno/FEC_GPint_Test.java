@@ -29,7 +29,7 @@ public class FEC_GPint_Test {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "PFEC", s.getTag());
-            Assert.assertEquals("Invalid manufacterer ID", "FEC", s.getManufacturerID());
+            Assert.assertEquals("Invalid manufacterer ID", "FEC", s.getSupportedManufacturerID());
             Assert.assertEquals("Invalid manufacterer sentence ID", "GPint", s.getManufacturerSentenceId());
             Assert.assertEquals("Invalid sentence ID", "FEC-GPint", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "13", s.getChecksum());
@@ -56,7 +56,7 @@ public class FEC_GPint_Test {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "PFEC", s.getTag());
-            Assert.assertEquals("Invalid manufacterer ID", "FEC", s.getManufacturerID());
+            Assert.assertEquals("Invalid manufacterer ID", "FEC", s.getSupportedManufacturerID());
             Assert.assertEquals("Invalid manufacterer sentence ID", "GPint", s.getManufacturerSentenceId());
             Assert.assertEquals("Invalid sentence ID", "FEC-GPint", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "13", s.getChecksum());
@@ -84,7 +84,7 @@ public class FEC_GPint_Test {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "PFEC", s.getTag());
-            Assert.assertEquals("Invalid manufacterer ID", "FEC", s.getManufacturerID());
+            Assert.assertEquals("Invalid manufacterer ID", "FEC", s.getSupportedManufacturerID());
             Assert.assertEquals("Invalid manufacterer sentence ID", "GPint", s.getManufacturerSentenceId());
             Assert.assertEquals("Invalid sentence ID", "FEC-GPint", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "13", s.getChecksum());

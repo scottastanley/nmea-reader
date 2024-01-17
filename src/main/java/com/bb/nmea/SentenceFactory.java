@@ -112,41 +112,82 @@ public class SentenceFactory {
         NMEASentence instance = null;
         try {
             Boolean isValid = NMEASentence.isValidRawSentence(rawSentence);
+            
             if (isValid) {
-                String type = null;
-                try {
-                    type = TalkerSentence.getTypeFromTag(NMEASentence.getTag(rawSentence));                    
-                } catch (Throwable t) {
-                    LOG.error("Unable to identify type for raw sentence: " + rawSentence);
-                    instance = new UnparsableSentence(rawSentence);
-                }
-                
-                // If we identified the type for the sentence parse it if supported
-                if (type != null) {
-                    Class<? extends NMEASentence> clazz = m_sentenceClasses.get(type.toLowerCase());
+                if (ProprietarySentence.isProprietarySentence(rawSentence)) {
+                    String mfgId = ProprietarySentenceManufacturer.getManufacturerID(rawSentence);
+                    ProprietarySentenceManufacturer mfg = m_proprietaryMfgs.get(mfgId.toLowerCase());
                     
-                    if (clazz != null) {
-                        try {
-                            instance = clazz.getConstructor(String.class).newInstance(rawSentence);
-                        } catch (InvocationTargetException e) {
-                            // If an error occurs parsing the message, treat it as an unsupported
-                            // except log the error
-                            instance = new UnparsableSentence(rawSentence);
-                            LOG.error("Failed to parse sentence: " + rawSentence);
-                            LOG.debug("Parsing error", e);
-                        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
-                            // We should never see these.  If we do simply halt processing.
-                            LOG.error("Unexpected exception", e);
-                        }
+                    if (mfg != null) {
+                        String proprietarySentenceId = mfg.getManufacturerSentenceId(rawSentence);
+                        String sentenceId = ProprietarySentence.getProprietarySentenceId(mfgId, proprietarySentenceId);
+                        
+                        instance = parseSentence(sentenceId, rawSentence);                        
                     } else {
-                        instance = new UnsupportedSentence(rawSentence);
+                        instance = new UnsupportedManufacturer(rawSentence);
                     }
+                } else {
+                    instance = getTalkerSentence(rawSentence);                    
                 }
             } else {
                 instance = new InvalidSentence(rawSentence);
             }
         } catch (Throwable t) {
             LOG.error("Failed getting NMEA sentence: " + rawSentence);
+        }
+        
+        return instance;
+    }
+    
+    /**
+     * Construct an NMEASentance for a talker sentence string
+     * 
+     * @param rawSentence The raw sentence string
+     * @return The NMEASentence
+     */
+    private NMEASentence getTalkerSentence(final String rawSentence) {
+        String type = null;
+        try {
+            type = TalkerSentence.getTypeFromTag(NMEASentence.getTag(rawSentence));                    
+        } catch (Throwable t) {
+            LOG.error("Unable to identify type for raw sentence: " + rawSentence);
+            return new UnparsableSentence(rawSentence);
+        }
+        
+        // If we identified the type for the sentence parse it if supported
+        return parseSentence(type, rawSentence);
+    }
+    
+    /**
+     * Get the registered class for the given sentence type and parse the provided 
+     * raw sentence as this type.
+     * 
+     * @param type The sentence type
+     * @param rawSentence The raw sentence
+     * @return The NMEASentence
+     */
+    private NMEASentence parseSentence(final String type, final String rawSentence) {
+        NMEASentence instance = null;
+
+        if (type != null) {
+            Class<? extends NMEASentence> clazz = m_sentenceClasses.get(type.toLowerCase());
+            
+            if (clazz != null) {
+                try {
+                    instance = clazz.getConstructor(String.class).newInstance(rawSentence);
+                } catch (InvocationTargetException e) {
+                    // If an error occurs parsing the message, treat it as an unsupported
+                    // except log the error
+                    instance = new UnparsableSentence(rawSentence);
+                    LOG.error("Failed to parse sentence: " + rawSentence);
+                    LOG.debug("Parsing error", e);
+                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+                    // We should never see these.  If we do simply halt processing.
+                    LOG.error("Unexpected exception", e);
+                }
+            } else {
+                instance = new UnsupportedSentence(rawSentence);
+            }
         }
         
         return instance;

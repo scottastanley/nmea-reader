@@ -34,7 +34,7 @@ public class ProprietarySentenceTest {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "PSMDCN", s.getTag());
-            Assert.assertEquals("Invalid tag", "SMD", s.getManufacturerID());
+            Assert.assertEquals("Invalid tag", "SMD", s.getSupportedManufacturerID());
             Assert.assertEquals("Invalid sentence ID", "SMD-CN", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "1A", s.getChecksum());
             Assert.assertEquals("Incorrect number of fields", Integer.valueOf(2), s.getNumFields());
@@ -69,7 +69,7 @@ public class ProprietarySentenceTest {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "PFEC", s.getTag());
-            Assert.assertEquals("Invalid tag", "FEC", s.getManufacturerID());
+            Assert.assertEquals("Invalid tag", "FEC", s.getSupportedManufacturerID());
             Assert.assertEquals("Invalid sentence ID", "FEC-GPint", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "13", s.getChecksum());
             Assert.assertEquals("Incorrect number of fields", Integer.valueOf(3), s.getNumFields());
@@ -103,7 +103,7 @@ public class ProprietarySentenceTest {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "PFEC", s.getTag());
-            Assert.assertEquals("Invalid tag", "FEC", s.getManufacturerID());
+            Assert.assertEquals("Invalid tag", "FEC", s.getSupportedManufacturerID());
             Assert.assertEquals("Invalid sentence ID", "FEC-idfnc", s.getSentenceId());
             Assert.assertEquals("Invalid checksum", "2A", s.getChecksum());
             Assert.assertEquals("Incorrect number of fields", Integer.valueOf(4), s.getNumFields());
@@ -139,8 +139,22 @@ public class ProprietarySentenceTest {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "PFEC", s.getTag());
-            Assert.assertEquals("Invalid tag", "FEC", s.getManufacturerID());
+            Assert.assertEquals("Invalid tag", "FEC", s.getSupportedManufacturerID());
             Assert.assertEquals("Invalid sentence ID", "FEC-null", s.getSentenceId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+    
+    @Test
+    public void testIsProprietarySentence() {
+        String rawProprietaryStr = "$PFEC,idfnc,A,1*2A";
+        String rawTalkerStr = "$GPDPT,2.6,-0.8*76";
+        
+        try {
+            Assert.assertTrue("Should be proprietary", ProprietarySentence.isProprietarySentence(rawProprietaryStr));
+            Assert.assertFalse("Should not be a proprietary", ProprietarySentence.isProprietarySentence(rawTalkerStr));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Caught unexpected exception: " + e.getMessage());

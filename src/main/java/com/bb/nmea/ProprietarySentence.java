@@ -49,7 +49,7 @@ public abstract class ProprietarySentence extends NMEASentence {
         String manufactSentenceId = getManufacturerSentenceId();
         manufactSentenceId = manufactSentenceId != null ? manufactSentenceId : "null";
         
-        return m_manufacturerId + "-" + manufactSentenceId;
+        return getProprietarySentenceId(m_manufacturerId, manufactSentenceId);
     }
     
     /**
@@ -64,7 +64,29 @@ public abstract class ProprietarySentence extends NMEASentence {
      * 
      * @return The Manufacturer ID
      */
-    public String getManufacturerID() {
+    public String getSupportedManufacturerID() {
         return m_manufacturerId;
+    }
+    
+    /**
+     * Is the provided raw sentence a proprietary sentence.
+     * 
+     * @param rawSentence The raw sentence
+     * @return True if the sentence is proprietary
+     */
+    static boolean isProprietarySentence(final String rawSentence) {
+        return rawSentence.substring(1, 2).equals("P");
+    }
+    
+    /**
+     * Get the proprietary sentence ID based on the given manufacturer ID and the
+     * manufacturer defined sentence ID.
+     * 
+     * @param mfgId The manufacturer ID
+     * @param mfgSentenceId The manufacturer defined sentence ID
+     * @return
+     */
+    static String getProprietarySentenceId(final String mfgId, final String mfgSentenceId) {
+        return mfgId + "-" + mfgSentenceId;
     }
 }

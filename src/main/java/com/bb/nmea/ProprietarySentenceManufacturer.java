@@ -55,4 +55,17 @@ public abstract class ProprietarySentenceManufacturer {
     public String getManufacturerId() {
         return m_manufacturerId;
     }
+    
+    
+    /**
+     * Get the manufacturer ID for the given sentence. Note, this does not check to
+     * make sure this is a proprietary sentence. It assumes this test has already 
+     * been done.
+     * 
+     * @param rawSentence The raw sentence
+     * @return The manufacturer ID
+     */
+    public static String getManufacturerID(final String rawSentence) {
+        return rawSentence.substring(2, 5);
+    }
 }
