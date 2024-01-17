@@ -115,19 +115,9 @@ public class SentenceFactory {
             
             if (isValid) {
                 if (ProprietarySentence.isProprietarySentence(rawSentence)) {
-                    String mfgId = ProprietarySentenceManufacturer.getManufacturerID(rawSentence);
-                    ProprietarySentenceManufacturer mfg = m_proprietaryMfgs.get(mfgId.toLowerCase());
-                    
-                    if (mfg != null) {
-                        String proprietarySentenceId = mfg.getManufacturerSentenceId(rawSentence);
-                        String sentenceId = ProprietarySentence.getProprietarySentenceId(mfgId, proprietarySentenceId);
-                        
-                        instance = parseSentence(sentenceId, rawSentence);                        
-                    } else {
-                        instance = new UnsupportedManufacturer(rawSentence);
-                    }
+                    instance = parseProprietarySentence(rawSentence);
                 } else {
-                    instance = getTalkerSentence(rawSentence);                    
+                    instance = parseTalkerSentence(rawSentence);                    
                 }
             } else {
                 instance = new InvalidSentence(rawSentence);
@@ -145,7 +135,7 @@ public class SentenceFactory {
      * @param rawSentence The raw sentence string
      * @return The NMEASentence
      */
-    private NMEASentence getTalkerSentence(final String rawSentence) {
+    private NMEASentence parseTalkerSentence(final String rawSentence) {
         String type = null;
         try {
             type = TalkerSentence.getTypeFromTag(NMEASentence.getTag(rawSentence));                    
@@ -156,6 +146,26 @@ public class SentenceFactory {
         
         // If we identified the type for the sentence parse it if supported
         return parseSentence(type, rawSentence);
+    }
+    
+    /**
+     * Construct an NMEASentance for a proprietary sentence string
+     * 
+     * @param rawSentence The raw sentence string
+     * @return The NMEASentence
+     */
+    private NMEASentence parseProprietarySentence(final String rawSentence) {
+        String mfgId = ProprietarySentenceManufacturer.getManufacturerID(rawSentence);
+        ProprietarySentenceManufacturer mfg = m_proprietaryMfgs.get(mfgId.toLowerCase());
+        
+        if (mfg != null) {
+            String proprietarySentenceId = mfg.getManufacturerSentenceId(rawSentence);
+            String sentenceId = ProprietarySentence.getProprietarySentenceId(mfgId, proprietarySentenceId);
+            
+            return parseSentence(sentenceId, rawSentence);                        
+        } else {
+            return new UnsupportedManufacturer(rawSentence);
+        }
     }
     
     /**
