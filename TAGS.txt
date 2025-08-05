@@ -1,0 +1,62 @@
+2025-08-03 21:57:30,951 INFO  [Sentence Reader 0] SentenceReaderRunnable - Stopped
+2025-08-03 21:57:30,951 INFO  [main] NMEASentenceProvider - Stopping all listeners
+2025-08-03 21:57:30,951 INFO  [main] StatsCollector - UNSUPPORTED TAG: PFEC: 301
+2025-08-03 21:57:30,951 INFO  [main] StatsCollector - UNSUPPORTED TAG: GPGGA: 152
+2025-08-03 21:57:30,951 INFO  [main] StatsCollector - ZDA: 151
+2025-08-03 21:57:30,951 INFO  [main] StatsCollector - VTG: 152
+2025-08-03 21:57:30,951 INFO  [main] StatsCollector - INVALID: 305
+2025-08-03 21:57:30,951 INFO  [main] StatsCollector - UNSUPPORTED TAG: WIMDA: 152
+2025-08-03 21:57:30,951 INFO  [main] StatsCollector - UNSUPPORTED MFG: SMD: 1209
+
+
+
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - RSA: 122
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - UNSUPPORTED TAG: PFEC: 41
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - UNSUPPORTED TAG: GPGGA: 86
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - ZDA: 103
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - DBT: 98
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - VTG: 108
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - DPT: 110
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - UNSUPPORTED TAG: GPRMC: 46
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - INVALID: 329
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - UNSUPPORTED TAG: WIMDA: 152
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - FEC-GPint: 12
+2025-08-03 22:02:48,281 INFO  [main] StatsCollector - UNSUPPORTED MFG: SMD: 1205
+
+
+
+
+
+2025-08-03 22:25:31,554 INFO  [Sentence Reader 0] SentenceReaderRunnable - Stopped
+2025-08-03 22:25:31,554 INFO  [main] NMEASentenceProvider - Stopping all listeners
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - RSA: 357
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - UNSUPPORTED TAG: PFEC: 130
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - UNSUPPORTED TAG: GPGGA: 261
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - ZDA: 321
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - DBT: 298
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - VTG: 254
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - DPT: 342
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - UNSUPPORTED TAG: GPRMC: 134
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - INVALID: 986
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - UNSUPPORTED TAG: WIMDA: 453
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - FEC-GPint: 32
+2025-08-03 22:25:31,555 INFO  [main] StatsCollector - UNSUPPORTED MFG: SMD: 3554
+
+
+
+
+
+2025-08-03 22:33:05,725 INFO  [Sentence Reader 0] SentenceReaderRunnable - Stopped
+2025-08-03 22:33:05,725 INFO  [main] NMEASentenceProvider - Stopping all listeners
+2025-08-03 22:33:05,725 INFO  [main] StatsCollector - RSA: 6
+2025-08-03 22:33:05,726 INFO  [main] StatsCollector - UNSUPPORTED TAG: GPGGA: 3
+2025-08-03 22:33:05,726 INFO  [main] StatsCollector - ZDA: 5
+2025-08-03 22:33:05,726 INFO  [main] StatsCollector - DBT: 4
+2025-08-03 22:33:05,726 INFO  [main] StatsCollector - VTG: 7
+2025-08-03 22:33:05,726 INFO  [main] StatsCollector - DPT: 7
+2025-08-03 22:33:05,726 INFO  [main] StatsCollector - UNSUPPORTED TAG: GPRMC: 2
+2025-08-03 22:33:05,726 INFO  [main] StatsCollector - INVALID: 22
+2025-08-03 22:33:05,726 INFO  [main] StatsCollector - UNSUPPORTED TAG: WIMDA: 7
+2025-08-03 22:33:05,726 INFO  [main] StatsCollector - FEC-GPint: 1
+2025-08-03 22:33:05,727 INFO  [main] StatsCollector - UNSUPPORTED MFG: SMD: 62
+

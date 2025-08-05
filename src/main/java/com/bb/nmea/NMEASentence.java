@@ -19,8 +19,10 @@ import java.util.regex.Pattern;
 
 import com.bb.nmea.sentences.common.Direction;
 import com.bb.nmea.sentences.common.FAAModeIndicator;
+import com.bb.nmea.sentences.common.GPSFixQuality;
 import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.Latitude;
+import com.bb.nmea.sentences.common.LengthUnit;
 import com.bb.nmea.sentences.common.Longitude;
 import com.bb.nmea.sentences.common.SpeedUnits;
 import com.bb.nmea.sentences.common.Status;
@@ -190,7 +192,12 @@ public abstract class NMEASentence {
      * @return The field value
      */
     protected String getField(final int index) {
-        return m_fields != null ? m_fields[index] : null;
+        String val = m_fields != null ? m_fields[index] : null;
+        
+        if (val.length() == 0)
+        	val = null;
+        
+		return val;
     }
     
     /**
@@ -330,6 +337,25 @@ public abstract class NMEASentence {
         return new UTCTime(strValue);
     }
     
+    /**
+     * Get the value of the specified field index as a GPSFixQuality instance.
+     * 
+     * @param index
+     * @return The field value
+     */
+    protected GPSFixQuality getFieldAsGpsFixQuality(final int index) {
+    	return GPSFixQuality.getGPSFixQuality(getFieldAsInteger(index));
+    }
+    
+    /**
+     * Get the value of the specified field index as a LengthUnit instance.
+     * 
+     * @param index
+     * @return The field value
+     */
+    protected LengthUnit getFieldAsLengthUnit(final int index) {
+    	return LengthUnit.getLengthUnit(getField(index));
+    }    
     /**
      * Parse the tag from the provided raw sentence string.
      * 

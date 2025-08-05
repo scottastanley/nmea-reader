@@ -245,9 +245,9 @@ public class NMEASentenceTest {
             Assert.assertEquals("Invalid field 1 string", "257.9", s.getField(1));
             Assert.assertEquals("Invalid field 1 float", Float.valueOf(257.9F), s.getFieldAsFloat(1));
             
-            Assert.assertEquals("Invalid field 2 string", "", s.getField(2));
+            Assert.assertNull("Invalid field 2 string", s.getField(2));
             
-            Assert.assertEquals("Invalid field 3 string", "", s.getField(3));
+            Assert.assertNull("Invalid field 3 string", s.getField(3));
             
             Assert.assertEquals("Invalid field 4 string", "13.0", s.getField(4));
             Assert.assertEquals("Invalid field 4 float", Float.valueOf(13.0F), s.getFieldAsFloat(4));
@@ -396,11 +396,11 @@ public class NMEASentenceTest {
                     preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
             
             Assert.assertEquals("Invalid tag", "PSMDCN", s.getTag());
-            Assert.assertEquals("Invalid checksum", "59", s.getChecksum());
-            Assert.assertEquals("Incorrect number of fields", Integer.valueOf(8), s.getNumFields());
+            Assert.assertEquals("Invalid checksum", "18", s.getChecksum());
+            Assert.assertEquals("Incorrect number of fields", Integer.valueOf(2), s.getNumFields());
             
             // Validate raw fields
-            Assert.assertEquals("Invalid field 0 string", "GPGLL", s.getField(0));
+            Assert.assertEquals("Invalid field 0 string", "PSMDCN", s.getField(0));
             
             Assert.assertEquals("Invalid field 1 string", "3", s.getField(1));
             Assert.assertEquals("Invalid field 1 string", Integer.valueOf(3), s.getFieldAsInteger(1));

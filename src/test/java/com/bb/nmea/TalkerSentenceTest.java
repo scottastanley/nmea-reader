@@ -193,9 +193,9 @@ public class TalkerSentenceTest {
             Assert.assertEquals("Invalid field 1 string", "257.9", s.getField(1));
             Assert.assertEquals("Invalid field 1 float", Float.valueOf(257.9F), s.getFieldAsFloat(1));
             
-            Assert.assertEquals("Invalid field 2 string", "", s.getField(2));
+            Assert.assertNull("Invalid field 2 string", s.getField(2));
             
-            Assert.assertEquals("Invalid field 3 string", "", s.getField(3));
+            Assert.assertNull("Invalid field 3 string", s.getField(3));
             
             Assert.assertEquals("Invalid field 4 string", "13.0", s.getField(4));
             Assert.assertEquals("Invalid field 4 float", Float.valueOf(13.0F), s.getFieldAsFloat(4));
