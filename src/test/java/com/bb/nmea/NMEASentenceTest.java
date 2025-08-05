@@ -378,4 +378,47 @@ public class NMEASentenceTest {
             Assert.fail("Caught unexpected exception: " + e.getMessage());
         }
     }
+    
+    @Test
+    public void testParsePSMDCN() {
+        String rawStr = "$PSMDCN,3*18";
+        
+        try {
+            Assert.assertTrue("Message should be valid", NMEASentence.isValidRawSentence(rawStr));
+
+            long preTime = System.currentTimeMillis();
+            NMEASentence s = new TestNMEASentence(rawStr);
+            long postTime = System.currentTimeMillis();
+            
+            Assert.assertTrue("Sentence should be valid", s.isValid());
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
+            
+            Assert.assertEquals("Invalid tag", "PSMDCN", s.getTag());
+            Assert.assertEquals("Invalid checksum", "59", s.getChecksum());
+            Assert.assertEquals("Incorrect number of fields", Integer.valueOf(8), s.getNumFields());
+            
+            // Validate raw fields
+            Assert.assertEquals("Invalid field 0 string", "GPGLL", s.getField(0));
+            
+            Assert.assertEquals("Invalid field 1 string", "3", s.getField(1));
+            Assert.assertEquals("Invalid field 1 string", Integer.valueOf(3), s.getFieldAsInteger(1));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
+    
+    @Test
+    public void testParsePSMDCN_InvalidChecksum() {
+        String rawStr = "$PSMDCN,3*1A";
+        
+        try {
+            Assert.assertFalse("Message should be invalid", NMEASentence.isValidRawSentence(rawStr));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
 }
