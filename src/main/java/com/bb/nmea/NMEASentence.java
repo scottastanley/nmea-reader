@@ -354,8 +354,16 @@ public abstract class NMEASentence {
      * @return The field value
      */
     protected LengthUnit getFieldAsLengthUnit(final int index) {
-    	return LengthUnit.getLengthUnit(getField(index));
+    	String fieldStr = getField(index);
+    	
+    	LengthUnit result = null;
+    	if (fieldStr != null) {
+    		result = LengthUnit.getLengthUnit(fieldStr);
+    	}
+
+		return result;
     }    
+    
     /**
      * Parse the tag from the provided raw sentence string.
      * 
