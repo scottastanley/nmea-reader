@@ -266,7 +266,7 @@ public class NMEASentanceProviderTest {
         
         String[] origStr3 = {
             "$APHDM,335.2,M*34",
-            "$INHDM,333.7,M*68",
+            "$INHDM,333.7,M*21",
             "$GAHDM,332.7,M*21",
             "$GRHDM,345.7,M*32"
         };

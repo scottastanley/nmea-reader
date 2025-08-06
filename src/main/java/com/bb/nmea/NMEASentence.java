@@ -111,7 +111,6 @@ public abstract class NMEASentence {
     private static String calculateChecksum(final String rawSentence) {
         // Extract the relevant portion of the string and remove all special characters
         String chkSumStr = rawSentence.substring(1, rawSentence.length() - 3);
-        chkSumStr = chkSumStr.replace("$", "").replace("I", "").replace("*", "");
         
         byte calcChecksum = 0;
         for (byte b : chkSumStr.getBytes()) {
