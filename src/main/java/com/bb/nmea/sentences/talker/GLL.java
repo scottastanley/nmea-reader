@@ -28,6 +28,7 @@ import com.bb.nmea.sentences.common.UTCTime;
  * 
  * $GPGLL,3747.743,N,12220.080,W,190130,A,A*53
  * $GPGLL,3747.741,N,12220.083,W,190137.52,A,D*79
+ * $APGLL,3806.9698,N,12137.4570,W,045959.00,A*17
  * 
  * @author Scott Stanley
  */
@@ -49,7 +50,12 @@ public class GLL extends TalkerSentence {
         m_longitudeDir = this.getFieldAsDirection(4);
         m_utcTime = this.getFieldAsUTCTime(5);
         m_status = this.getFieldAsStatus(6);
-        m_faaModeIndicator = this.getFieldAsFAAModeIndicator(7);
+        
+        if (this.getNumFields() >= 8) {
+            m_faaModeIndicator = this.getFieldAsFAAModeIndicator(7);        	
+        } else {
+        	m_faaModeIndicator = null;
+        }
     }
 
     /**

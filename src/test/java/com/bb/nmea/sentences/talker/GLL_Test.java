@@ -38,7 +38,7 @@ public class GLL_Test {
     }
 
     @Test
-    public void testCase2_version2_3() {
+    public void testCase2_post_v2_3() {
         String rawStr = "$GPGLL,3513.123,S,02312.453,E,131130.21,A,A*53";
         
         try {
@@ -71,7 +71,7 @@ public class GLL_Test {
     }
 
     @Test
-    public void testCase1_version2_3() {
+    public void testCase1_post_v2_3() {
         String rawStr = "$GPGLL,3747.741,N,12220.083,W,190137.52,A,D*79";
         
         try {
@@ -103,4 +103,36 @@ public class GLL_Test {
         }
     }
 
+    @Test
+    public void testCase3_pre_v2_3() {
+        String rawStr = "$APGLL,3806.9698,N,12137.4570,W,045959.00,A*17";
+        
+        try {
+            long preTime = System.currentTimeMillis();
+            GLL s = new GLL(rawStr);
+            long postTime = System.currentTimeMillis();
+            
+            Assert.assertEquals("Incorrect raw NMEA sentence", rawStr, s.getRawSentence());
+            Assert.assertTrue("Invalid collected timestamp", 
+                    preTime <= s.getCollectedTimestamp() && s.getCollectedTimestamp() <= postTime);
+            
+            Assert.assertEquals("Invalid tag", "APGLL", s.getTag());
+            Assert.assertEquals("Invalid talked ID", "AP", s.getTalkerId());
+            Assert.assertEquals("Invalid type code", "GLL", s.getSentenceId());
+            Assert.assertEquals("Invalid checksum", "17", s.getChecksum());
+            
+            LatitudeTest.validateLatitude(38, 06.9698F, s.getLatitude(), s.getLatitudeDir());
+            Assert.assertEquals("Wrong latitude direction", Direction.NORTH, s.getLatitudeDir());
+            
+            LongitudeTest.validateLongitude(121, 37.4570F, s.getLongitude(), s.getLongitudeDir());
+            Assert.assertEquals("Wrong longitude direction", Direction.WEST, s.getLongitudeDir());
+            
+            UtcTimeTest.validateUTCTime(04,  59,  59.00F,  s.getUtcTime());
+            Assert.assertEquals("Incorrect status", Status.VALID, s.getStatus());
+            Assert.assertNull("Incorrect FAA mode", s.getFaaModeIndicator());            
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Caught unexpected exception: " + e.getMessage());
+        }
+    }
 }
