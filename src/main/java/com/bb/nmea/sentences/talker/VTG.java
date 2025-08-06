@@ -39,13 +39,21 @@ public class VTG
     public VTG(final String rawSentence) {
         super(rawSentence);
         
-        // Primary format
+        // Primary format, post v2.3 of the format
         if (this.getNumFields() == 10) {
             m_courseOverGroundDegrTrue = this.getFieldAsFloat(1);
             m_courseOverGroundDegrMagnetic = this.getFieldAsFloat(3);
             m_speedOverGroundKnots = this.getFieldAsFloat(5);
             m_speedOverGroundKmPerHr = this.getFieldAsFloat(7);
             m_faaModeIndicator = this.getFieldAsFAAModeIndicator(9);
+        }
+        // Pre v2.3 format
+        else if (this.getNumFields() == 9) {
+            m_courseOverGroundDegrTrue = this.getFieldAsFloat(1);
+            m_courseOverGroundDegrMagnetic = this.getFieldAsFloat(3);
+            m_speedOverGroundKnots = this.getFieldAsFloat(5);
+            m_speedOverGroundKmPerHr = this.getFieldAsFloat(7);
+            m_faaModeIndicator = null;
         }
         // Legacy sentences may have the following format;
         // VTG,trueCourseDegr,magCourseDegr,speedOverGroundKnots,speedOverGroundKmPerHr*hh
