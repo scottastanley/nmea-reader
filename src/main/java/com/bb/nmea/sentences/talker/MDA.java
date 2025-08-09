@@ -22,6 +22,9 @@ import com.bb.nmea.TalkerSentence;
  * 
  * Obsolete as of 2009
  * 
+ * References
+ * NMEA Revealed (https://gpsd.gitlab.io/gpsd/NMEA.html)
+ * 
  * @author Scott Stanley
  */
 public class MDA 
