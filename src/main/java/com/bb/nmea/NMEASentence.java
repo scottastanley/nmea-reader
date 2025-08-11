@@ -24,6 +24,7 @@ import com.bb.nmea.sentences.common.HeadingType;
 import com.bb.nmea.sentences.common.Latitude;
 import com.bb.nmea.sentences.common.LengthUnit;
 import com.bb.nmea.sentences.common.Longitude;
+import com.bb.nmea.sentences.common.SentenceDate;
 import com.bb.nmea.sentences.common.SpeedUnits;
 import com.bb.nmea.sentences.common.Status;
 import com.bb.nmea.sentences.common.TemperatureUnits;
@@ -362,6 +363,23 @@ public abstract class NMEASentence {
 
 		return result;
     }    
+
+    /**
+     * Get the value of the specified field index as a SentenceDate instance.
+     * 
+     * @param index
+     * @return The field value
+     */
+    protected SentenceDate getFieldAsSentenceDate(final int index) {
+    	String fieldStr = getField(index);
+    	
+    	SentenceDate result = null;
+    	if (fieldStr != null) {
+    		result =new SentenceDate(fieldStr);
+    	}
+
+		return result;
+    }
     
     /**
      * Parse the tag from the provided raw sentence string.
