@@ -50,3 +50,11 @@ tty.usbserial-AM009S8I: FT232R USB UART (Dial-In)
 
     INFO  NMEASentenceProvider - Stats: 2100 in 418 rate 5 sent/sec
     
+    
+    
+Finding your USB ports on a Mac
+-------------------------------
+brew install lsusb
+
+lsusb : Displays all USB devices connected to the computer.
+
