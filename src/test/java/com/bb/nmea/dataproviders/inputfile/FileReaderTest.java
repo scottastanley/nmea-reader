@@ -19,6 +19,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -61,12 +62,17 @@ public class FileReaderTest {
         DataCollectorOutputStream oStrm = new DataCollectorOutputStream();
         try {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
-            
             CountDownLatch latch = new CountDownLatch(1);
+            
+            AtomicBoolean endSignalled = new AtomicBoolean(false);
             
             FileReader rdr = new FileReader((byte[] data, int numBytes) ->  {
                 try {
-                    oStrm.write(data, 0, numBytes);
+                	if (numBytes >= 0) {
+                		oStrm.write(data, 0, numBytes);
+                	} else {
+                		endSignalled.set(true);
+                	}
                 } catch (IOException e) {
                     throw new DataProviderException("", e);
                     }
@@ -83,6 +89,9 @@ public class FileReaderTest {
             for (int n = 0; n < origBytes.length; n++) {
                 Assert.assertEquals("Incorrect bytes collected", origBytes[n], collectedBytes[n]);
             }
+            
+            Assert.assertEquals("Latch not properly decremented", 0, latch.getCount());
+            Assert.assertTrue("End of data not properly signalled", endSignalled.get());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
@@ -118,9 +127,15 @@ public class FileReaderTest {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
             CountDownLatch latch = new CountDownLatch(1);
             
+            AtomicBoolean endSignalled = new AtomicBoolean(false);
+            
             FileReader rdr = new FileReader((byte[] data, int numBytes) ->  {
                 try {
-                    oStrm.write(data, 0, numBytes);
+                	if (numBytes >= 0) {
+                		oStrm.write(data, 0, numBytes);
+                	} else {
+                		endSignalled.set(true);
+                	}
                 } catch (IOException e) {
                     throw new DataProviderException("", e);
                     }
@@ -138,6 +153,9 @@ public class FileReaderTest {
             for (int n = 0; n < origBytes.length; n++) {
                 Assert.assertEquals("Incorrect bytes collected", origBytes[n], collectedBytes[n]);
             }
+            
+            Assert.assertEquals("Latch not properly decremented", 0, latch.getCount());
+            Assert.assertTrue("End of data not properly signalled", endSignalled.get());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
@@ -173,9 +191,15 @@ public class FileReaderTest {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
             CountDownLatch latch = new CountDownLatch(1);
             
+            AtomicBoolean endSignalled = new AtomicBoolean(false);
+            
             FileReader rdr = new FileReader((byte[] data, int numBytes) ->  {
                 try {
-                    oStrm.write(data, 0, numBytes);
+                	if (numBytes >= 0) {
+                		oStrm.write(data, 0, numBytes);
+                	} else {
+                		endSignalled.set(true);
+                	}
                 } catch (IOException e) {
                     throw new DataProviderException("", e);
                     }
@@ -193,6 +217,9 @@ public class FileReaderTest {
             for (int n = 0; n < origBytes.length; n++) {
                 Assert.assertEquals("Incorrect bytes collected", origBytes[n], collectedBytes[n]);
             }
+            
+            Assert.assertEquals("Latch not properly decremented", 0, latch.getCount());
+            Assert.assertTrue("End of data not properly signalled", endSignalled.get());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
@@ -228,9 +255,15 @@ public class FileReaderTest {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
             CountDownLatch latch = new CountDownLatch(1);
             
+            AtomicBoolean endSignalled = new AtomicBoolean(false);
+            
             FileReader rdr = new FileReader((byte[] data, int numBytes) ->  {
                 try {
-                    oStrm.write(data, 0, numBytes);
+                	if (numBytes >= 0) {
+                		oStrm.write(data, 0, numBytes);
+                	} else {
+                		endSignalled.set(true);
+                	}
                 } catch (IOException e) {
                     throw new DataProviderException("", e);
                     }
@@ -248,6 +281,9 @@ public class FileReaderTest {
             for (int n = 0; n < origBytes.length; n++) {
                 Assert.assertEquals("Incorrect bytes collected", origBytes[n], collectedBytes[n]);
             }
+            
+            Assert.assertEquals("Latch not properly decremented", 0, latch.getCount());
+            Assert.assertTrue("End of data not properly signalled", endSignalled.get());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());
@@ -283,9 +319,15 @@ public class FileReaderTest {
             InputStream inpStr = new ByteArrayInputStream(origBytes);
             CountDownLatch latch = new CountDownLatch(1);
             
+            AtomicBoolean endSignalled = new AtomicBoolean(false);
+            
             FileReader rdr = new FileReader((byte[] data, int numBytes) ->  {
                 try {
-                    oStrm.write(data, 0, numBytes);
+                	if (numBytes >= 0) {
+                		oStrm.write(data, 0, numBytes);
+                	} else {
+                		endSignalled.set(true);
+                	}
                 } catch (IOException e) {
                     throw new DataProviderException("", e);
                     }
@@ -303,6 +345,9 @@ public class FileReaderTest {
             for (int n = 0; n < origBytes.length; n++) {
                 Assert.assertEquals("Incorrect bytes collected", origBytes[n], collectedBytes[n]);
             }
+            
+            Assert.assertEquals("Latch not properly decremented", 0, latch.getCount());
+            Assert.assertTrue("End of data not properly signalled", endSignalled.get());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception: " + e.getMessage());

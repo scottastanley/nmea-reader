@@ -23,7 +23,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * A ThreadGroup which is used to control the set of threads executing the instances of 
- * {@link com.bb.nmea.SentenceReaderRunnable}.  This thread froup will contain a thread 
+ * {@link com.bb.nmea.SentenceReaderRunnable}.  This thread group will contain a thread 
  * for each {@link com.bb.nmea.DataProvider} given to the {@link com.bb.nmea.NMEASentenceProvider}.
  * 
  * @author Scott Stanley
@@ -48,9 +48,9 @@ public class SentenceReaderThreadGroup
      * 
      * @param runnable The runnable to start on the new thread
      */
-    void createStartThreadForRunnable(final Runnable runnable) {
+    void createStartThreadForRunnable(final int dataProviderId, final Runnable runnable) {
         Thread thrd = new Thread(this, runnable);
-        thrd.setName("Sentence Reader " + m_threads.size());
+        thrd.setName("Sentence Reader " + dataProviderId);
         m_threads.add(thrd);
         
         LOG.debug("Creating thread " + thrd.getName() + " starting");

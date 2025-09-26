@@ -37,6 +37,7 @@ import org.apache.logging.log4j.Logger;
 public abstract class DataProvider {
     private static final Logger LOG = LogManager.getLogger(DataProvider.class);
     private PipedOutputStream m_oStrm;
+    private int m_dataProviderId;
 
     /**
      * Create an instance of a DataProvider.
@@ -106,4 +107,41 @@ public abstract class DataProvider {
             throw new DataProviderException("Failed to write data to buffer", e);
         }
     }
+    
+    /**
+     * Mark the data provider as completed processing. This method should be called
+     * when all data from the data provider has been successfully processed and provided.
+     */
+    final protected void dataComplete() {
+        if (m_oStrm == null) {
+            throw new RuntimeException("DataProvider not fully configured.  No oStrm provided.");
+        } else {
+        	try {
+        		LOG.info("Data complete, closing output stream");
+				m_oStrm.close();
+			} catch (IOException e) {
+				LOG.error("Failed closing output stream in data provider", e);
+			}
+        }
+    }
+
+    /**
+     * Get the value for the data provider ID. This ID is intended to allow 
+     * each data provider to uniquely identify itself and associate any
+     * threads or other resources with itself.
+     * 
+     * @return The integer ID
+     */
+	protected int getDataProviderId() {
+		return m_dataProviderId;
+	}
+
+	/**
+	 * Set the value for the data provider ID.
+	 * 
+	 * @param dataProviderId The provider ID.
+	 */
+	void setDataProviderId(int dataProviderId) {
+		m_dataProviderId = dataProviderId;
+	}
 }

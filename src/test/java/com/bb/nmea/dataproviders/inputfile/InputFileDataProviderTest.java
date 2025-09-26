@@ -72,6 +72,7 @@ public class InputFileDataProviderTest {
             DataProviderTestTools.setOutputStream(dp, oStrm);
 
             dp.start();
+            dp.waitOnThreadCompletion();
             
             // Validate
             byte[] collectedBytes = oStrm.getCollectedBytes();
@@ -122,6 +123,7 @@ public class InputFileDataProviderTest {
             DataProviderTestTools.setOutputStream(dp, oStrm);
 
             dp.start();
+            dp.waitOnThreadCompletion();
             
             // Validate
             byte[] collectedBytes = oStrm.getCollectedBytes();

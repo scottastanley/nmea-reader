@@ -57,17 +57,24 @@ public class NMEASentenceProvider {
         throws NMEASentenceProviderException {
 
         try {
+        	int dpId = 0;
             for (DataProvider dp : rawDataProviders) {
                 m_dataProviders.add(dp);
                 
+                // Set the data provider ID
+                dp.setDataProviderId(dpId++);
+                
+                // Set the output stream
                 PipedInputStream inpStrm = new PipedInputStream();
                 PipedOutputStream outStrm = new PipedOutputStream(inpStrm);
                 dp.setOutputStream(outStrm);
                 
+                // Set up the sentence reader to process data coming from this
+                // data provider
                 BufferedReader rdr = new BufferedReader(new InputStreamReader(inpStrm));
 
                 SentenceReaderRunnable sentRdrRunn = new SentenceReaderRunnable(rdr, this);
-                m_thrdGrp.createStartThreadForRunnable(sentRdrRunn);
+                m_thrdGrp.createStartThreadForRunnable(dp.getDataProviderId(), sentRdrRunn);
             }
             
             m_thrdGrp.waitOnAllAlive();

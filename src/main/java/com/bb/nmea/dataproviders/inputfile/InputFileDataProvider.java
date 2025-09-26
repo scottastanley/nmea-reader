@@ -73,23 +73,17 @@ public class InputFileDataProvider
             
             m_latch = new CountDownLatch(1);
             m_readThread = new Thread(new FileReader(this::provideFileData, inpStrm, m_latch, m_pauseMillis));
-            m_readThread.setName("NMEA File Input");
+            m_readThread.setName("NMEA File Input " + getDataProviderId());
             
             // Start the read thread
             m_readThread.start();
             LOG.info("Started read thread.");
-            
-            LOG.info("Waiting on read thread to complete");
-            m_latch.await();
-            
-            LOG.info("Read thread completed...");
-            m_readThread = null;
+
         } catch (FileNotFoundException e) {
             throw new DataProviderException("Provided input file does not exist [" + 
                                             m_inputFile.getAbsolutePath() + "]", e);
-        } catch(InterruptedException e) {
-            LOG.info("InputFileDataProvider was interrupted");
-        }
+        } 
+
     }
 
     @Override
@@ -105,6 +99,24 @@ public class InputFileDataProvider
     }
     
     /**
+     * Wait on the reader thread to complete execution. This logic
+     * is used in testing to insure we have finished processing 
+     * before we evaluate the results.
+     */
+    void waitOnThreadCompletion() {
+        
+        try {
+            LOG.info("Waiting on read thread to complete");
+			m_latch.await();
+	        
+	        LOG.info("Read thread completed...");
+	        m_readThread = null;
+        } catch(InterruptedException e) {
+          LOG.info("Waiting was interrupted");
+      }
+    }
+    
+    /**
      * Provide the data to the data provider.
      * 
      * @param bytes
@@ -114,6 +126,10 @@ public class InputFileDataProvider
      */
     final void provideFileData(final byte[] bytes, final int numBytes) 
             throws DataProviderException {
-        this.provideData(bytes, 0, numBytes);
+    	if (numBytes >= 0) {
+            this.provideData(bytes, 0, numBytes);
+    	} else {
+    		this.dataComplete();
+    	}
     }
 }

@@ -73,7 +73,8 @@ public class FileReader implements Runnable {
             LOG.info("Thread interrupted");
             // Ignore this one since this is thrown in the natural stop process
         } finally {
-            
+        	LOG.info("Finished reading data from input  file");
+        	
             // Close the input stream
             if (m_inpStrm != null) {
                 try {
@@ -81,6 +82,13 @@ public class FileReader implements Runnable {
                     m_inpStrm.close();
                 } catch (IOException ex) {}
             }
+            
+            // Signal to the system that the data is complete
+            try {
+				m_dm.provideData(buffer, -1);
+			} catch (DataProviderException e) {
+	            LOG.error("Failed setting ends of data", e);
+			}
             
             // Count down on the latch to indicate we completed
             m_latch.countDown();
