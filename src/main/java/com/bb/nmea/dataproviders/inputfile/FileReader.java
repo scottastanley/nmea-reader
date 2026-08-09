@@ -65,6 +65,8 @@ public class FileReader implements Runnable {
                     Thread.sleep(m_delay);
                 }
             }
+            
+        	LOG.info("Finished reading data from input  file");
         } catch (IOException e) {
             LOG.error("Failed reading source file", e);
         } catch (DataProviderException e) {
@@ -73,7 +75,7 @@ public class FileReader implements Runnable {
             LOG.info("Thread interrupted");
             // Ignore this one since this is thrown in the natural stop process
         } finally {
-        	LOG.info("Finished reading data from input  file");
+        	LOG.info("Closing resources and signaling completion");
         	
             // Close the input stream
             if (m_inpStrm != null) {
