@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,13 +38,14 @@ import com.bb.nmea.NMEASentence;
  */
 public class SentenceLogger extends NMEAListener {
     private static final Logger LOG = LogManager.getLogger(SentenceLogger.class);
-    private static final String FILENAME_TEMPLATE = "raw_{TIMESTAMP}.nmea";
+    private static final String FILENAME_TEMPLATE = "raw_{TIMESTAMP}";
+    private static final String FILENAME_SUFFIX = ".nmea";
     
     private final PrintWriter m_wrt;
 
     public SentenceLogger() {
-        String fileName = FILENAME_TEMPLATE.replace("{TIMESTAMP}", Long.toString(System.currentTimeMillis()));
-        File oFile = new File(fileName);
+        File oFile = getUniqueFile();
+        
         try {
             m_wrt = new PrintWriter(new FileWriter(oFile));
         } catch (IOException e) {
@@ -62,5 +65,42 @@ public class SentenceLogger extends NMEAListener {
         if (m_wrt != null) {
             m_wrt.close();
         }
+    }
+    
+    /**
+     * Get a filename with the specified uniquifier.
+     * 
+     * @param uniquifier
+     * @return A filename with the specified uniquifier
+     */
+    private String getFilename(final Integer uniquifier) {
+    	LocalDate now = LocalDate.now();
+        String fileNamePrefix = FILENAME_TEMPLATE.replace("{TIMESTAMP}", now.format(DateTimeFormatter.BASIC_ISO_DATE));
+        
+        if (uniquifier != null) {
+        	fileNamePrefix += fileNamePrefix + "_" + uniquifier.toString();
+        }
+        
+        return fileNamePrefix + FILENAME_SUFFIX;
+    }
+    
+    /**
+     * Get a file that does not currently exist.
+     * 
+     * @return A new file which does not currently exist
+     */
+    private File getUniqueFile() {
+        String fileName = getFilename(null);
+        File oFile = new File(fileName);
+        
+        int uniqueifier = 1;
+        while (oFile.exists()) {
+        	fileName = getFilename(uniqueifier);
+            oFile = new File(fileName);
+            
+            uniqueifier++;
+        }
+        
+        return oFile;
     }
 }
