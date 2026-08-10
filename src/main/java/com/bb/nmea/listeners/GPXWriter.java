@@ -39,6 +39,13 @@ public class GPXWriter extends NMEAListener {
     public GPXWriter() {
         m_trckSegBldr = TrackSegment.builder();
     }
+    
+    /**
+     * Perform any initialization of the listener.
+     */
+    @Override
+    public void initialize() {
+    }
 
     @Override
     public void processEvent(NMEASentence sentence) {

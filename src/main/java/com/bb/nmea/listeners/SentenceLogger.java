@@ -40,10 +40,18 @@ public class SentenceLogger extends NMEAListener {
     private static final Logger LOG = LogManager.getLogger(SentenceLogger.class);
     private static final String FILENAME_TEMPLATE = "raw_{TIMESTAMP}";
     private static final String FILENAME_SUFFIX = ".nmea";
+    private static final String LOG_DIRECTORY_PROPERTY = "logDirectory";
     
-    private final PrintWriter m_wrt;
+    private PrintWriter m_wrt;
 
     public SentenceLogger() {
+    }
+    
+    /**
+     * Perform any initialization of the listener.
+     */
+    @Override
+    public void initialize() {
         File oFile = getUniqueFile();
         
         try {
@@ -53,6 +61,7 @@ public class SentenceLogger extends NMEAListener {
             throw new RuntimeException("Failed to open output file", e);
         }
     }
+
 
     @Override
     public void processEvent(NMEASentence sentence) {
@@ -90,8 +99,22 @@ public class SentenceLogger extends NMEAListener {
      * @return A new file which does not currently exist
      */
     private File getUniqueFile() {
+    	// Get the base directory for the sentence logs
+    	String logDirName = this.getProperties().getProperty(LOG_DIRECTORY_PROPERTY);
+    	File logDir;
+    	if (logDirName != null) {
+    		logDir = new File(logDirName);
+    		
+    		if (! logDir.exists()) {
+    			logDir.mkdirs();
+    		}
+    	} else {
+    		logDir = new File("./");
+    	}
+    	
+    	// Get the sentence log file
         String fileName = getFilename(null);
-        File oFile = new File(fileName);
+        File oFile = new File(logDir, fileName);
         
         int uniqueifier = 1;
         while (oFile.exists()) {

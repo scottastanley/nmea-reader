@@ -12,6 +12,13 @@ import com.bb.nmea.NMEASentence;
 public class InvalidCollector extends NMEAListener {
     private static final Logger LOG = LogManager.getLogger(InvalidCollector.class);
     private final List<String> m_invalidSentences = new ArrayList<String>();
+    
+    /**
+     * Perform any initialization of the listener.
+     */
+    @Override
+    public void initialize() {
+    }
 
     @Override
     public void processEvent(NMEASentence sentence) {

@@ -80,8 +80,9 @@ public class Main {
         try {
             nmeaProv = new NMEASentenceProvider(dataProviders.toArray(new DataProvider[0]));
             
-            // Add the listeners
+            // Initialize and add the listeners
             for (NMEAListener l : listeners) {
+            	l.initialize();
                 nmeaProv.addListener(l);
             }
             
