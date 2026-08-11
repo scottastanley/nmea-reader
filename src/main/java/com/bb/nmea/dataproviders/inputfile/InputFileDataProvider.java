@@ -61,6 +61,8 @@ public class InputFileDataProvider
     @Override
     public void start() throws DataProviderException {
         LOG.info("Starting...");
+        LOG.info("inputFile: " + m_inputFile.getAbsolutePath());
+        LOG.info("pauseMillis: " + m_pauseMillis);
         
         // Verify that the input file exists and is indeed a file
         if (! m_inputFile.exists() || ! m_inputFile.isFile()) {
