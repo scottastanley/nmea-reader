@@ -43,50 +43,15 @@ import com.bb.nmea.dataproviders.port.PortListenerDataProvider;
  */
 public class Main {
     private static final Logger LOG = LogManager.getLogger(Main.class);
+    private static NMEASentenceProvider nmeaProv = null;
+
     
     public static void main(String[] args) {
         Configuration config = new Configuration(args);
         
-        //
-        // Configure all data providers
-        //
-        List<DataProvider> dataProviders = new ArrayList<DataProvider>();
-        
-        // Configure the port data providers
-        List<PortConfig> portConfigs = config.getPortConfigs();
-        for (PortConfig portConfig : portConfigs) {
-            PortListenerDataProvider dp = new PortListenerDataProvider(portConfig.getDescriptor(), portConfig.getBaudRate());
-            dataProviders.add(dp);
-        }
-        
-        // Configure the file data providers
-        List<FileConfig> fileConfigs = config.getFileConfigs();
-        for (FileConfig fileConfig : fileConfigs) {
-            File file = new File(fileConfig.getFilename());
-            InputFileDataProvider dp = new InputFileDataProvider(file, fileConfig.getPauseMillis());
-            dataProviders.add(dp);
-        }
-        
-        List<NMEAListener> listeners = new ArrayList<NMEAListener>();
-        List<ListenerConfig> listConfigs = config.getListenerConfigs();
-        for (ListenerConfig cfg : listConfigs) {
-            listeners.add(cfg.getListenerInstance());
-        }
-        
-        //
-        // Set up the NMEA sentence provider and start it
-        //
-        NMEASentenceProvider nmeaProv = null;
         try {
-            nmeaProv = new NMEASentenceProvider(dataProviders.toArray(new DataProvider[0]));
-            
-            // Add the listeners
-            for (NMEAListener l : listeners) {
-                nmeaProv.addListener(l);
-            }
-            
-            // Start processing data
-            nmeaProv.start();
+            // Set up the NMEA sentence provider and start it
+        	Main.startNmeaSentenceProviders(config);
             
             // Wait on the user before proceeding
             waitOnUserInput();
@@ -94,16 +59,75 @@ public class Main {
             LOG.error("Failed setting up the NMEASentenceProvider", e);
             System.exit(-1);
         } finally {
-            // Stop the sentence provider
-            if (nmeaProv != null) {
-                try {
-                    nmeaProv.stop();
-                } catch (NMEASentenceProviderException e) {
-                    LOG.error("Error stopping NMEA sentence provider", e);
-                }
+        	Main.stopNmeaSentenceProviders();
+        }
+    }
+    
+    /**
+     * Start the NMEA sentence providers defined in the given configuration.
+     * 
+     * @param conf The configuration
+     * @throws NMEASentenceProviderException 
+     */
+    public static void startNmeaSentenceProviders(final Configuration conf) 
+    		throws NMEASentenceProviderException {
+        //
+        // Configure all sentence providers
+        //
+        List<DataProvider> dataProviders = new ArrayList<DataProvider>();
+        
+        // Configure the port data providers
+        List<PortConfig> portConfigs = conf.getPortConfigs();
+        for (PortConfig portConfig : portConfigs) {
+            PortListenerDataProvider dp = new PortListenerDataProvider(portConfig.getDescriptor(), portConfig.getBaudRate());
+            dataProviders.add(dp);
+        }
+        
+        // Configure the file data providers
+        List<FileConfig> fileConfigs = conf.getFileConfigs();
+        for (FileConfig fileConfig : fileConfigs) {
+            File file = new File(fileConfig.getFilename());
+            InputFileDataProvider dp = new InputFileDataProvider(file, fileConfig.getPauseMillis());
+            dataProviders.add(dp);
+        }
+        
+        List<NMEAListener> listeners = new ArrayList<NMEAListener>();
+        List<ListenerConfig> listConfigs = conf.getListenerConfigs();
+        for (ListenerConfig cfg : listConfigs) {
+            listeners.add(cfg.getListenerInstance());
+        }
+
+        //
+        // Set up the NMEA sentence provider and start it
+        //
+        NMEASentenceProvider nmeaProv = new NMEASentenceProvider(dataProviders.toArray(new DataProvider[0]));
+        
+        // Add the listeners
+        for (NMEAListener l : listeners) {
+            nmeaProv.addListener(l);
+        }
+        
+        // Start processing data
+        LOG.info("Starting the sentence providers");
+        nmeaProv.start();
+    }
+    
+    /**
+     * Stop the NMEA sentence provider
+     */
+    public static void stopNmeaSentenceProviders() {
+        LOG.info("Stopping the sentence providers");
+        
+        // Stop the sentence provider
+        if (nmeaProv != null) {
+            try {
+                nmeaProv.stop();
+            } catch (NMEASentenceProviderException e) {
+                LOG.error("Error stopping NMEA sentence provider", e);
             }
         }
     }
+
     
     /**
      * Open a user console and wait on the user to enter "exit" before returning
@@ -114,7 +138,9 @@ public class Main {
         String input = "";
         while (! input.equalsIgnoreCase("exit")) {
             LOG.info("\nEnter \"exit\" to terminate.\n");
-            input = s.nextLine();
+            
+            input = s.nextLine();            
+            LOG.debug("userInput: " + input);
         }
         
         s.close();

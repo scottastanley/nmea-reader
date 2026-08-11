@@ -37,6 +37,13 @@ class Configuration {
     
     private final Properties m_props = new Properties();
     
+    /**
+     * Build an NMEA reader configuration reading the properties from
+     * the file specified with the system property.
+     */
+    public Configuration() {
+    	this(new String[0]);
+    }
 
     /**
      * Construct the configuration object.
