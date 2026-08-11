@@ -51,7 +51,7 @@ public class Main {
         
         try {
             // Set up the NMEA sentence provider and start it
-        	Main.startNmeaSentenceProviders(config);
+       	    Main.startNmeaSentenceProviders(config);
             
             // Wait on the user before proceeding
             waitOnUserInput();

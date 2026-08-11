@@ -26,6 +26,11 @@ public abstract class NMEAListener {
     private Properties m_properties;
     
     /**
+     * Perform any initialization of the listener.
+     */
+    abstract public void initialize();
+    
+    /**
      * Process the provided NMEASentence.  This method will be called with all
      * sentences received by the system, including invalid sentences as well as those 
      * for which an explicit class is not defined.

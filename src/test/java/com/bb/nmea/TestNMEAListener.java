@@ -28,6 +28,13 @@ public class TestNMEAListener extends NMEAListener {
 
     public TestNMEAListener() {
     }
+    
+    /**
+     * Perform any initialization of the listener.
+     */
+    @Override
+    public void initialize() {
+    }
 
     @Override
     public void processEvent(NMEASentence sentence) {
