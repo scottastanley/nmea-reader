@@ -44,7 +44,9 @@ public class FileReader implements Runnable {
 
     @Override
     public void run() {
-        Random ran = new Random(System.currentTimeMillis());
+    	// Get the random number generator. Seeding with current time + the thread ID so
+    	// each thread gets a different sequence
+        Random ran = new Random(System.currentTimeMillis() + Thread.currentThread().getId());
         
         // Initialize the buffer
         int numBytesToRead = ran.nextInt(m_maxBytesPerBlock) + 1;
