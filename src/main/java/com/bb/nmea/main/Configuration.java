@@ -31,7 +31,7 @@ import java.util.Properties;
  * 
  * @author Scott Stanley
  */
-class Configuration {
+public class Configuration {
     protected static String NMEA_CONFIG_FILE_PROP = "nmeaConfigFile";
     private String m_propertiesFile = "nmea_config.properties";
     

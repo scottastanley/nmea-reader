@@ -52,7 +52,10 @@ public class SentenceLogger extends NMEAListener {
      */
     @Override
     public void initialize() {
-        File oFile = getUniqueFile();
+        LOG.info("Initializing...");
+        
+        File oFile = getUniqueFile();        
+        LOG.info("Log File: " + oFile.getAbsolutePath());
         
         try {
             m_wrt = new PrintWriter(new FileWriter(oFile));
@@ -71,6 +74,7 @@ public class SentenceLogger extends NMEAListener {
 
     @Override
     public void stop() {
+        LOG.info("Stopping...");
         if (m_wrt != null) {
             m_wrt.close();
         }

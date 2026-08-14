@@ -104,6 +104,7 @@ public class Main {
         
         // Add the listeners
         for (NMEAListener l : listeners) {
+        	l.initialize();
             nmeaProv.addListener(l);
         }
         
